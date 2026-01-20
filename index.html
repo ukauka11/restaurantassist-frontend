@@ -60,7 +60,72 @@
   
     <hr style="margin: 2rem 0; opacity: 0.2;" />
   
-    <h2>Example</h2>
+    <h2 style="margin-top: 2rem;">Start Free Trial</h2>
+
+    <div style="margin-top: 1rem; text-align: left;">
+      <label>Business ID (no spaces)</label><br />
+      <input id="businessId" placeholder="e.g. kjs-local-grindz"
+        style="width: 100%; padding: 10px; margin: 6px 0 14px; border-radius: 6px; border: 1px solid #334155; background:#0b1220; color:white;" />
+    
+      <label>Email</label><br />
+      <input id="email" type="email" placeholder="you@yourrestaurant.com"
+        style="width: 100%; padding: 10px; margin: 6px 0 14px; border-radius: 6px; border: 1px solid #334155; background:#0b1220; color:white;" />
+    
+      <button id="startTrialBtn"
+        style="width:100%; padding: 12px; border-radius: 6px; border: none; background:#38bdf8; font-weight:bold; cursor:pointer;">
+        Start Free Trial
+      </button>
+    
+      <div id="msg" style="margin-top: 12px; font-size: 0.95rem; opacity: 0.9;"></div>
+    </div>
+    
+    <script>
+      const API_BASE = "https://review-assistant-api.onrender.com"; // keep this until you upgrade Render
+    
+      document.getElementById("startTrialBtn").addEventListener("click", async () => {
+        const business_id = document.getElementById("businessId").value.trim().toLowerCase();
+        const email = document.getElementById("email").value.trim().toLowerCase();
+        const msg = document.getElementById("msg");
+    
+        msg.textContent = "";
+    
+        if (!business_id) {
+          msg.textContent = "Please enter a business id.";
+          return;
+        }
+        if (!email.includes("@")) {
+          msg.textContent = "Please enter a valid email.";
+          return;
+        }
+    
+        msg.textContent = "Creating checkout…";
+    
+        try {
+          const res = await fetch(`${API_BASE}/billing/create-checkout`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ business_id, email })
+          });
+    
+          const data = await res.json();
+          if (!res.ok) {
+            msg.textContent = data?.detail || "Failed to create checkout.";
+            return;
+          }
+    
+          if (!data.checkout_url) {
+            msg.textContent = "No checkout URL returned.";
+            return;
+          }
+    
+          // Redirect to Stripe Checkout
+          window.location.href = data.checkout_url;
+        } catch (e) {
+          msg.textContent = "Network error. Please try again.";
+        }
+      });
+    </script>
+
     <p><em>Customer:</em> “Food was great but the wait time was really long.”</p>
     <p>
       <em>Response:</em> “Thanks for your feedback! We’re glad you enjoyed the
