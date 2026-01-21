@@ -207,6 +207,22 @@
   -H "x-api-key: ${key}"`;
     }
 
+    async function copyText(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        return true;
+      }catch(e){
+        // Fallback for older browsers
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        return true;
+      }
+    }
+
     async function loadMe(){
       showErr("");
       setPill("Loading…");
@@ -279,6 +295,22 @@
 
       $("apiBase").addEventListener("input", updateCurlExamples);
       $("apiKey").addEventListener("input", updateCurlExamples);
+      $("btnCopyKey").addEventListener("click", async () => {
+        const key = getKey();
+        if (!key) return showErr("No API key to copy.");
+        await copyText(key);
+        setPill("API key copied", true);
+      });
+      
+      $("btnCopyAnalyze").addEventListener("click", async () => {
+        await copyText($("curlAnalyze").textContent);
+        setPill("/analyze curl copied", true);
+      });
+      
+      $("btnCopySummary").addEventListener("click", async () => {
+        await copyText($("curlSummary").textContent);
+        setPill("/summary curl copied", true);
+      });
     })();
   </script>
 </body>
