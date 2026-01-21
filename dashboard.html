@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RestaurantAssist — Dashboard</title>
+  <style>
+    :root { color-scheme: dark; }
+    body{
+      margin:0; font-family: Arial, sans-serif;
+      background:#0f172a; color:#e5e7eb;
+      display:flex; justify-content:center;
+      padding:24px;
+    }
+    .wrap{ width:100%; max-width:920px; }
+    .card{
+      background:#0b1224;
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:14px;
+      padding:18px;
+      margin-bottom:16px;
+      box-shadow:0 10px 24px rgba(0,0,0,0.25);
+    }
+    h1{ margin:0 0 10px 0; font-size:26px; }
+    h2{ margin:0 0 10px 0; font-size:18px; color:#cbd5e1; }
+    p{ margin:8px 0; color:#cbd5e1; }
+    label{ display:block; font-size:13px; color:#94a3b8; margin-bottom:6px; }
+    input, textarea{
+      width:100%;
+      box-sizing:border-box;
+      padding:12px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:#0a1020;
+      color:#e5e7eb;
+      outline:none;
+    }
+    input:focus, textarea:focus{ border-color:rgba(46,204,113,0.6); }
+    .row{ display:flex; gap:12px; flex-wrap:wrap; }
+    .row > div{ flex:1; min-width:220px; }
+    .btn{
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:#111a33;
+      color:#e5e7eb;
+      cursor:pointer;
+      text-decoration:none;
+      font-weight:600;
+    }
+    .btn.primary{
+      background:#16a34a;
+      border-color:#16a34a;
+      color:#04120a;
+    }
+    .btn:disabled{ opacity:0.55; cursor:not-allowed; }
+    .pill{
+      display:inline-block;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:12px;
+      border:1px solid rgba(255,255,255,0.14);
+      background:rgba(255,255,255,0.06);
+    }
+    .ok{ color:#86efac; }
+    .bad{ color:#fca5a5; }
+    pre{
+      white-space:pre-wrap;
+      background:#070b16;
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:12px;
+      padding:12px;
+      overflow:auto;
+      color:#cbd5e1;
+      margin:10px 0 0 0;
+    }
+    .small{ font-size:12px; color:#94a3b8; }
+    a{ color:#93c5fd; }
+    .muted{ opacity:0.85; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>RestaurantAssist Dashboard</h1>
+      <p class="muted">Paste your API key to view your subscription status and get ready-to-use examples.</p>
+    </div>
+
+    <div class="card">
+      <h2>1) Connect</h2>
+      <div class="row">
+        <div>
+          <label for="apiBase">API Base URL</label>
+          <input id="apiBase" value="https://review-assistant-api.onrender.com" />
+          <div class="small" style="margin-top:6px;">
+            Tip: If you later set up <code>api.restaurantassist.app</code>, update this value.
+          </div>
+        </div>
+        <div>
+          <label for="apiKey">Your API Key (x-api-key)</label>
+          <input id="apiKey" placeholder="cust_..." />
+          <div class="small" style="margin-top:6px;">
+            We emailed this to you after checkout. If you didn’t get it, check Spam and click “Not spam”.
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn primary" id="btnLoad">Load my account</button>
+        <button class="btn" id="btnSave">Save key locally</button>
+        <button class="btn" id="btnClear">Clear saved key</button>
+        <span class="pill" id="statusPill">Not connected</span>
+      </div>
+
+      <div id="err" class="small bad" style="margin-top:10px; display:none;"></div>
+    </div>
+
+    <div class="card">
+      <h2>2) Account</h2>
+      <div class="row">
+        <div>
+          <p><strong>Business:</strong> <span id="biz">—</span></p>
+          <p><strong>Email:</strong> <span id="email">—</span></p>
+        </div>
+        <div>
+          <p><strong>Plan:</strong> <span id="plan">—</span></p>
+          <p><strong>Status:</strong> <span id="subStatus">—</span></p>
+          <p><strong>Renews / ends:</strong> <span id="periodEnd">—</span></p>
+        </div>
+      </div>
+      <div class="small">
+        If your status is <strong>past_due</strong> or <strong>canceled</strong>, API requests will return <code>402</code>.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>3) Quick start</h2>
+      <p>Try these from Terminal / Command Prompt (replace review text):</p>
+      <pre id="curlAnalyze"></pre>
+      <pre id="curlSummary"></pre>
+      <div style="margin-top:10px;">
+        <a class="btn" href="/" >Back to home</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Help</h2>
+      <ul class="small">
+        <li><strong>Email went to Spam?</strong> Open it and click <strong>“Not spam”</strong> to train Gmail.</li>
+        <li><strong>Lost your API key?</strong> Email <a href="mailto:support@restaurantassist.app">support@restaurantassist.app</a> and we’ll reset it.</li>
+        <li><strong>API returns 401?</strong> Make sure you pasted the full <code>cust_...</code> key and saved it.</li>
+        <li><strong>API returns 402?</strong> Your subscription is not active (past_due/canceled).</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    function showErr(msg){
+      const el = $("err");
+      el.style.display = msg ? "block" : "none";
+      el.textContent = msg || "";
+    }
+
+    function setPill(text, ok){
+      const p = $("statusPill");
+      p.textContent = text;
+      p.classList.remove("ok","bad");
+      if (ok === true) p.classList.add("ok");
+      if (ok === false) p.classList.add("bad");
+    }
+
+    function getBase(){
+      return $("apiBase").value.trim().replace(/\/+$/,"");
+    }
+    function getKey(){
+      return $("apiKey").value.trim();
+    }
+
+    function updateCurlExamples(){
+      const base = getBase() || "https://review-assistant-api.onrender.com";
+      const key = getKey() || "cust_YOUR_KEY_HERE";
+
+      $("curlAnalyze").textContent =
+`curl -X POST "${base}/analyze" \\
+  -H "Content-Type: application/json" \\
+  -H "x-api-key: ${key}" \\
+  -d "{\\"review_text\\":\\"The food was great but the wait was long\\", \\"platform\\":\\"google\\"}"`;
+
+      $("curlSummary").textContent =
+`curl "${base}/summary" \\
+  -H "x-api-key: ${key}"`;
+    }
+
+    async function loadMe(){
+      showErr("");
+      setPill("Loading…");
+      updateCurlExamples();
+
+      const base = getBase();
+      const key = getKey();
+      if (!base) return showErr("API Base URL is required.");
+      if (!key) return showErr("API key is required.");
+
+      try{
+        const r = await fetch(`${base}/me`, {
+          headers: { "x-api-key": key }
+        });
+
+        if (!r.ok){
+          const txt = await r.text();
+          setPill("Error", false);
+          return showErr(`Request failed (${r.status}): ${txt}`);
+        }
+
+        const data = await r.json();
+
+        $("biz").textContent = data.business_id || "—";
+        $("email").textContent = data.email || "—";
+        $("plan").textContent = data.subscription?.plan || "starter";
+        $("subStatus").textContent = data.subscription?.status || "inactive";
+        $("periodEnd").textContent = data.subscription?.current_period_end || "N/A";
+
+        const ok = (data.subscription?.status === "active");
+        setPill(ok ? "Connected (active)" : "Connected (inactive)", ok);
+
+      }catch(e){
+        setPill("Error", false);
+        showErr(`Network error: ${e}`);
+      }
+    }
+
+    function saveKey(){
+      const key = getKey();
+      const base = getBase();
+      if (!key) return showErr("API key is required to save.");
+      localStorage.setItem("ra_api_key", key);
+      localStorage.setItem("ra_api_base", base);
+      setPill("Saved locally", true);
+      showErr("");
+      updateCurlExamples();
+    }
+
+    function clearKey(){
+      localStorage.removeItem("ra_api_key");
+      localStorage.removeItem("ra_api_base");
+      $("apiKey").value = "";
+      setPill("Cleared", true);
+      showErr("");
+      updateCurlExamples();
+    }
+
+    // init
+    (function(){
+      const savedKey = localStorage.getItem("ra_api_key");
+      const savedBase = localStorage.getItem("ra_api_base");
+      if (savedBase) $("apiBase").value = savedBase;
+      if (savedKey) $("apiKey").value = savedKey;
+      updateCurlExamples();
+
+      $("btnLoad").addEventListener("click", loadMe);
+      $("btnSave").addEventListener("click", saveKey);
+      $("btnClear").addEventListener("click", clearKey);
+
+      $("apiBase").addEventListener("input", updateCurlExamples);
+      $("apiKey").addEventListener("input", updateCurlExamples);
+    })();
+  </script>
+</body>
+</html>
