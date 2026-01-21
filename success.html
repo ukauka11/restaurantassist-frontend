@@ -7,7 +7,59 @@
 </head>
 <body style="font-family: Arial, sans-serif; padding: 40px;">
   <h1>✅ Checkout complete</h1>
-  <p>Thanks! Your subscription is active. Check your email for next steps.</p>
-  <p><a href="/">Back to home</a></p>
+  <p id="status">Checking your subscription status…</p>
+
+  <div id="details" style="margin-top:16px;"></div>
+
+  <p style="margin-top:24px;"><a href="/">Back to home</a></p>
+
+  <script>
+    const API_BASE = "https://review-assistant-api.onrender.com";
+
+    function getSessionId() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("session_id");
+    }
+
+    async function checkStatus() {
+      const sessionId = getSessionId();
+      const statusEl = document.getElementById("status");
+      const detailsEl = document.getElementById("details");
+
+      if (!sessionId) {
+        statusEl.textContent = "Missing session_id. Please contact support.";
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/billing/status?session_id=${encodeURIComponent(sessionId)}`);
+        const data = await res.json();
+
+        if (!res.ok) {
+          statusEl.textContent = data?.detail || "Could not check status.";
+          return;
+        }
+
+        if (!data.ready) {
+          statusEl.textContent = data.message || "Provisioning in progress…";
+          // Auto-retry a couple times
+          setTimeout(checkStatus, 3000);
+          return;
+        }
+
+        const sub = data.subscription || {};
+        statusEl.textContent = `✅ Subscription is ${sub.status || "unknown"}`;
+        detailsEl.innerHTML = `
+          <p><strong>Business:</strong> ${data.business_id}</p>
+          <p><strong>Plan:</strong> ${sub.plan || "starter"}</p>
+          <p><strong>Renews / ends:</strong> ${sub.current_period_end || "N/A"}</p>
+        `;
+      } catch (e) {
+        statusEl.textContent = "Network error while checking status. Please refresh.";
+      }
+    }
+
+    checkStatus();
+  </script>
 </body>
 </html>
