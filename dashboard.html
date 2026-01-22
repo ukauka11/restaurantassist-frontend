@@ -1,13 +1,173 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <title>RestaurantAssist • Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>RestaurantAssist — Dashboard</title>
   <link rel="stylesheet" href="/styles.css">
+  <style>
+    /* Dashboard-only polish (keeps styles.css clean) */
+
+    .hero {
+      margin-top: 18px;
+      padding: 22px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        radial-gradient(1200px 400px at 10% 0%, rgba(56,189,248,0.18), transparent 55%),
+        radial-gradient(900px 380px at 90% 10%, rgba(34,197,94,0.16), transparent 55%),
+        #0b1224;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+    }
+    .hero h1{
+      margin:0;
+      font-size: 34px;
+      letter-spacing: -0.3px;
+      color:#fff;
+    }
+    .hero .sub{
+      margin-top: 10px;
+      font-size: 14px;
+      color:#cbd5e1;
+      max-width: 900px;
+      line-height: 1.6;
+    }
+
+    .grid {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .row2 {
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 900px){
+      .row2{ grid-template-columns: 1fr; }
+    }
+
+    .sectionTitle{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .sectionTitle h2{
+      margin:0;
+      font-size: 18px;
+      color:#e2e8f0;
+    }
+    .hint{
+      font-size: 12px;
+      color:#94a3b8;
+    }
+
+    label{
+      display:block;
+      font-size: 13px;
+      color:#94a3b8;
+      margin: 10px 0 6px;
+    }
+    input{
+      width:100%;
+      box-sizing:border-box;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: #0a1020;
+      color:#e5e7eb;
+      outline:none;
+    }
+    input:focus{ border-color: rgba(56,189,248,0.8); }
+
+    .actions{
+      margin-top: 12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 12px;
+      border:1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color:#cbd5e1;
+    }
+    .pill.ok{
+      border-color: rgba(34,197,94,0.35);
+      background: rgba(34,197,94,0.12);
+      color:#bbf7d0;
+    }
+    .pill.warn{
+      border-color: rgba(148,163,184,0.35);
+      background: rgba(148,163,184,0.10);
+      color:#e2e8f0;
+    }
+
+    .kv{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 18px;
+      margin-top: 10px;
+    }
+    @media (max-width: 700px){
+      .kv{ grid-template-columns: 1fr; }
+    }
+    .k{ color:#94a3b8; font-size: 12px; margin-bottom: 4px; }
+    .v{ color:#e5e7eb; font-weight: 800; }
+
+    pre.code{
+      margin: 10px 0 0 0;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #070b16;
+      color:#cbd5e1;
+      overflow:auto;
+      font-size: 12px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* Toast */
+    .toast{
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(2,6,23,0.85);
+      color:#e5e7eb;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+      font-weight: 800;
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 160ms ease;
+    }
+    .toast.show{ opacity: 1; }
+    code{ background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 6px; }
+  </style>
 </head>
+
 <body>
   <div class="container">
+
+    <!-- NAV -->
     <div class="nav">
       <div class="brand"><div class="dot"></div><span>RestaurantAssist</span></div>
       <div class="navlinks">
@@ -17,236 +177,273 @@
         <a class="btn" href="mailto:support@restaurantassist.app">Support</a>
       </div>
     </div>
-    <div class="wrap">
-      <div class="card">
-        <h1>RestaurantAssist Dashboard</h1>
-        <p class="muted">Paste your API key to view your subscription status and get ready-to-use examples.</p>
+
+    <!-- HERO -->
+    <div class="hero">
+      <h1>Dashboard</h1>
+      <div class="sub">
+        Paste your API key to load your account details and copy working examples.
+        If your status becomes <code>past_due</code> or <code>canceled</code>, API requests will return <code>402</code>.
       </div>
-  
+    </div>
+
+    <div class="grid">
+
+      <!-- CONNECT -->
       <div class="card">
-        <h2>1) Connect</h2>
-        <div class="row">
+        <div class="sectionTitle">
+          <h2>1) Connect</h2>
+          <div id="pill" class="pill warn">● Not connected</div>
+        </div>
+
+        <div class="row2">
           <div>
-            <label for="apiBase">API Base URL</label>
+            <label>API Base URL</label>
             <input id="apiBase" value="https://review-assistant-api.onrender.com" />
-            <div class="small" style="margin-top:6px;">
-              Tip: If you later set up <code>api.restaurantassist.app</code>, update this value.
+            <div class="hint" style="margin-top:8px;">
+              Tip: if you later set up <code>api.restaurantassist.app</code>, update this value.
             </div>
           </div>
+
           <div>
-            <label for="apiKey">Your API Key (x-api-key)</label>
+            <label>Your API Key (<code>x-api-key</code>)</label>
             <input id="apiKey" placeholder="cust_..." />
-            <div class="small" style="margin-top:6px;">
-              We emailed this to you after checkout. If you didn’t get it, check Spam and click “Not spam”.
+            <div class="hint" style="margin-top:8px;">
+              We emailed this after checkout. If you didn’t get it, check Spam and click “Not spam”.
             </div>
           </div>
         </div>
-  
-        <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
-          <button class="btn primary" id="btnLoad">Load my account</button>
-          <button class="btn" id="btnSave">Save key locally</button>
-          <button class="btn" id="btnClear">Clear saved key</button>
-          <button class="btn" id="btnCopyKey">Copy API key</button>
-          <span class="pill" id="statusPill">Not connected</span>
+
+        <div class="actions">
+          <button class="btn primary" id="loadBtn">Load my account</button>
+          <button class="btn" id="saveBtn">Save key locally</button>
+          <button class="btn" id="clearBtn">Clear saved key</button>
+          <button class="btn" id="copyBtn">Copy API key</button>
         </div>
-  
-        <div id="err" class="small bad" style="margin-top:10px; display:none;"></div>
+
+        <div id="connectMsg" class="hint" style="margin-top:10px;"></div>
       </div>
-  
-      <div class="card">
-        <h2>2) Account</h2>
-        <div class="row">
-          <div>
-            <p><strong>Business:</strong> <span id="biz">—</span></p>
-            <p><strong>Email:</strong> <span id="email">—</span></p>
+
+      <!-- ACCOUNT + QUICK START -->
+      <div class="row2">
+
+        <!-- ACCOUNT -->
+        <div class="card">
+          <div class="sectionTitle">
+            <h2>2) Account</h2>
+            <div class="hint">Pulled from <code>/me</code></div>
           </div>
-          <div>
-            <p><strong>Plan:</strong> <span id="plan">—</span></p>
-            <p><strong>Status:</strong> <span id="subStatus">—</span></p>
-            <p><strong>Renews / ends:</strong> <span id="periodEnd">—</span></p>
+
+          <div class="kv">
+            <div>
+              <div class="k">Business</div>
+              <div class="v" id="biz">—</div>
+            </div>
+            <div>
+              <div class="k">Email</div>
+              <div class="v" id="email">—</div>
+            </div>
+            <div>
+              <div class="k">Plan</div>
+              <div class="v" id="plan">—</div>
+            </div>
+            <div>
+              <div class="k">Status</div>
+              <div class="v" id="status">—</div>
+            </div>
+            <div>
+              <div class="k">Renews / ends</div>
+              <div class="v" id="periodEnd">—</div>
+            </div>
+            <div>
+              <div class="k">API Base</div>
+              <div class="v" id="baseEcho">—</div>
+            </div>
           </div>
         </div>
-        <div class="small">
-          If your status is <strong>past_due</strong> or <strong>canceled</strong>, API requests will return <code>402</code>.
+
+        <!-- QUICK START -->
+        <div class="card">
+          <div class="sectionTitle">
+            <h2>3) Quick start</h2>
+            <div class="hint">Copy/paste into Terminal / Command Prompt</div>
+          </div>
+
+          <button class="btn" id="copyAnalyzeBtn">Copy /analyze curl</button>
+          <pre class="code" id="analyzeCode">Paste your API key above to generate a ready-to-use command.</pre>
+
+          <div style="height:10px;"></div>
+
+          <button class="btn" id="copySummaryBtn">Copy /summary curl</button>
+          <pre class="code" id="summaryCode">Paste your API key above to generate a ready-to-use command.</pre>
         </div>
+
       </div>
-  
-      <div class="card">
-        <h2>3) Quick start</h2>
-        <p>Try these from Terminal / Command Prompt (replace review text):</p>
-        <div class="copyrow">
-          <button class="btn" id="btnCopyAnalyze">Copy /analyze curl</button>
-          <span class="copyhint">Paste into Terminal / Command Prompt</span>
-        </div>
-        <pre id="curlAnalyze"></pre>
-        
-        <div class="copyrow">
-          <button class="btn" id="btnCopySummary">Copy /summary curl</button>
-          <span class="copyhint">Paste into Terminal / Command Prompt</span>
-        </div>
-        <pre id="curlSummary"></pre>
-  
-        <div style="margin-top:10px;">
-          <a class="btn" href="/" >Back to home</a>
-        </div>
-      </div>
-  
-      <div class="card">
-        <h2>Help</h2>
-        <ul class="small">
-          <li><strong>Email went to Spam?</strong> Open it and click <strong>“Not spam”</strong> to train Gmail.</li>
-          <li><strong>Lost your API key?</strong> Email <a href="mailto:support@restaurantassist.app">support@restaurantassist.app</a> and we’ll reset it.</li>
-          <li><strong>API returns 401?</strong> Make sure you pasted the full <code>cust_...</code> key and saved it.</li>
-          <li><strong>API returns 402?</strong> Your subscription is not active (past_due/canceled).</li>
-        </ul>
-      </div>
+
+    </div>
+
+    <div class="footer">
+      © <span id="yr"></span> RestaurantAssist • Questions? <a href="mailto:support@restaurantassist.app">support@restaurantassist.app</a>
     </div>
   </div>
 
+  <div id="toast" class="toast">Copied!</div>
+
   <script>
-    const $ = (id) => document.getElementById(id);
+    document.getElementById("yr").textContent = new Date().getFullYear();
 
-    function showErr(msg){
-      const el = $("err");
-      el.style.display = msg ? "block" : "none";
-      el.textContent = msg || "";
+    const apiBaseEl = document.getElementById("apiBase");
+    const apiKeyEl  = document.getElementById("apiKey");
+    const pillEl    = document.getElementById("pill");
+    const connectMsgEl = document.getElementById("connectMsg");
+
+    const bizEl = document.getElementById("biz");
+    const emailEl = document.getElementById("email");
+    const planEl = document.getElementById("plan");
+    const statusEl = document.getElementById("status");
+    const periodEndEl = document.getElementById("periodEnd");
+    const baseEchoEl = document.getElementById("baseEcho");
+
+    const analyzeCodeEl = document.getElementById("analyzeCode");
+    const summaryCodeEl = document.getElementById("summaryCode");
+
+    const toastEl = document.getElementById("toast");
+    function toast(text="Copied!"){
+      toastEl.textContent = text;
+      toastEl.classList.add("show");
+      setTimeout(()=>toastEl.classList.remove("show"), 900);
     }
 
-    function setPill(text, ok){
-      const p = $("statusPill");
-      p.textContent = text;
-      p.classList.remove("ok","bad");
-      if (ok === true) p.classList.add("ok");
-      if (ok === false) p.classList.add("bad");
+    function setPillNotConnected(){
+      pillEl.className = "pill warn";
+      pillEl.textContent = "● Not connected";
+    }
+    function setPillConnectedActive(){
+      pillEl.className = "pill ok";
+      pillEl.textContent = "● Connected (active)";
+    }
+    function setPillConnectedInactive(status){
+      pillEl.className = "pill warn";
+      pillEl.textContent = `● Connected (${status || "inactive"})`;
     }
 
-    function getBase(){
-      return $("apiBase").value.trim().replace(/\/+$/,"");
-    }
-    function getKey(){
-      return $("apiKey").value.trim();
-    }
+    function buildCurlSamples(){
+      const base = apiBaseEl.value.trim().replace(/\/+$/, "");
+      const key = apiKeyEl.value.trim();
 
-    function updateCurlExamples(){
-      const base = getBase() || "https://review-assistant-api.onrender.com";
-      const key = getKey() || "cust_YOUR_KEY_HERE";
+      if (!key){
+        analyzeCodeEl.textContent = "Paste your API key above to generate a ready-to-use command.";
+        summaryCodeEl.textContent = "Paste your API key above to generate a ready-to-use command.";
+        return;
+      }
 
-      $("curlAnalyze").textContent =
+      analyzeCodeEl.textContent =
 `curl -X POST "${base}/analyze" \\
   -H "Content-Type: application/json" \\
   -H "x-api-key: ${key}" \\
   -d "{\\"review_text\\":\\"The food was great but the wait was long\\", \\"platform\\":\\"google\\"}"`;
 
-      $("curlSummary").textContent =
+      summaryCodeEl.textContent =
 `curl "${base}/summary" \\
   -H "x-api-key: ${key}"`;
     }
 
-    async function copyText(text){
-      try{
-        await navigator.clipboard.writeText(text);
-        return true;
-      }catch(e){
-        // Fallback for older browsers
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        document.body.removeChild(ta);
-        return true;
-      }
+    apiBaseEl.addEventListener("input", buildCurlSamples);
+    apiKeyEl.addEventListener("input", () => { setPillNotConnected(); buildCurlSamples(); });
+
+    // Load saved key on page load
+    const saved = localStorage.getItem("ra_api_key");
+    if (saved) {
+      apiKeyEl.value = saved;
+      buildCurlSamples();
+    } else {
+      buildCurlSamples();
     }
 
-    async function loadMe(){
-      showErr("");
-      setPill("Loading…");
-      updateCurlExamples();
+    document.getElementById("saveBtn").addEventListener("click", () => {
+      const key = apiKeyEl.value.trim();
+      if (!key) return;
+      localStorage.setItem("ra_api_key", key);
+      toast("Saved locally");
+    });
 
-      const base = getBase();
-      const key = getKey();
-      if (!base) return showErr("API Base URL is required.");
-      if (!key) return showErr("API key is required.");
+    document.getElementById("clearBtn").addEventListener("click", () => {
+      localStorage.removeItem("ra_api_key");
+      apiKeyEl.value = "";
+      setPillNotConnected();
+      buildCurlSamples();
+      toast("Cleared");
+    });
 
-      try{
-        const r = await fetch(`${base}/me`, {
+    document.getElementById("copyBtn").addEventListener("click", async () => {
+      const key = apiKeyEl.value.trim();
+      if (!key) return;
+      await navigator.clipboard.writeText(key);
+      toast("API key copied");
+    });
+
+    async function loadAccount(){
+      const base = apiBaseEl.value.trim().replace(/\/+$/, "");
+      const key = apiKeyEl.value.trim();
+
+      connectMsgEl.textContent = "";
+
+      if (!key){
+        connectMsgEl.textContent = "Enter your API key first.";
+        setPillNotConnected();
+        return;
+      }
+
+      connectMsgEl.textContent = "Loading…";
+
+      try {
+        const res = await fetch(`${base}/me`, {
           headers: { "x-api-key": key }
         });
+        const data = await res.json();
 
-        if (!r.ok){
-          const txt = await r.text();
-          setPill("Error", false);
-          return showErr(`Request failed (${r.status}): ${txt}`);
+        if (!res.ok){
+          connectMsgEl.textContent = data?.detail || "Failed to load account.";
+          setPillConnectedInactive("unauthorized");
+          return;
         }
 
-        const data = await r.json();
+        bizEl.textContent = data.business_id || "—";
+        emailEl.textContent = data.email || "—";
+        planEl.textContent = data.subscription?.plan || "—";
+        statusEl.textContent = data.subscription?.status || "inactive";
+        periodEndEl.textContent = data.subscription?.current_period_end || "N/A";
+        baseEchoEl.textContent = base;
 
-        $("biz").textContent = data.business_id || "—";
-        $("email").textContent = data.email || "—";
-        $("plan").textContent = data.subscription?.plan || "starter";
-        $("subStatus").textContent = data.subscription?.status || "inactive";
-        $("periodEnd").textContent = data.subscription?.current_period_end || "N/A";
+        if ((data.subscription?.status || "").toLowerCase() === "active"){
+          setPillConnectedActive();
+        } else {
+          setPillConnectedInactive(data.subscription?.status);
+        }
 
-        const ok = (data.subscription?.status === "active");
-        setPill(ok ? "Connected (active)" : "Connected (inactive)", ok);
-
-      }catch(e){
-        setPill("Error", false);
-        showErr(`Network error: ${e}`);
+        connectMsgEl.textContent = "Loaded.";
+      } catch (e){
+        connectMsgEl.textContent = "Network error. Check your API base URL.";
+        setPillConnectedInactive("network");
       }
     }
 
-    function saveKey(){
-      const key = getKey();
-      const base = getBase();
-      if (!key) return showErr("API key is required to save.");
-      localStorage.setItem("ra_api_key", key);
-      localStorage.setItem("ra_api_base", base);
-      setPill("Saved locally", true);
-      showErr("");
-      updateCurlExamples();
-    }
+    document.getElementById("loadBtn").addEventListener("click", loadAccount);
 
-    function clearKey(){
-      localStorage.removeItem("ra_api_key");
-      localStorage.removeItem("ra_api_base");
-      $("apiKey").value = "";
-      setPill("Cleared", true);
-      showErr("");
-      updateCurlExamples();
-    }
+    document.getElementById("copyAnalyzeBtn").addEventListener("click", async () => {
+      const txt = analyzeCodeEl.textContent;
+      if (!txt || txt.includes("Paste your API key")) return;
+      await navigator.clipboard.writeText(txt);
+      toast("Analyze curl copied");
+    });
 
-    // init
-    (function(){
-      const savedKey = localStorage.getItem("ra_api_key");
-      const savedBase = localStorage.getItem("ra_api_base");
-      if (savedBase) $("apiBase").value = savedBase;
-      if (savedKey) $("apiKey").value = savedKey;
-      updateCurlExamples();
-
-      $("btnLoad").addEventListener("click", loadMe);
-      $("btnSave").addEventListener("click", saveKey);
-      $("btnClear").addEventListener("click", clearKey);
-
-      $("apiBase").addEventListener("input", updateCurlExamples);
-      $("apiKey").addEventListener("input", updateCurlExamples);
-      $("btnCopyKey").addEventListener("click", async () => {
-        const key = getKey();
-        if (!key) return showErr("No API key to copy.");
-        await copyText(key);
-        setPill("API key copied", true);
-      });
-      
-      $("btnCopyAnalyze").addEventListener("click", async () => {
-        await copyText($("curlAnalyze").textContent);
-        setPill("/analyze curl copied", true);
-      });
-      
-      $("btnCopySummary").addEventListener("click", async () => {
-        await copyText($("curlSummary").textContent);
-        setPill("/summary curl copied", true);
-      });
-    })();
+    document.getElementById("copySummaryBtn").addEventListener("click", async () => {
+      const txt = summaryCodeEl.textContent;
+      if (!txt || txt.includes("Paste your API key")) return;
+      await navigator.clipboard.writeText(txt);
+      toast("Summary curl copied");
+    });
   </script>
 </body>
 </html>
+
