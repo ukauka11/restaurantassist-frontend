@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>RestaurantAssist • Docs</title>
+  <title>RestaurantAssist • Advanced Docs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="/styles.css">
+
   <style>
     .hero {
       margin-top: 18px;
@@ -17,19 +18,8 @@
         #0b1224;
       box-shadow: 0 10px 24px rgba(0,0,0,0.25);
     }
-    .hero h1{
-      margin:0;
-      font-size: 34px;
-      letter-spacing: -0.3px;
-      color:#fff;
-    }
-    .hero .sub{
-      margin-top: 10px;
-      font-size: 14px;
-      color:#cbd5e1;
-      max-width: 950px;
-      line-height: 1.6;
-    }
+    .hero h1{ margin:0; font-size: 34px; letter-spacing: -0.3px; color:#fff; }
+    .hero .sub{ margin-top: 10px; font-size: 14px; color:#cbd5e1; max-width: 950px; line-height: 1.6; }
 
     .grid { margin-top: 16px; display:grid; gap:16px; }
     .row2 { display:grid; grid-template-columns: 1fr 1fr; gap:16px; }
@@ -38,36 +28,6 @@
     .sectionTitle{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px; }
     .sectionTitle h2{ margin:0; font-size: 18px; color:#e2e8f0; }
     .hint{ font-size: 12px; color:#94a3b8; line-height: 1.5; }
-
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 8px 12px; border-radius: 999px;
-      font-weight: 800; font-size: 12px;
-      border:1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.06);
-      color:#cbd5e1;
-    }
-
-    .ctaRow { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top: 12px; }
-    .ctaRow .btn.primary { background:#38bdf8; border-color:#38bdf8; color:#031018; }
-
-    details.advanced {
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.03);
-      border-radius: 16px;
-      padding: 14px 16px;
-    }
-    details.advanced > summary{
-      cursor: pointer;
-      list-style: none;
-      font-weight: 900;
-      color:#e2e8f0;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-    }
-    details.advanced > summary::-webkit-details-marker{ display:none; }
 
     label{ display:block; font-size: 13px; color:#94a3b8; margin: 10px 0 6px; }
     input{
@@ -97,6 +57,15 @@
     }
 
     .actions{ margin-top: 10px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 12px; border-radius: 999px;
+      font-weight: 800; font-size: 12px;
+      border:1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color:#cbd5e1;
+    }
 
     .toast{
       position: fixed;
@@ -140,194 +109,114 @@
 
     <!-- HERO -->
     <div class="hero">
-      <h1>Docs</h1>
+      <h1>Docs (Advanced)</h1>
       <div class="sub">
-        If you’re not technical, don’t worry — you probably don’t need this page.
-        The easiest way is to use the <strong>Dashboard</strong>.
-      </div>
-
-      <div class="ctaRow">
-        <a class="btn primary" href="/dashboard.html">Go to Dashboard</a>
-        <a class="btn" href="/support.html">Need help?</a>
-      </div>
-
-      <div class="sub" style="margin-top:12px;">
-        <strong>Simple steps:</strong>
-        1) Start trial → 2) Check email for your key → 3) Paste key into Dashboard → 4) Paste review → Generate → Copy.
+        <strong>Most restaurant owners don’t need this page.</strong><br/>
+        If you just want replies: go to the <a href="/dashboard.html">Dashboard</a>, paste a review, and click <strong>Generate</strong>.
+        <br/><br/>
+        This page is for developers who want to call the API directly (curl / scripts / integrations).
       </div>
     </div>
 
     <div class="grid">
 
-      <!-- BEGINNER QUICK START -->
+      <!-- QUICK CONNECT -->
       <div class="card">
         <div class="sectionTitle">
-          <h2>Quick Start (non-technical)</h2>
-          <div class="pill">Recommended</div>
+          <h2>Connect</h2>
+          <div class="pill">Paste your key once → copy commands</div>
         </div>
 
-        <ul>
-          <li><strong>Step 1:</strong> Go to <a href="/">Home</a> and click <strong>Start free trial</strong>.</li>
-          <li><strong>Step 2:</strong> After checkout, check your email for your API key (it starts with <code>cust_</code>).</li>
-          <li><strong>Step 3:</strong> Go to <a href="/dashboard.html">Dashboard</a> and paste the key.</li>
-          <li><strong>Step 4:</strong> Paste a review and click <strong>Generate response</strong>.</li>
-          <li><strong>Step 5:</strong> Click <strong>Copy reply</strong> and paste it into Google/Yelp/Facebook.</li>
-        </ul>
+        <div class="row2">
+          <div>
+            <label>API Base URL</label>
+            <input id="apiBase" value="https://review-assistant-api.onrender.com" />
+            <div class="hint" style="margin-top:8px;">
+              If you later set <code>api.restaurantassist.app</code>, update this.
+            </div>
+          </div>
+          <div>
+            <label>Your API Key (<code>x-api-key</code>)</label>
+            <input id="apiKey" placeholder="cust_..." />
+            <div class="hint" style="margin-top:8px;">
+              You receive this after checkout (via email).
+            </div>
+          </div>
+        </div>
 
-        <div class="hint" style="margin-top:10px;">
-          If your email goes to Spam, click <strong>“Not spam”</strong> so your inbox learns it’s safe.
+        <div class="actions">
+          <button class="btn" id="saveBtn">Save key locally</button>
+          <button class="btn" id="clearBtn">Clear saved key</button>
+          <button class="btn" id="copyKeyBtn">Copy API key</button>
         </div>
       </div>
 
-      <!-- TROUBLESHOOTING (KEEP VISIBLE) -->
-      <div class="card">
-        <div class="sectionTitle">
-          <h2>Help (common issues)</h2>
-          <div class="hint">Fast fixes</div>
+      <!-- ENDPOINTS -->
+      <div class="row2">
+        <div class="card">
+          <div class="sectionTitle">
+            <h2>Endpoints</h2>
+            <div class="hint">Core API routes</div>
+          </div>
+
+          <ul>
+            <li><code>GET /health</code> — quick uptime check</li>
+            <li><code>GET /me</code> — your business + plan + subscription status</li>
+            <li><code>POST /analyze</code> — send a review, get AI reply + tags</li>
+            <li><code>GET /summary</code> — daily/all-time summary of saved reviews</li>
+          </ul>
+
+          <div class="hint" style="margin-top:10px;">
+            If subscription is not active, protected routes return <code>402</code>.
+          </div>
         </div>
-        <ul>
-          <li><strong>401 Unauthorized</strong> — your key is missing or incorrect (must start with <code>cust_</code>)</li>
-          <li><strong>402 Subscription inactive</strong> — payment failed or subscription canceled</li>
-          <li><strong>Network error</strong> — check your internet or the API Base URL</li>
-          <li><strong>Email went to Spam</strong> — click “Not spam” (this usually fixes it)</li>
-        </ul>
-        <div class="ctaRow" style="margin-top:12px;">
-          <a class="btn primary" href="/support.html">Contact Support</a>
-          <a class="btn" href="/dashboard.html">Try Dashboard</a>
+
+        <div class="card">
+          <div class="sectionTitle">
+            <h2>Headers</h2>
+            <div class="hint">Required for protected routes</div>
+          </div>
+          <pre class="code">x-api-key: cust_...</pre>
+          <div class="hint" style="margin-top:10px;">
+            Your API key identifies your business. Keep it private.
+          </div>
         </div>
       </div>
 
-      <!-- ADVANCED SECTION -->
-      <details class="advanced">
-        <summary>
-          <span>Advanced (for developers / IT)</span>
-          <span class="hint">curl + raw API details</span>
-        </summary>
-
-        <div style="margin-top:12px;">
-          <!-- QUICK CONNECT -->
-          <div class="card">
-            <div class="sectionTitle">
-              <h2>Connect</h2>
-              <div class="pill">Tip: paste your key once — then copy commands</div>
-            </div>
-
-            <div class="row2">
-              <div>
-                <label>API Base URL</label>
-                <input id="apiBase" value="https://review-assistant-api.onrender.com" />
-                <div class="hint" style="margin-top:8px;">
-                  If you later set <code>api.restaurantassist.app</code>, update this.
-                </div>
-              </div>
-              <div>
-                <label>Your API Key (<code>x-api-key</code>)</label>
-                <input id="apiKey" placeholder="cust_..." />
-                <div class="hint" style="margin-top:8px;">
-                  You receive this after checkout (via email).
-                </div>
-              </div>
-            </div>
-
-            <div class="actions">
-              <button class="btn" id="saveBtn">Save key locally</button>
-              <button class="btn" id="clearBtn">Clear saved key</button>
-              <button class="btn" id="copyKeyBtn">Copy API key</button>
-            </div>
-          </div>
-
-          <!-- ENDPOINTS -->
-          <div class="row2">
-            <div class="card">
-              <div class="sectionTitle">
-                <h2>Endpoints</h2>
-                <div class="hint">Core API routes</div>
-              </div>
-
-              <ul>
-                <li><code>GET /health</code> — quick uptime check</li>
-                <li><code>GET /me</code> — business + plan + subscription status</li>
-                <li><code>POST /analyze</code> — send review, get AI response + tags</li>
-                <li><code>GET /summary</code> — summary of saved reviews</li>
-              </ul>
-
-              <div class="hint" style="margin-top:10px;">
-                If subscription is not active, protected routes return <code>402</code>.
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="sectionTitle">
-                <h2>Headers</h2>
-                <div class="hint">Required for protected routes</div>
-              </div>
-              <pre class="code">x-api-key: cust_...</pre>
-              <div class="hint" style="margin-top:10px;">
-                Your API key identifies your business. Keep it private.
-              </div>
-            </div>
-          </div>
-
-          <!-- CURLs -->
-          <div class="card">
-            <div class="sectionTitle">
-              <h2>Copy-paste examples (curl)</h2>
-              <div class="hint">Mac/Linux Terminal + Windows PowerShell (with curl)</div>
-            </div>
-
-            <button class="btn" id="copyMeBtn">Copy /me curl</button>
-            <pre class="code" id="meCode">Paste your API key above to generate a ready-to-use command.</pre>
-
-            <div style="height:10px;"></div>
-
-            <button class="btn" id="copyAnalyzeBtn">Copy /analyze curl</button>
-            <pre class="code" id="analyzeCode">Paste your API key above to generate a ready-to-use command.</pre>
-
-            <div style="height:10px;"></div>
-
-            <button class="btn" id="copySummaryBtn">Copy /summary curl</button>
-            <pre class="code" id="summaryCode">Paste your API key above to generate a ready-to-use command.</pre>
-          </div>
-
-          <!-- REQUEST/RESPONSE -->
-          <div class="row2">
-            <div class="card">
-              <div class="sectionTitle">
-                <h2>POST /analyze body</h2>
-                <div class="hint">JSON payload</div>
-              </div>
-              <pre class="code">{
-  "review_text": "Food was great but the wait was long.",
-  "platform": "google",
-  "customer_name": "Optional",
-  "order_number": "Optional",
-  "run_id": "Optional"
-}</pre>
-              <div class="hint" style="margin-top:10px;">
-                <code>platform</code> can be <code>google</code>, <code>yelp</code>, <code>facebook</code>, or <code>other</code>.
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="sectionTitle">
-                <h2>What you get back</h2>
-                <div class="hint">Response contains a ready-to-post reply</div>
-              </div>
-              <pre class="code">{
-  "business_id": "your-business",
-  "record": {
-    "sentiment": "negative",
-    "urgency": "medium",
-    "category": "speed_wait_time",
-    "tags": ["wait_time"],
-    "reply": "Thanks for your feedback! ...",
-    "next_steps": ["Review staffing at peak hours", "..."]
-  }
-}</pre>
-            </div>
-          </div>
+      <!-- CURLs -->
+      <div class="card">
+        <div class="sectionTitle">
+          <h2>Copy-paste examples (curl)</h2>
+          <div class="hint">For developers / IT / agencies</div>
         </div>
-      </details>
+
+        <button class="btn" id="copyMeBtn">Copy /me curl</button>
+        <pre class="code" id="meCode">Paste your API key above to generate a ready-to-use command.</pre>
+
+        <div style="height:10px;"></div>
+
+        <button class="btn" id="copyAnalyzeBtn">Copy /analyze curl</button>
+        <pre class="code" id="analyzeCode">Paste your API key above to generate a ready-to-use command.</pre>
+
+        <div style="height:10px;"></div>
+
+        <button class="btn" id="copySummaryBtn">Copy /summary curl</button>
+        <pre class="code" id="summaryCode">Paste your API key above to generate a ready-to-use command.</pre>
+      </div>
+
+      <!-- TROUBLESHOOTING -->
+      <div class="card">
+        <div class="sectionTitle">
+          <h2>Troubleshooting</h2>
+          <div class="hint">Common issues</div>
+        </div>
+        <ul>
+          <li><strong>401 Unauthorized</strong> — missing/incorrect <code>x-api-key</code></li>
+          <li><strong>402 Subscription inactive</strong> — canceled or payment issue</li>
+          <li><strong>Network error</strong> — check internet + API Base URL</li>
+          <li><strong>Email went to Spam</strong> — click “Not spam” once to train inbox</li>
+        </ul>
+      </div>
 
     </div>
 
@@ -341,7 +230,6 @@
   <script>
     document.getElementById("yr").textContent = new Date().getFullYear();
 
-    // Advanced-only elements exist after expanding details, but safe to bind anyway:
     const apiBaseEl = document.getElementById("apiBase");
     const apiKeyEl  = document.getElementById("apiKey");
 
@@ -357,8 +245,6 @@
     }
 
     function buildCurlSamples(){
-      if (!apiBaseEl || !apiKeyEl) return;
-
       const base = apiBaseEl.value.trim().replace(/\/+$/, "");
       const key = apiKeyEl.value.trim();
 
@@ -384,55 +270,48 @@
   -H "x-api-key: ${key}"`;
     }
 
-    // Load saved key (same key Dashboard saves)
+    // Load saved key
     const saved = localStorage.getItem("ra_api_key");
-    if (saved && apiKeyEl) apiKeyEl.value = saved;
+    if (saved) apiKeyEl.value = saved;
 
     buildCurlSamples();
+    apiBaseEl.addEventListener("input", buildCurlSamples);
+    apiKeyEl.addEventListener("input", buildCurlSamples);
 
-    if (apiBaseEl) apiBaseEl.addEventListener("input", buildCurlSamples);
-    if (apiKeyEl) apiKeyEl.addEventListener("input", buildCurlSamples);
-
-    const saveBtn = document.getElementById("saveBtn");
-    if (saveBtn) saveBtn.addEventListener("click", () => {
+    document.getElementById("saveBtn").addEventListener("click", () => {
       const key = apiKeyEl.value.trim();
       if (!key) return;
       localStorage.setItem("ra_api_key", key);
       toast("Saved locally");
     });
 
-    const clearBtn = document.getElementById("clearBtn");
-    if (clearBtn) clearBtn.addEventListener("click", () => {
+    document.getElementById("clearBtn").addEventListener("click", () => {
       localStorage.removeItem("ra_api_key");
-      if (apiKeyEl) apiKeyEl.value = "";
+      apiKeyEl.value = "";
       buildCurlSamples();
       toast("Cleared");
     });
 
-    const copyKeyBtn = document.getElementById("copyKeyBtn");
-    if (copyKeyBtn) copyKeyBtn.addEventListener("click", async () => {
+    document.getElementById("copyKeyBtn").addEventListener("click", async () => {
       const key = apiKeyEl.value.trim();
       if (!key) return;
       await navigator.clipboard.writeText(key);
       toast("API key copied");
     });
 
-    const copyMeBtn = document.getElementById("copyMeBtn");
-    if (copyMeBtn) copyMeBtn.addEventListener("click", async () => {
+    document.getElementById("copyMeBtn").addEventListener("click", async () => {
       if (meCodeEl.textContent.includes("Paste your API key")) return;
       await navigator.clipboard.writeText(meCodeEl.textContent);
       toast("/me curl copied");
     });
 
-    const copyAnalyzeBtn = document.getElementById("copyAnalyzeBtn");
-    if (copyAnalyzeBtn) copyAnalyzeBtn.addEventListener("click", async () => {
+    document.getElementById("copyAnalyzeBtn").addEventListener("click", async () => {
       if (analyzeCodeEl.textContent.includes("Paste your API key")) return;
       await navigator.clipboard.writeText(analyzeCodeEl.textContent);
       toast("/analyze curl copied");
     });
 
-    const copySummaryBtn = document.getElementById("copySummaryBtn");
-    if (copySummaryBtn) copySummaryBtn.addEventListener("click", async () => {
+    document.getElementById("copySummaryBtn").addEventListener("click", async () => {
       if (summaryCodeEl.textContent.includes("Paste your API key")) return;
       await navigator.clipboard.writeText(summaryCodeEl.textContent);
       toast("/summary curl copied");
