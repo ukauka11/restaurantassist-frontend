@@ -655,6 +655,33 @@
     document.getElementById("yr").textContent = new Date().getFullYear();
 
     const API_BASE = "https://review-assistant-api.onrender.com";
+    let selectedPlan = "starter";
+    const planStarterEl = document.getElementById("planStarter");
+    const planProEl = document.getElementById("planPro");
+    const chooseStarterBtn = document.getElementById("chooseStarterBtn");
+    const chooseProBtn = document.getElementById("chooseProBtn");
+    
+    function setPlan(plan){
+      selectedPlan = plan;
+    
+      // visual highlight
+      planStarterEl.classList.toggle("selected", plan === "starter");
+      planProEl.classList.toggle("selected", plan === "pro");
+    
+      // button styling
+      if (plan === "starter"){
+        chooseStarterBtn.classList.add("primary");
+        chooseProBtn.classList.remove("primary");
+        chooseProBtn.classList.add("btn");
+      } else {
+        chooseProBtn.classList.add("primary");
+        chooseStarterBtn.classList.remove("primary");
+        chooseStarterBtn.classList.add("btn");
+      }
+    }
+    
+    chooseStarterBtn.addEventListener("click", () => setPlan("starter"));
+    chooseProBtn.addEventListener("click", () => setPlan("pro"));
 
     const msgEl = document.getElementById("msg");
     function setMsg(text, cls){
@@ -677,7 +704,7 @@
         const res = await fetch(`${API_BASE}/billing/create-checkout`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ business_id, email, plan: (window.RA_SELECTED_PLAN || "starter") })
+          body: JSON.stringify({ business_id, email, plan: selectedPlan })
         });
 
         const data = await res.json();
