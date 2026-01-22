@@ -1,13 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Success</title>
+  <title>RestaurantAssist • Success</title>
   <link rel="stylesheet" href="/styles.css">
+  <style>
+    .heroBox{
+      margin-top: 18px;
+      padding: 22px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        radial-gradient(1200px 420px at 10% 0%, rgba(56,189,248,0.18), transparent 55%),
+        radial-gradient(900px 380px at 90% 10%, rgba(34,197,94,0.16), transparent 55%),
+        #0b1224;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+    }
+    .heroBox h1{ margin:0; color:#fff; font-size: 34px; letter-spacing:-0.3px; }
+    .sub{ margin-top:10px; color:#cbd5e1; line-height:1.6; max-width: 900px; }
+
+    .grid{ margin-top: 16px; display:grid; gap:16px; grid-template-columns: 1.1fr 0.9fr; }
+    @media (max-width: 900px){ .grid{ grid-template-columns:1fr; } }
+
+    .notice{
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(46,204,113,0.45);
+      background: rgba(46,204,113,0.12);
+      color:#eafff5;
+    }
+    .notice strong{ color:#fff; }
+
+    .steps li{ margin: 8px 0; color:#cbd5e1; }
+
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 12px; border-radius: 999px;
+      font-weight: 900; font-size: 12px;
+      border:1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color:#cbd5e1;
+    }
+
+    .statusBox{
+      margin-top: 12px;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #070b16;
+      color:#cbd5e1;
+    }
+
+    code{ background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 6px; }
+  </style>
 </head>
-<body style="font-family: Arial, sans-serif; padding: 40px;">
+
+<body style="font-family: Arial, sans-serif;">
   <div class="container">
+
     <div class="nav">
       <div class="brand"><div class="dot"></div><span>RestaurantAssist</span></div>
       <div class="navlinks">
@@ -17,32 +69,63 @@
         <a class="btn" href="/support.html">Support</a>
       </div>
     </div>
-    <h1>✅ Checkout complete</h1>
-    <div style="
-      margin-top:16px;
-      padding:14px;
-      border-radius:6px;
-      background:#0b3d2e;
-      color:#eafff5;
-      border:1px solid #2ecc71;
-      box-shadow: 0 0 0 1px rgba(46,204,113,0.4);
-    ">
-      <strong style="color:#ffffff;">Important:</strong><br>
-      Your API key has been sent to your email.
-      <br><br>
-      If you don’t see it within <strong>1 minute</strong>,
-      please check your <strong>Spam</strong> folder and click
-      <strong>“Not spam”</strong>.
+
+    <div class="heroBox">
+      <div class="pill">Checkout complete ✅</div>
+      <h1 style="margin-top:10px;">You’re all set.</h1>
+      <div class="sub">
+        Next step is simple: go to your <strong>Dashboard</strong>, paste your API key, and generate your first response.
+      </div>
+
+      <div class="navlinks" style="margin-top:14px;">
+        <a class="btn primary" href="/dashboard.html">Go to Dashboard</a>
+        <a class="btn" href="/support.html">Need help?</a>
+      </div>
+
+      <div class="notice">
+        <strong>Important:</strong><br>
+        Your API key has been sent to your email.<br><br>
+        If you don’t see it within <strong>1 minute</strong>, check <strong>Spam</strong> and click <strong>“Not spam”</strong>.
+      </div>
     </div>
-  
-    <p id="status">Checking your subscription status…</p>
-  
-    <div id="details" style="margin-top:16px;"></div>
-  
-    <p style="margin-top:24px;"><a href="/">Back to home</a></p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="sectionTitle">
+          <h2>What to do now</h2>
+          <div class="hint">No tech required</div>
+        </div>
+        <ol class="steps">
+          <li>Open your email and find the message from RestaurantAssist.</li>
+          <li>Copy the API key (starts with <code>cust_</code>).</li>
+          <li>Open the <a href="/dashboard.html">Dashboard</a> and paste the key.</li>
+          <li>Paste a customer review → click <strong>Generate</strong> → copy the reply.</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <div class="sectionTitle">
+          <h2>Status</h2>
+          <div class="hint">Optional</div>
+        </div>
+
+        <div id="status" class="statusBox">Checking your subscription status…</div>
+        <div id="details" class="hint" style="margin-top:10px;"></div>
+
+        <div class="hint" style="margin-top:12px;">
+          If this box doesn’t update, don’t worry — the email/API key is what you need.
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      © <span id="yr"></span> RestaurantAssist • Questions? <a href="/support.html">Support</a>
+    </div>
   </div>
-  
+
   <script>
+    document.getElementById("yr").textContent = new Date().getFullYear();
+
     const API_BASE = "https://review-assistant-api.onrender.com";
 
     function getSessionId() {
@@ -56,40 +139,39 @@
       const detailsEl = document.getElementById("details");
 
       if (!sessionId) {
-        statusEl.textContent = "Missing session_id. Please contact support.";
+        statusEl.textContent = "No session_id found. You can still proceed to the Dashboard.";
         return;
       }
 
       try {
         const res = await fetch(`${API_BASE}/billing/status?session_id=${encodeURIComponent(sessionId)}`);
-        const data = await res.json();
+        const data = await res.json().catch(()=> ({}));
 
         if (!res.ok) {
-          statusEl.textContent = data?.detail || "Could not check status.";
+          statusEl.textContent = "Status check unavailable (that’s okay). Go to Dashboard.";
+          detailsEl.innerHTML = `If you need help, contact <a href="/support.html">Support</a>.`;
           return;
         }
 
         if (!data.ready) {
           statusEl.textContent = data.message || "Provisioning in progress…";
-          // Auto-retry a couple times
           setTimeout(checkStatus, 3000);
           return;
         }
 
         const sub = data.subscription || {};
-        statusEl.textContent = `✅ Subscription is ${sub.status || "unknown"}`;
+        statusEl.textContent = `✅ Subscription: ${sub.status || "unknown"}`;
         detailsEl.innerHTML = `
-          <p><strong>Business:</strong> ${data.business_id}</p>
-          <p><strong>Plan:</strong> ${sub.plan || "starter"}</p>
-          <p><strong>Renews / ends:</strong> ${sub.current_period_end || "N/A"}</p>
+          <div><strong>Business:</strong> ${data.business_id || "N/A"}</div>
+          <div><strong>Plan:</strong> ${sub.plan || "starter"}</div>
+          <div><strong>Renews / ends:</strong> ${sub.current_period_end || "N/A"}</div>
         `;
       } catch (e) {
-        statusEl.textContent = "Network error while checking status. Please refresh.";
+        statusEl.textContent = "Network issue while checking status. Refresh or go to Dashboard.";
       }
     }
 
     checkStatus();
   </script>
 </body>
-
 </html>
