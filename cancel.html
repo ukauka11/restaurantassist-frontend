@@ -1,13 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Checkout canceled</title>
+  <title>RestaurantAssist • Checkout canceled</title>
   <link rel="stylesheet" href="/styles.css">
+  <style>
+    .heroBox{
+      margin-top: 18px;
+      padding: 22px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        radial-gradient(1200px 420px at 10% 0%, rgba(56,189,248,0.18), transparent 55%),
+        radial-gradient(900px 380px at 90% 10%, rgba(244,63,94,0.16), transparent 55%),
+        #0b1224;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+    }
+    .heroBox h1{ margin:0; color:#fff; font-size: 34px; letter-spacing:-0.3px; }
+    .sub{ margin-top:10px; color:#cbd5e1; line-height:1.6; max-width: 900px; }
+  </style>
 </head>
-<body style="font-family: Arial, sans-serif; padding: 40px;">
+
+<body style="font-family: Arial, sans-serif;">
   <div class="container">
+
     <div class="nav">
       <div class="brand"><div class="dot"></div><span>RestaurantAssist</span></div>
       <div class="navlinks">
@@ -17,9 +34,28 @@
         <a class="btn" href="/support.html">Support</a>
       </div>
     </div>
-    <h1>Checkout canceled</h1>
-    <p>No worries — you can try again anytime.</p>
-    <p><a href="/">Back to home</a></p>
+
+    <div class="heroBox">
+      <h1>Checkout canceled</h1>
+      <div class="sub">
+        No worries — you can start again anytime.
+        If you already have an API key from earlier, you can go straight to the Dashboard.
+      </div>
+
+      <div class="navlinks" style="margin-top:14px;">
+        <a class="btn primary" href="/#start">Try again</a>
+        <a class="btn" href="/dashboard.html">Go to Dashboard</a>
+        <a class="btn" href="/support.html">Need help?</a>
+      </div>
+    </div>
+
+    <div class="footer">
+      © <span id="yr"></span> RestaurantAssist • Questions? <a href="/support.html">Support</a>
+    </div>
   </div>
+
+  <script>
+    document.getElementById("yr").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
