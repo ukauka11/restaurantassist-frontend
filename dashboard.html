@@ -6,73 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="/styles.css">
   <style>
-    /* Dashboard-only polish (keeps styles.css clean) */
-
     .hero {
       margin-top: 18px;
       padding: 22px;
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,0.08);
       background:
-        radial-gradient(1200px 400px at 10% 0%, rgba(56,189,248,0.18), transparent 55%),
+        radial-gradient(1200px 420px at 10% 0%, rgba(56,189,248,0.18), transparent 55%),
         radial-gradient(900px 380px at 90% 10%, rgba(34,197,94,0.16), transparent 55%),
         #0b1224;
       box-shadow: 0 10px 24px rgba(0,0,0,0.25);
     }
-    .hero h1{
-      margin:0;
-      font-size: 34px;
-      letter-spacing: -0.3px;
-      color:#fff;
-    }
-    .hero .sub{
-      margin-top: 10px;
-      font-size: 14px;
-      color:#cbd5e1;
-      max-width: 900px;
-      line-height: 1.6;
-    }
+    .hero h1{ margin:0; font-size: 34px; letter-spacing:-0.3px; color:#fff; }
+    .hero .sub{ margin-top:10px; font-size:14px; color:#cbd5e1; line-height:1.6; max-width: 980px; }
 
-    .grid {
-      margin-top: 16px;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
+    .grid { margin-top: 16px; display:grid; gap:16px; }
+    .row2 { display:grid; grid-template-columns: 1fr 1fr; gap:16px; }
+    @media (max-width: 900px){ .row2{ grid-template-columns: 1fr; } }
 
-    .row2 {
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    @media (max-width: 900px){
-      .row2{ grid-template-columns: 1fr; }
-    }
+    .sectionTitle{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px; }
+    .sectionTitle h2{ margin:0; font-size: 18px; color:#e2e8f0; }
+    .hint{ font-size: 12px; color:#94a3b8; line-height: 1.5; }
 
-    .sectionTitle{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-      margin-bottom: 10px;
-    }
-    .sectionTitle h2{
-      margin:0;
-      font-size: 18px;
-      color:#e2e8f0;
-    }
-    .hint{
-      font-size: 12px;
-      color:#94a3b8;
-    }
-
-    label{
-      display:block;
-      font-size: 13px;
-      color:#94a3b8;
-      margin: 10px 0 6px;
-    }
-    input{
+    label{ display:block; font-size: 13px; color:#94a3b8; margin: 10px 0 6px; }
+    input, select, textarea{
       width:100%;
       box-sizing:border-box;
       padding: 12px;
@@ -82,50 +39,22 @@
       color:#e5e7eb;
       outline:none;
     }
-    input:focus{ border-color: rgba(56,189,248,0.8); }
+    textarea{ min-height: 120px; resize: vertical; }
+    input:focus, select:focus, textarea:focus{ border-color: rgba(56,189,248,0.8); }
 
-    .actions{
-      margin-top: 12px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
+    .actions{ margin-top: 10px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
 
     .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 12px;
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 12px; border-radius: 999px;
+      font-weight: 800; font-size: 12px;
       border:1px solid rgba(255,255,255,0.14);
       background: rgba(255,255,255,0.06);
       color:#cbd5e1;
     }
-    .pill.ok{
-      border-color: rgba(34,197,94,0.35);
-      background: rgba(34,197,94,0.12);
-      color:#bbf7d0;
-    }
-    .pill.warn{
-      border-color: rgba(148,163,184,0.35);
-      background: rgba(148,163,184,0.10);
-      color:#e2e8f0;
-    }
-
-    .kv{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px 18px;
-      margin-top: 10px;
-    }
-    @media (max-width: 700px){
-      .kv{ grid-template-columns: 1fr; }
-    }
-    .k{ color:#94a3b8; font-size: 12px; margin-bottom: 4px; }
-    .v{ color:#e5e7eb; font-weight: 800; }
+    .pill.ok{ border-color: rgba(34,197,94,0.35); background: rgba(34,197,94,0.10); color:#bbf7d0; }
+    .pill.warn{ border-color: rgba(251,191,36,0.35); background: rgba(251,191,36,0.10); color:#fde68a; }
+    .pill.bad{ border-color: rgba(248,113,113,0.35); background: rgba(248,113,113,0.10); color:#fecaca; }
 
     pre.code{
       margin: 10px 0 0 0;
@@ -141,7 +70,6 @@
       word-break: break-word;
     }
 
-    /* Toast */
     .toast{
       position: fixed;
       bottom: 18px;
@@ -160,7 +88,28 @@
       transition: opacity 160ms ease;
     }
     .toast.show{ opacity: 1; }
+
+    details.advanced {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      border-radius: 16px;
+      padding: 14px 16px;
+    }
+    details.advanced > summary{
+      cursor: pointer;
+      list-style: none;
+      font-weight: 900;
+      color:#e2e8f0;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    details.advanced > summary::-webkit-details-marker{ display:none; }
+    .tiny{ font-size: 12px; color:#94a3b8; }
+
     code{ background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 6px; }
+    a{ color:#7dd3fc; }
   </style>
 </head>
 
@@ -174,26 +123,28 @@
         <a class="btn" href="/">Home</a>
         <a class="btn" href="/dashboard.html">Dashboard</a>
         <a class="btn" href="/docs.html">Docs</a>
-        <a class="btn" href="mailto:support@restaurantassist.app">Support</a>
+        <a class="btn" href="/support.html">Support</a>
       </div>
     </div>
 
-    <!-- HERO -->
+    <!-- HERO / SUPER SIMPLE INSTRUCTIONS -->
     <div class="hero">
       <h1>Dashboard</h1>
       <div class="sub">
-        Paste your API key to load your account details and copy working examples.
-        If your status becomes <code>past_due</code> or <code>canceled</code>, API requests will return <code>402</code>.
+        <strong>3 easy steps:</strong>
+        1) Paste your API key (from your email) •
+        2) Click <strong>Load my account</strong> •
+        3) Paste a review and click <strong>Generate response</strong>.
       </div>
     </div>
 
     <div class="grid">
 
-      <!-- CONNECT -->
+      <!-- CONNECT + ACCOUNT -->
       <div class="card">
         <div class="sectionTitle">
           <h2>1) Connect</h2>
-          <div id="pill" class="pill warn">● Not connected</div>
+          <div id="statusPill" class="pill">Not connected</div>
         </div>
 
         <div class="row2">
@@ -201,89 +152,142 @@
             <label>API Base URL</label>
             <input id="apiBase" value="https://review-assistant-api.onrender.com" />
             <div class="hint" style="margin-top:8px;">
-              Tip: if you later set up <code>api.restaurantassist.app</code>, update this value.
+              Tip: Leave this alone unless we tell you to change it.
             </div>
           </div>
-
           <div>
             <label>Your API Key (<code>x-api-key</code>)</label>
             <input id="apiKey" placeholder="cust_..." />
             <div class="hint" style="margin-top:8px;">
-              We emailed this after checkout. If you didn’t get it, check Spam and click “Not spam”.
+              We email this after checkout. If it lands in Spam, click “Not spam”.
             </div>
           </div>
         </div>
 
         <div class="actions">
-          <button class="btn primary" id="loadBtn">Load my account</button>
+          <button class="btn" id="loadBtn">Load my account</button>
           <button class="btn" id="saveBtn">Save key locally</button>
           <button class="btn" id="clearBtn">Clear saved key</button>
-          <button class="btn" id="copyBtn">Copy API key</button>
+          <button class="btn" id="copyKeyBtn">Copy API key</button>
         </div>
 
-        <div id="connectMsg" class="hint" style="margin-top:10px;"></div>
+        <div class="row2" style="margin-top: 12px;">
+          <div>
+            <div class="sectionTitle" style="margin-bottom:6px;">
+              <h2 style="font-size:16px;">2) Account</h2>
+              <div class="tiny">from <code>/me</code></div>
+            </div>
+
+            <div class="hint">Business:</div>
+            <div id="bizOut" style="font-weight:900; margin-top:4px;">—</div>
+
+            <div class="hint" style="margin-top:10px;">Email:</div>
+            <div id="emailOut" style="font-weight:900; margin-top:4px;">—</div>
+          </div>
+
+          <div>
+            <div class="hint">Plan:</div>
+            <div id="planOut" style="font-weight:900; margin-top:4px;">—</div>
+
+            <div class="hint" style="margin-top:10px;">Status:</div>
+            <div id="subOut" style="font-weight:900; margin-top:4px;">—</div>
+
+            <div class="hint" style="margin-top:10px;">Renews / ends:</div>
+            <div id="renewOut" style="font-weight:900; margin-top:4px;">—</div>
+
+            <div class="hint" style="margin-top:10px;">
+              If your status is <strong>past_due</strong> or <strong>canceled</strong>, requests will return <code>402</code>.
+            </div>
+          </div>
+        </div>
+
+        <div id="msg" class="hint" style="margin-top:12px;"></div>
       </div>
 
-      <!-- ACCOUNT + QUICK START -->
-      <div class="row2">
+      <!-- GENERATE RESPONSE (THE MAIN FEATURE) -->
+      <div class="card">
+        <div class="sectionTitle">
+          <h2>3) Generate a response</h2>
+          <div class="pill">Paste review → Generate → Copy</div>
+        </div>
 
-        <!-- ACCOUNT -->
-        <div class="card">
-          <div class="sectionTitle">
-            <h2>2) Account</h2>
-            <div class="hint">Pulled from <code>/me</code></div>
+        <div class="row2">
+          <div>
+            <label>Platform</label>
+            <select id="platform">
+              <option value="google">Google</option>
+              <option value="yelp">Yelp</option>
+              <option value="facebook">Facebook</option>
+              <option value="other">Other</option>
+            </select>
           </div>
-
-          <div class="kv">
-            <div>
-              <div class="k">Business</div>
-              <div class="v" id="biz">—</div>
-            </div>
-            <div>
-              <div class="k">Email</div>
-              <div class="v" id="email">—</div>
-            </div>
-            <div>
-              <div class="k">Plan</div>
-              <div class="v" id="plan">—</div>
-            </div>
-            <div>
-              <div class="k">Status</div>
-              <div class="v" id="status">—</div>
-            </div>
-            <div>
-              <div class="k">Renews / ends</div>
-              <div class="v" id="periodEnd">—</div>
-            </div>
-            <div>
-              <div class="k">API Base</div>
-              <div class="v" id="baseEcho">—</div>
-            </div>
+          <div>
+            <label>Optional: Customer name</label>
+            <input id="customerName" placeholder="(optional)" />
           </div>
         </div>
 
-        <!-- QUICK START -->
-        <div class="card">
-          <div class="sectionTitle">
-            <h2>3) Quick start</h2>
-            <div class="hint">Copy/paste into Terminal / Command Prompt</div>
+        <div class="row2">
+          <div>
+            <label>Optional: Order number</label>
+            <input id="orderNumber" placeholder="(optional)" />
           </div>
-
-          <button class="btn" id="copyAnalyzeBtn">Copy /analyze curl</button>
-          <pre class="code" id="analyzeCode">Paste your API key above to generate a ready-to-use command.</pre>
-
-          <div style="height:10px;"></div>
-
-          <button class="btn" id="copySummaryBtn">Copy /summary curl</button>
-          <pre class="code" id="summaryCode">Paste your API key above to generate a ready-to-use command.</pre>
+          <div>
+            <label>Optional: Run ID</label>
+            <input id="runId" placeholder="(optional)" />
+          </div>
         </div>
 
+        <label>Paste the customer review</label>
+        <textarea id="reviewText" placeholder="Example: Food was great but the wait was long..."></textarea>
+
+        <div class="actions">
+          <button class="btn" id="genBtn">Generate response</button>
+          <button class="btn" id="copyReplyBtn" disabled>Copy reply</button>
+          <button class="btn" id="copyJsonBtn" disabled>Copy full result</button>
+        </div>
+
+        <div id="genMsg" class="hint" style="margin-top:10px;"></div>
+
+        <div style="margin-top:12px;">
+          <div class="hint">Ready-to-post reply:</div>
+          <pre class="code" id="replyOut">—</pre>
+        </div>
+
+        <div style="margin-top:12px;">
+          <div class="hint">Full result (tags, sentiment, urgency, etc.):</div>
+          <pre class="code" id="jsonOut">—</pre>
+        </div>
       </div>
+
+      <!-- ADVANCED (Docs style / curl / troubleshooting) -->
+      <details class="advanced">
+        <summary>
+          <span>Advanced (optional)</span>
+          <span class="tiny">curl + raw API examples</span>
+        </summary>
+
+        <div style="margin-top: 12px;">
+          <div class="sectionTitle">
+            <h2>Copy-paste curl examples</h2>
+            <div class="hint">For developers / IT help</div>
+          </div>
+
+          <div class="actions">
+            <button class="btn" id="copyMeBtn">Copy /me curl</button>
+            <button class="btn" id="copyAnalyzeBtn">Copy /analyze curl</button>
+            <button class="btn" id="copySummaryBtn">Copy /summary curl</button>
+            <a class="btn" href="/docs.html" style="text-decoration:none;">Open full Docs</a>
+          </div>
+
+          <pre class="code" id="curlOut">Paste your API key above to generate curl commands.</pre>
+        </div>
+      </details>
 
     </div>
 
     <div class="footer">
-      © <span id="yr"></span> RestaurantAssist • Questions? <a href="mailto:support@restaurantassist.app">support@restaurantassist.app</a>
+      © <span id="yr"></span> RestaurantAssist • Questions? <a href="/support.html">Support</a>
     </div>
   </div>
 
@@ -293,19 +297,25 @@
     document.getElementById("yr").textContent = new Date().getFullYear();
 
     const apiBaseEl = document.getElementById("apiBase");
-    const apiKeyEl  = document.getElementById("apiKey");
-    const pillEl    = document.getElementById("pill");
-    const connectMsgEl = document.getElementById("connectMsg");
+    const apiKeyEl = document.getElementById("apiKey");
 
-    const bizEl = document.getElementById("biz");
-    const emailEl = document.getElementById("email");
-    const planEl = document.getElementById("plan");
-    const statusEl = document.getElementById("status");
-    const periodEndEl = document.getElementById("periodEnd");
-    const baseEchoEl = document.getElementById("baseEcho");
+    const statusPill = document.getElementById("statusPill");
+    const msgEl = document.getElementById("msg");
 
-    const analyzeCodeEl = document.getElementById("analyzeCode");
-    const summaryCodeEl = document.getElementById("summaryCode");
+    const bizOut = document.getElementById("bizOut");
+    const emailOut = document.getElementById("emailOut");
+    const planOut = document.getElementById("planOut");
+    const subOut = document.getElementById("subOut");
+    const renewOut = document.getElementById("renewOut");
+
+    const genBtn = document.getElementById("genBtn");
+    const genMsg = document.getElementById("genMsg");
+    const replyOut = document.getElementById("replyOut");
+    const jsonOut = document.getElementById("jsonOut");
+    const copyReplyBtn = document.getElementById("copyReplyBtn");
+    const copyJsonBtn = document.getElementById("copyJsonBtn");
+
+    const curlOut = document.getElementById("curlOut");
 
     const toastEl = document.getElementById("toast");
     function toast(text="Copied!"){
@@ -314,54 +324,60 @@
       setTimeout(()=>toastEl.classList.remove("show"), 900);
     }
 
-    function setPillNotConnected(){
-      pillEl.className = "pill warn";
-      pillEl.textContent = "● Not connected";
+    function baseUrl(){
+      return apiBaseEl.value.trim().replace(/\/+$/, "");
     }
-    function setPillConnectedActive(){
-      pillEl.className = "pill ok";
-      pillEl.textContent = "● Connected (active)";
-    }
-    function setPillConnectedInactive(status){
-      pillEl.className = "pill warn";
-      pillEl.textContent = `● Connected (${status || "inactive"})`;
+    function apiKey(){
+      return apiKeyEl.value.trim();
     }
 
-    function buildCurlSamples(){
-      const base = apiBaseEl.value.trim().replace(/\/+$/, "");
-      const key = apiKeyEl.value.trim();
+    function setPill(state, text){
+      statusPill.className = "pill";
+      if (state === "ok") statusPill.classList.add("ok");
+      if (state === "warn") statusPill.classList.add("warn");
+      if (state === "bad") statusPill.classList.add("bad");
+      statusPill.textContent = text;
+    }
 
+    function buildCurl(){
+      const base = baseUrl();
+      const key = apiKey();
       if (!key){
-        analyzeCodeEl.textContent = "Paste your API key above to generate a ready-to-use command.";
-        summaryCodeEl.textContent = "Paste your API key above to generate a ready-to-use command.";
+        curlOut.textContent = "Paste your API key above to generate curl commands.";
         return;
       }
 
-      analyzeCodeEl.textContent =
-`curl -X POST "${base}/analyze" \\
+      curlOut.textContent =
+`/me
+curl "${base}/me" \\
+  -H "x-api-key: ${key}"
+
+---
+
+/analyze
+curl -X POST "${base}/analyze" \\
   -H "Content-Type: application/json" \\
   -H "x-api-key: ${key}" \\
-  -d "{\\"review_text\\":\\"The food was great but the wait was long\\", \\"platform\\":\\"google\\"}"`;
+  -d "{\\"review_text\\":\\"The food was great but the wait was long\\", \\"platform\\":\\"google\\"}"
 
-      summaryCodeEl.textContent =
-`curl "${base}/summary" \\
+---
+
+/summary
+curl "${base}/summary" \\
   -H "x-api-key: ${key}"`;
     }
 
-    apiBaseEl.addEventListener("input", buildCurlSamples);
-    apiKeyEl.addEventListener("input", () => { setPillNotConnected(); buildCurlSamples(); });
-
-    // Load saved key on page load
+    // Load saved key from localStorage
     const saved = localStorage.getItem("ra_api_key");
-    if (saved) {
-      apiKeyEl.value = saved;
-      buildCurlSamples();
-    } else {
-      buildCurlSamples();
-    }
+    if (saved) apiKeyEl.value = saved;
+
+    buildCurl();
+
+    apiBaseEl.addEventListener("input", buildCurl);
+    apiKeyEl.addEventListener("input", () => { buildCurl(); setPill("", "Not connected"); });
 
     document.getElementById("saveBtn").addEventListener("click", () => {
-      const key = apiKeyEl.value.trim();
+      const key = apiKey();
       if (!key) return;
       localStorage.setItem("ra_api_key", key);
       toast("Saved locally");
@@ -370,80 +386,189 @@
     document.getElementById("clearBtn").addEventListener("click", () => {
       localStorage.removeItem("ra_api_key");
       apiKeyEl.value = "";
-      setPillNotConnected();
-      buildCurlSamples();
+      buildCurl();
+      setPill("", "Not connected");
       toast("Cleared");
     });
 
-    document.getElementById("copyBtn").addEventListener("click", async () => {
-      const key = apiKeyEl.value.trim();
+    document.getElementById("copyKeyBtn").addEventListener("click", async () => {
+      const key = apiKey();
       if (!key) return;
       await navigator.clipboard.writeText(key);
       toast("API key copied");
     });
 
-    async function loadAccount(){
-      const base = apiBaseEl.value.trim().replace(/\/+$/, "");
-      const key = apiKeyEl.value.trim();
-
-      connectMsgEl.textContent = "";
-
+    // Load account via /me
+    document.getElementById("loadBtn").addEventListener("click", async () => {
+      msgEl.textContent = "";
+      const key = apiKey();
       if (!key){
-        connectMsgEl.textContent = "Enter your API key first.";
-        setPillNotConnected();
+        msgEl.textContent = "Paste your API key first (starts with cust_...).";
+        setPill("warn", "Missing key");
         return;
       }
 
-      connectMsgEl.textContent = "Loading…";
+      setPill("warn", "Connecting…");
+      msgEl.textContent = "Loading your account…";
 
-      try {
-        const res = await fetch(`${base}/me`, {
+      try{
+        const res = await fetch(`${baseUrl()}/me`, {
           headers: { "x-api-key": key }
         });
-        const data = await res.json();
+
+        const data = await res.json().catch(()=> ({}));
 
         if (!res.ok){
-          connectMsgEl.textContent = data?.detail || "Failed to load account.";
-          setPillConnectedInactive("unauthorized");
+          const detail = data?.detail || `Error ${res.status}`;
+          msgEl.textContent = detail;
+
+          if (res.status === 401) setPill("bad", "Unauthorized (bad key)");
+          else if (res.status === 402) setPill("bad", "Subscription inactive");
+          else setPill("bad", "Error");
+
           return;
         }
 
-        bizEl.textContent = data.business_id || "—";
-        emailEl.textContent = data.email || "—";
-        planEl.textContent = data.subscription?.plan || "—";
-        statusEl.textContent = data.subscription?.status || "inactive";
-        periodEndEl.textContent = data.subscription?.current_period_end || "N/A";
-        baseEchoEl.textContent = base;
+        const sub = data.subscription || {};
+        bizOut.textContent = data.business_id || "—";
+        emailOut.textContent = data.email || "—";
+        planOut.textContent = sub.plan || "starter";
+        subOut.textContent = sub.status || "inactive";
+        renewOut.textContent = sub.current_period_end || "N/A";
 
-        if ((data.subscription?.status || "").toLowerCase() === "active"){
-          setPillConnectedActive();
+        if (sub.status === "active"){
+          setPill("ok", "Connected (active)");
+        } else if (sub.status === "past_due"){
+          setPill("warn", "Connected (past due)");
         } else {
-          setPillConnectedInactive(data.subscription?.status);
+          setPill("bad", "Connected (inactive)");
         }
 
-        connectMsgEl.textContent = "Loaded.";
-      } catch (e){
-        connectMsgEl.textContent = "Network error. Check your API base URL.";
-        setPillConnectedInactive("network");
-      }
-    }
+        msgEl.textContent = "Account loaded.";
 
-    document.getElementById("loadBtn").addEventListener("click", loadAccount);
+      } catch (e){
+        setPill("bad", "Network error");
+        msgEl.textContent = "Network error. Check your API Base URL and internet.";
+      }
+    });
+
+    // Generate response via /analyze
+    genBtn.addEventListener("click", async () => {
+      genMsg.textContent = "";
+      replyOut.textContent = "—";
+      jsonOut.textContent = "—";
+      copyReplyBtn.disabled = true;
+      copyJsonBtn.disabled = true;
+
+      const key = apiKey();
+      if (!key){
+        genMsg.textContent = "Paste your API key first.";
+        return;
+      }
+
+      const review_text = document.getElementById("reviewText").value.trim();
+      const platform = document.getElementById("platform").value;
+      const customer_name = document.getElementById("customerName").value.trim();
+      const order_number = document.getElementById("orderNumber").value.trim();
+      const run_id = document.getElementById("runId").value.trim();
+
+      if (!review_text){
+        genMsg.textContent = "Paste the customer review first.";
+        return;
+      }
+
+      genMsg.textContent = "Generating… (takes a few seconds)";
+      genBtn.disabled = true;
+
+      try{
+        const res = await fetch(`${baseUrl()}/analyze`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key": key
+          },
+          body: JSON.stringify({
+            review_text,
+            platform,
+            customer_name,
+            order_number,
+            run_id: run_id || null
+          })
+        });
+
+        const data = await res.json().catch(()=> ({}));
+
+        if (!res.ok){
+          const detail = data?.detail || `Error ${res.status}`;
+          genMsg.textContent = detail;
+
+          if (res.status === 401) setPill("bad", "Unauthorized (bad key)");
+          if (res.status === 402) setPill("bad", "Subscription inactive");
+          return;
+        }
+
+        const record = data.record || {};
+        const reply = record.reply || "(No reply returned)";
+
+        replyOut.textContent = reply;
+        jsonOut.textContent = JSON.stringify(data, null, 2);
+
+        copyReplyBtn.disabled = false;
+        copyJsonBtn.disabled = false;
+
+        genMsg.textContent = "Done. Copy and paste your reply into Google/Yelp/Facebook.";
+
+      } catch (e){
+        genMsg.textContent = "Network error. Please try again.";
+      } finally {
+        genBtn.disabled = false;
+      }
+    });
+
+    copyReplyBtn.addEventListener("click", async () => {
+      const txt = replyOut.textContent.trim();
+      if (!txt || txt === "—") return;
+      await navigator.clipboard.writeText(txt);
+      toast("Reply copied");
+    });
+
+    copyJsonBtn.addEventListener("click", async () => {
+      const txt = jsonOut.textContent.trim();
+      if (!txt || txt === "—") return;
+      await navigator.clipboard.writeText(txt);
+      toast("Full result copied");
+    });
+
+    // Advanced curl copy buttons
+    document.getElementById("copyMeBtn").addEventListener("click", async () => {
+      if (curlOut.textContent.includes("Paste your API key")) return;
+      const base = baseUrl(); const key = apiKey();
+      const t = `curl "${base}/me" \\\n  -H "x-api-key: ${key}"`;
+      await navigator.clipboard.writeText(t);
+      toast("/me curl copied");
+    });
 
     document.getElementById("copyAnalyzeBtn").addEventListener("click", async () => {
-      const txt = analyzeCodeEl.textContent;
-      if (!txt || txt.includes("Paste your API key")) return;
-      await navigator.clipboard.writeText(txt);
-      toast("Analyze curl copied");
+      if (curlOut.textContent.includes("Paste your API key")) return;
+      const base = baseUrl(); const key = apiKey();
+      const t =
+`curl -X POST "${base}/analyze" \\
+  -H "Content-Type: application/json" \\
+  -H "x-api-key: ${key}" \\
+  -d "{\\"review_text\\":\\"The food was great but the wait was long\\", \\"platform\\":\\"google\\"}"`;
+      await navigator.clipboard.writeText(t);
+      toast("/analyze curl copied");
     });
 
     document.getElementById("copySummaryBtn").addEventListener("click", async () => {
-      const txt = summaryCodeEl.textContent;
-      if (!txt || txt.includes("Paste your API key")) return;
-      await navigator.clipboard.writeText(txt);
-      toast("Summary curl copied");
+      if (curlOut.textContent.includes("Paste your API key")) return;
+      const base = baseUrl(); const key = apiKey();
+      const t = `curl "${base}/summary" \\\n  -H "x-api-key: ${key}"`;
+      await navigator.clipboard.writeText(t);
+      toast("/summary curl copied");
     });
   </script>
 </body>
 </html>
+
 
