@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>RestaurantAssist • Support</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .hero {
+      margin-top: 18px;
+      padding: 22px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        radial-gradient(1200px 420px at 10% 0%, rgba(56,189,248,0.18), transparent 55%),
+        radial-gradient(900px 380px at 90% 10%, rgba(34,197,94,0.14), transparent 55%),
+        #0b1224;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+    }
+    .hero h1{ margin:0; font-size: 34px; letter-spacing:-0.3px; color:#fff; }
+    .hero .sub{ margin-top:10px; font-size:14px; color:#cbd5e1; line-height:1.6; max-width: 980px; }
+
+    .grid{ margin-top: 16px; display:grid; gap: 16px; }
+    .row2{ display:grid; grid-template-columns: 1fr 1fr; gap:16px; }
+    @media (max-width: 900px){ .row2{ grid-template-columns: 1fr; } }
+
+    .sectionTitle{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px; }
+    .sectionTitle h2{ margin:0; font-size: 18px; color:#e2e8f0; }
+    .hint{ font-size: 12px; color:#94a3b8; line-height: 1.5; }
+
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 12px; border-radius: 999px;
+      font-weight: 800; font-size: 12px;
+      border:1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color:#cbd5e1;
+    }
+
+    .actions{ margin-top: 10px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+
+    .toast{
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(2,6,23,0.85);
+      color:#e5e7eb;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+      font-weight: 800;
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 160ms ease;
+    }
+    .toast.show{ opacity: 1; }
+
+    code{ background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 6px; }
+    a{ color:#7dd3fc; }
+    ul{ margin: 8px 0 0 18px; color:#cbd5e1; }
+    li{ margin: 6px 0; }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- NAV -->
+    <div class="nav">
+      <div class="brand"><div class="dot"></div><span>RestaurantAssist</span></div>
+      <div class="navlinks">
+        <a class="btn" href="/">Home</a>
+        <a class="btn" href="/dashboard.html">Dashboard</a>
+        <a class="btn" href="/docs.html">Docs</a>
+        <a class="btn" href="/support.html">Support</a>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+      <h1>Support</h1>
+      <div class="sub">
+        Need help? No worries. Most people only need 1 thing: their API key.
+        If you’re stuck, copy the support email below and send us a message.
+      </div>
+    </div>
+
+    <div class="grid">
+
+      <div class="row2">
+        <div class="card">
+          <div class="sectionTitle">
+            <h2>Contact</h2>
+            <div class="pill">Fastest: email</div>
+          </div>
+
+          <div class="hint">Support email:</div>
+          <div style="font-weight:900; font-size:16px; margin-top:6px;">support@restaurantassist.app</div>
+
+          <div class="actions">
+            <button class="btn" id="copyEmail">Copy support email</button>
+            <a class="btn" href="mailto:support@restaurantassist.app?subject=RestaurantAssist%20Support" style="text-decoration:none;">Open email app</a>
+          </div>
+
+          <div class="hint" style="margin-top:10px;">
+            If “Open email app” asks what program to use, that’s normal on some Windows computers.
+            The <strong>Copy support email</strong> button always works.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="sectionTitle">
+            <h2>What to include</h2>
+            <div class="hint">So we can help fast</div>
+          </div>
+
+          <ul>
+            <li>Your <code>business_id</code> (the business name you entered)</li>
+            <li>The email you used at checkout</li>
+            <li>What page you were on (Home / Dashboard / Checkout / Success)</li>
+            <li>If possible: paste the exact error message</li>
+          </ul>
+
+          <div class="actions">
+            <a class="btn" href="/dashboard.html" style="text-decoration:none;">Go to Dashboard</a>
+            <a class="btn" href="/docs.html" style="text-decoration:none;">Open Docs</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="sectionTitle">
+          <h2>Quick help (most common)</h2>
+          <div class="hint">2-minute fixes</div>
+        </div>
+
+        <ul>
+          <li><strong>I didn’t get my API key email.</strong> Check Spam → click “Not spam”. Then go to Dashboard and paste the key.</li>
+          <li><strong>Dashboard says “401 Unauthorized”.</strong> Your key is missing or incorrect. Paste the key exactly (starts with <code>cust_</code>).</li>
+          <li><strong>Dashboard says “402 Subscription inactive”.</strong> Subscription isn’t active (payment failed or canceled). Reply to your key email or contact support.</li>
+          <li><strong>“Network error”.</strong> Check the API Base URL in the Dashboard (leave it as the default unless you changed it).</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      © <span id="yr"></span> RestaurantAssist • Questions? <a href="mailto:support@restaurantassist.app">support@restaurantassist.app</a>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">Copied!</div>
+
+  <script>
+    document.getElementById("yr").textContent = new Date().getFullYear();
+    const toastEl = document.getElementById("toast");
+    function toast(text="Copied!"){
+      toastEl.textContent = text;
+      toastEl.classList.add("show");
+      setTimeout(()=>toastEl.classList.remove("show"), 900);
+    }
+
+    document.getElementById("copyEmail").addEventListener("click", async () => {
+      await navigator.clipboard.writeText("support@restaurantassist.app");
+      toast("Support email copied");
+    });
+  </script>
+</body>
+</html>
