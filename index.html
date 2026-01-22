@@ -476,28 +476,92 @@
         }
       </script>
 
-      <!-- RIGHT: Trial form -->
-      <div class="card" id="start">
-        <h2>Start free trial</h2>
-        <p style="margin-top:-4px;">
-          Choose a short business ID (letters/numbers/dashes) — you’ll use it for your account.
-        </p>
-
-        <label for="businessId">Business ID (no spaces)</label>
-        <input id="businessId" placeholder="e.g. olive-garden" />
-
-        <label for="email">Email</label>
-        <input id="email" type="email" placeholder="you@yourrestaurant.com" />
-
-        <button class="btn primary" id="startTrialBtn" style="width:100%; margin-top:12px;">
-          Start Free Trial
-        </button>
-
-        <div id="msg" class="msg"></div>
-
-        <p class="tiny">
-          After checkout, your API key is emailed. If it lands in Spam, click <strong>“Not spam”</strong>.
-        </p>
+      <!-- RIGHT COLUMN: Pricing + Trial -->
+      <div class="rightCol">
+      
+        <!-- Pricing -->
+        <div class="card" id="pricing">
+          <h2>Pricing</h2>
+          <p style="margin-top:-4px;">
+            Simple plans. Start with Starter. Upgrade when you’re busier.
+          </p>
+      
+          <div class="pricingStack">
+      
+            <!-- Starter -->
+            <div class="planCard selected" id="planStarter" data-plan="starter">
+              <div class="planTop">
+                <div class="planName">Starter</div>
+                <div class="planPrice">$29<span style="font-size:12px;opacity:.8">/mo</span></div>
+              </div>
+              <div style="color:#cbd5e1; line-height:1.5;">
+                Great for 1 location getting started.
+              </div>
+              <ul>
+                <li>Paste review → Generate reply</li>
+                <li>Platform-aware tone (Google/Yelp/Facebook)</li>
+                <li>Urgency flags for bad reviews</li>
+                <li>Basic summaries (top issues)</li>
+              </ul>
+              <div class="chooseBtnRow">
+                <button class="btn primary" type="button" id="chooseStarterBtn">Choose Starter</button>
+                <div class="planSmall">Good for most restaurants.</div>
+              </div>
+            </div>
+      
+            <!-- Pro -->
+            <div class="planCard" id="planPro" data-plan="pro">
+              <div class="planTop">
+                <div class="planName">
+                  Pro <span class="badge">Most popular</span>
+                </div>
+                <div class="planPrice">$59<span style="font-size:12px;opacity:.8">/mo</span></div>
+              </div>
+              <div style="color:#cbd5e1; line-height:1.5;">
+                For busy restaurants that want consistency and speed.
+              </div>
+              <ul>
+                <li>Everything in Starter</li>
+                <li>Brand voice presets (friendly / professional)</li>
+                <li>Better summaries & patterns</li>
+                <li>Higher usage limits</li>
+              </ul>
+              <div class="chooseBtnRow">
+                <button class="btn" type="button" id="chooseProBtn">Choose Pro</button>
+                <div class="planSmall">Upgrade anytime.</div>
+              </div>
+            </div>
+      
+          </div>
+      
+          <p class="tiny" style="margin-top:12px;">
+            Multi-location plan coming soon. Need it now? <a href="/support.html">Contact support</a>
+          </p>
+        </div>
+      
+        <!-- Trial form -->
+        <div class="card" id="start">
+          <h2>Start free trial</h2>
+          <p style="margin-top:-4px;">
+            Choose a short business ID (letters/numbers/dashes) — you’ll use it for your account.
+          </p>
+      
+          <label for="businessId">Business ID (no spaces)</label>
+          <input id="businessId" placeholder="e.g. kjs-local-grindz" />
+      
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="you@yourrestaurant.com" />
+      
+          <button class="btn primary" id="startTrialBtn" style="width:100%; margin-top:12px;">
+            Start Free Trial
+          </button>
+      
+          <div id="msg" class="msg"></div>
+      
+          <p class="tiny">
+            After checkout, your API key is emailed. If it lands in Spam, click <strong>“Not spam”</strong>.
+          </p>
+        </div>
       </div>
     </div>
 
