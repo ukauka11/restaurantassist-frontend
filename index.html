@@ -5,157 +5,278 @@
   <title>RestaurantAssist</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
+    :root { color-scheme: dark; }
     body {
       font-family: Arial, sans-serif;
       background: #0f172a;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      color: #e5e7eb;
       margin: 0;
     }
-    .box {
-      max-width: 600px;
-      text-align: center;
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 22px;
+    }
+
+    /* Nav */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      background: #0b1224;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+    }
+    .brand {
+      font-weight: 900;
+      letter-spacing: 0.2px;
+      font-size: 18px;
+    }
+    .navlinks { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: #e5e7eb;
+      text-decoration: none;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn.primary {
+      background: #38bdf8;
+      border-color: #38bdf8;
+      color: #031018;
+    }
+
+    /* Hero */
+    .hero {
+      margin-top: 18px;
+      padding: 22px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: radial-gradient(1200px 400px at 10% 0%, rgba(56,189,248,0.18), transparent 55%),
+                  radial-gradient(900px 380px at 90% 10%, rgba(34,197,94,0.16), transparent 55%),
+                  #0b1224;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
     }
     h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
+      margin: 0;
+      font-size: 38px;
+      line-height: 1.1;
+      letter-spacing: -0.4px;
+      color: #fff;
     }
-    p {
-      font-size: 1.2rem;
-      opacity: 0.85;
+    .sub {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #cbd5e1;
+      max-width: 780px;
+      line-height: 1.6;
     }
-    a {
-      display: inline-block;
-      margin-top: 1.5rem;
-      padding: 0.75rem 1.5rem;
-      background: #38bdf8;
-      color: black;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 6px;
+    .heroActions {
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
     }
+    .tiny {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    /* Main grid */
+    .grid {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+    }
+    @media (max-width: 900px){
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #0b1224;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+    }
+    .card h2 {
+      margin: 0 0 10px 0;
+      font-size: 18px;
+      color: #e2e8f0;
+    }
+    .card p { margin: 8px 0; color: #cbd5e1; line-height: 1.6; }
+
+    .steps { margin: 10px 0 0 0; padding-left: 18px; color: #cbd5e1; }
+    .steps li { margin: 8px 0; }
+
+    label { display:block; font-size: 13px; color:#94a3b8; margin: 10px 0 6px; }
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: #0a1020;
+      color: #e5e7eb;
+      outline: none;
+    }
+    input:focus { border-color: rgba(56,189,248,0.8); }
+
+    .msg { margin-top: 10px; font-size: 13px; color: #cbd5e1; min-height: 18px; }
+    .err { color: #fca5a5; }
+    .ok  { color: #86efac; }
+
+    .example {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #070b16;
+      color: #cbd5e1;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .footer {
+      margin: 18px 0 8px;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 12px;
+    }
+    code { background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 6px; }
   </style>
 </head>
+
 <body>
-  <div style="
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:12px;
-    padding:14px 18px;
-    border:1px solid rgba(255,255,255,0.08);
-    border-radius:14px;
-    background:#0b1224;
-    box-shadow:0 10px 24px rgba(0,0,0,0.25);
-    margin-bottom:16px;
-  ">
-    <div style="font-weight:800; letter-spacing:0.2px;">
-      RestaurantAssist
+  <div class="container">
+
+    <!-- NAV -->
+    <div class="nav">
+      <div class="brand">RestaurantAssist</div>
+      <div class="navlinks">
+        <a class="btn" href="/">Home</a>
+        <a class="btn" href="/dashboard.html">Dashboard</a>
+        <a class="btn" href="/docs.html">Docs</a>
+        <a class="btn" href="mailto:support@restaurantassist.app">Support</a>
+      </div>
     </div>
-  
-    <div style="display:flex; gap:10px; flex-wrap:wrap;">
-      <a class="btn" href="/">Home</a>
-      <a class="btn" href="/dashboard.html">Dashboard</a>
-      <a class="btn" href="/docs.html">Docs</a>
-      <a class="btn" href="mailto:support@restaurantassist.app">Support</a>
+
+    <!-- HERO -->
+    <div class="hero">
+      <h1>Respond to reviews in seconds.</h1>
+      <div class="sub">
+        RestaurantAssist generates fast, professional AI-written responses to Google, Yelp, and Facebook reviews —
+        and gives you quick summaries of what customers keep mentioning.
+      </div>
+
+      <div class="heroActions">
+        <a class="btn primary" href="#start">Start free trial</a>
+        <a class="btn" href="/dashboard.html">Go to dashboard</a>
+      </div>
+
+      <div class="tiny">
+        Already subscribed? Use the Dashboard to check your plan and test your API key.
+      </div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="grid">
+      <!-- LEFT: How it works + value -->
+      <div class="card">
+        <h2>How it works</h2>
+        <ol class="steps">
+          <li>Start a free trial with your business ID + email.</li>
+          <li>We email your API key (and you can view status in the Dashboard).</li>
+          <li>Send reviews to <code>/analyze</code> and get a ready-to-post response.</li>
+        </ol>
+
+        <div class="example">
+          <div><strong>Customer:</strong> “Food was great but the wait time was really long.”</div>
+          <div style="margin-top:8px;"><strong>Response:</strong> “Thanks for your feedback! We’re glad you enjoyed the food and apologize for the wait. We’re working to improve service speed and appreciate your patience.”</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Trial form -->
+      <div class="card" id="start">
+        <h2>Start free trial</h2>
+        <p style="margin-top:-4px;">
+          Choose a short business ID (letters/numbers/dashes) — you’ll use it for your account.
+        </p>
+
+        <label for="businessId">Business ID (no spaces)</label>
+        <input id="businessId" placeholder="e.g. kjs-local-grindz" />
+
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="you@yourrestaurant.com" />
+
+        <button class="btn primary" id="startTrialBtn" style="width:100%; margin-top:12px;">
+          Start Free Trial
+        </button>
+
+        <div id="msg" class="msg"></div>
+
+        <p class="tiny">
+          After checkout, your API key is emailed. If it lands in Spam, click <strong>“Not spam”</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="footer">
+      © <span id="yr"></span> RestaurantAssist • Questions? <a href="mailto:support@restaurantassist.app">support@restaurantassist.app</a>
     </div>
   </div>
 
-  <div class="box">
-    <h1>RestaurantAssist</h1>
-    <p>AI-written responses to restaurant reviews — automatically.</p>
-  
-    <p style="margin-top: 1rem;">
-      Respond to Google, Yelp, and Facebook reviews in seconds so you can
-      focus on running your business.
-    </p>
-  
-    <a href="#" style="margin-top: 1.5rem;">Start Free Trial</a>
-  
-    <hr style="margin: 2rem 0; opacity: 0.2;" />
-  
-    <h2>How it works</h2>
-    <p>1. Send us your reviews</p>
-    <p>2. AI analyzes sentiment and urgency</p>
-    <p>3. Get a professional response ready to post</p>
-  
-    <hr style="margin: 2rem 0; opacity: 0.2;" />
-  
-    <h2 style="margin-top: 2rem;">Start Free Trial</h2>
+  <script>
+    document.getElementById("yr").textContent = new Date().getFullYear();
 
-    <div style="margin-top: 1rem; text-align: left;">
-      <label>Business ID (no spaces)</label><br />
-      <input id="businessId" placeholder="e.g. kjs-local-grindz"
-        style="width: 100%; padding: 10px; margin: 6px 0 14px; border-radius: 6px; border: 1px solid #334155; background:#0b1220; color:white;" />
-    
-      <label>Email</label><br />
-      <input id="email" type="email" placeholder="you@yourrestaurant.com"
-        style="width: 100%; padding: 10px; margin: 6px 0 14px; border-radius: 6px; border: 1px solid #334155; background:#0b1220; color:white;" />
-    
-      <button id="startTrialBtn"
-        style="width:100%; padding: 12px; border-radius: 6px; border: none; background:#38bdf8; font-weight:bold; cursor:pointer;">
-        Start Free Trial
-      </button>
-    
-      <div id="msg" style="margin-top: 12px; font-size: 0.95rem; opacity: 0.9;"></div>
-    </div>
-    
-    <script>
-      const API_BASE = "https://review-assistant-api.onrender.com"; // keep this until you upgrade Render
-    
-      document.getElementById("startTrialBtn").addEventListener("click", async () => {
-        const business_id = document.getElementById("businessId").value.trim().toLowerCase();
-        const email = document.getElementById("email").value.trim().toLowerCase();
-        const msg = document.getElementById("msg");
-    
-        msg.textContent = "";
-    
-        if (!business_id) {
-          msg.textContent = "Please enter a business id.";
-          return;
-        }
-        if (!email.includes("@")) {
-          msg.textContent = "Please enter a valid email.";
-          return;
-        }
-    
-        msg.textContent = "Creating checkout…";
-    
-        try {
-          const res = await fetch(`${API_BASE}/billing/create-checkout`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ business_id, email })
-          });
-    
-          const data = await res.json();
-          if (!res.ok) {
-            msg.textContent = data?.detail || "Failed to create checkout.";
-            return;
-          }
-    
-          if (!data.checkout_url) {
-            msg.textContent = "No checkout URL returned.";
-            return;
-          }
-    
-          // Redirect to Stripe Checkout
-          window.location.href = data.checkout_url;
-        } catch (e) {
-          msg.textContent = "Network error. Please try again.";
-        }
-      });
-    </script>
+    const API_BASE = "https://review-assistant-api.onrender.com";
 
-    <p><em>Customer:</em> “Food was great but the wait time was really long.”</p>
-    <p>
-      <em>Response:</em> “Thanks for your feedback! We’re glad you enjoyed the
-      food and apologize for the wait. We’re working to improve service speed
-      and appreciate your patience.”
-    </p>
-  </div>
+    const msgEl = document.getElementById("msg");
+    function setMsg(text, cls){
+      msgEl.className = "msg " + (cls || "");
+      msgEl.textContent = text || "";
+    }
+
+    document.getElementById("startTrialBtn").addEventListener("click", async () => {
+      const business_id = document.getElementById("businessId").value.trim().toLowerCase();
+      const email = document.getElementById("email").value.trim().toLowerCase();
+
+      setMsg("");
+
+      if (!business_id) return setMsg("Please enter a business id.", "err");
+      if (!email.includes("@")) return setMsg("Please enter a valid email.", "err");
+
+      setMsg("Creating checkout…");
+
+      try {
+        const res = await fetch(`${API_BASE}/billing/create-checkout`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ business_id, email })
+        });
+
+        const data = await res.json();
+        if (!res.ok) return setMsg(data?.detail || "Failed to create checkout.", "err");
+        if (!data.checkout_url) return setMsg("No checkout URL returned.", "err");
+
+        window.location.href = data.checkout_url;
+      } catch (e) {
+        setMsg("Network error. Please try again.", "err");
+      }
+    });
+  </script>
 </body>
 </html>
+
