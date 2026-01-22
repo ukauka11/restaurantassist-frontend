@@ -271,6 +271,129 @@
           Tip: If a review mentions <em>missing items</em> or <em>wrong order</em>, RestaurantAssist automatically raises urgency.
         </p>
       </div>
+      <!-- PRICING -->
+      <div class="card" style="margin-top:16px;">
+        <h2 style="margin:0 0 6px 0;">Pricing</h2>
+        <p style="margin:0 0 14px 0; color:#cbd5e1;">
+          Simple plans. Start with Starter. Upgrade when you’re busier.
+        </p>
+      
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:14px;">
+          <!-- STARTER -->
+          <div style="
+            padding:16px;
+            border-radius:16px;
+            border:1px solid rgba(255,255,255,0.10);
+            background:#0b1224;
+            box-shadow:0 10px 24px rgba(0,0,0,0.25);
+          ">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+              <div style="font-weight:900; color:#fff; font-size:16px;">Starter</div>
+              <div style="font-weight:900; color:#fff; font-size:18px;">
+                $29<span style="font-weight:700; color:#94a3b8; font-size:12px;">/mo</span>
+              </div>
+            </div>
+      
+            <div style="margin-top:10px; color:#cbd5e1; line-height:1.6;">
+              Great for 1 location getting started.
+            </div>
+      
+            <ul style="margin:12px 0 0 18px; color:#cbd5e1; line-height:1.7;">
+              <li>Paste review → Generate reply</li>
+              <li>Platform-aware tone (Google/Yelp/Facebook)</li>
+              <li>Urgency flags for bad reviews</li>
+              <li>Basic summaries (top issues)</li>
+            </ul>
+      
+            <button
+              class="btn primary"
+              style="width:100%; margin-top:14px;"
+              onclick="selectPlan('starter')"
+            >
+              Choose Starter
+            </button>
+      
+            <div style="margin-top:8px; font-size:12px; color:#94a3b8;">
+              Card required to prevent trial abuse.
+            </div>
+          </div>
+      
+          <!-- PRO -->
+          <div style="
+            padding:16px;
+            border-radius:16px;
+            border:1px solid rgba(56,189,248,0.35);
+            background: radial-gradient(900px 280px at 20% 0%, rgba(56,189,248,0.10), transparent 60%), #0b1224;
+            box-shadow:0 10px 24px rgba(0,0,0,0.25);
+            position:relative;
+          ">
+            <div style="
+              position:absolute; top:14px; right:14px;
+              padding:6px 10px;
+              border-radius:999px;
+              font-size:11px;
+              font-weight:900;
+              border:1px solid rgba(56,189,248,0.35);
+              background: rgba(56,189,248,0.08);
+              color:#c7f9ff;
+            ">
+              Most popular
+            </div>
+      
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+              <div style="font-weight:900; color:#fff; font-size:16px;">Pro</div>
+              <div style="font-weight:900; color:#fff; font-size:18px;">
+                $59<span style="font-weight:700; color:#94a3b8; font-size:12px;">/mo</span>
+              </div>
+            </div>
+      
+            <div style="margin-top:10px; color:#cbd5e1; line-height:1.6;">
+              For busy restaurants that want consistency and speed.
+            </div>
+      
+            <ul style="margin:12px 0 0 18px; color:#cbd5e1; line-height:1.7;">
+              <li>Everything in Starter</li>
+              <li>Brand voice presets (friendly / professional)</li>
+              <li>Better summaries & patterns</li>
+              <li>Higher monthly usage limits</li>
+            </ul>
+      
+            <button
+              class="btn primary"
+              style="width:100%; margin-top:14px;"
+              onclick="selectPlan('pro')"
+            >
+              Choose Pro
+            </button>
+      
+            <div style="margin-top:8px; font-size:12px; color:#94a3b8;">
+              Upgrade anytime. Downgrade anytime.
+            </div>
+          </div>
+        </div>
+      
+        <div style="margin-top:12px; font-size:12px; color:#94a3b8;">
+          Multi-location plan coming soon. Need it now? <a href="/support.html">Contact support</a>.
+        </div>
+      </div>
+      
+      <script>
+        // Default plan
+        window.RA_SELECTED_PLAN = "starter";
+      
+        function selectPlan(plan){
+          window.RA_SELECTED_PLAN = plan;
+      
+          // Scroll to your existing trial form and focus business ID
+          const start = document.getElementById("start");
+          if (start) start.scrollIntoView({ behavior: "smooth", block: "start" });
+      
+          setTimeout(() => {
+            const biz = document.getElementById("businessId");
+            if (biz) biz.focus();
+          }, 250);
+        }
+      </script>
 
       <!-- RIGHT: Trial form -->
       <div class="card" id="start">
