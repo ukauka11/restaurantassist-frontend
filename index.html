@@ -478,6 +478,26 @@
       msgEl.textContent = text || "";
     }
 
+    const planEl = document.getElementById("plan");
+    const starterCard = document.getElementById("planStarterCard");
+    const proCard = document.getElementById("planProCard");
+    
+    function setPlan(p){
+      planEl.value = p;
+    
+      // visual highlight
+      if (p === "starter") {
+        starterCard.classList.add("featured");
+        proCard.classList.remove("featured");
+      } else {
+        proCard.classList.add("featured");
+        starterCard.classList.remove("featured");
+      }
+    }
+    
+    document.getElementById("chooseStarter")?.addEventListener("click", () => setPlan("starter"));
+    document.getElementById("choosePro")?.addEventListener("click", () => setPlan("pro"));
+
     document.getElementById("startTrialBtn").addEventListener("click", async () => {
       const business_id = document.getElementById("businessId").value.trim().toLowerCase();
       const email = document.getElementById("email").value.trim().toLowerCase();
@@ -493,7 +513,8 @@
         const res = await fetch(`${API_BASE}/billing/create-checkout`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ business_id, email })
+          const plan = document.getElementById("plan").value || "starter";
+          body: JSON.stringify({ business_id, email, plan })
         });
 
         const data = await res.json();
