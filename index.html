@@ -19,6 +19,24 @@
       padding: 22px;
     }
 
+    /* Consistent vertical spacing */
+    .stack {
+      margin-top: 18px;
+      display: grid;
+      gap: 16px;
+    }
+
+    /* Two-column row (desktop), stacked (mobile) */
+    .row2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+    @media (max-width: 900px){
+      .row2 { grid-template-columns: 1fr; }
+    }
+
     /* Nav */
     .nav {
       display: flex;
@@ -67,6 +85,7 @@
       text-decoration: none;
       font-weight: 700;
       cursor: pointer;
+      user-select: none;
     }
     .btn.primary {
       background: #38bdf8;
@@ -74,136 +93,7 @@
       color: #031018;
     }
 
-    /* Hero */
-    .hero {
-      margin-top: 18px;
-      padding: 22px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: radial-gradient(1200px 400px at 10% 0%, rgba(56,189,248,0.18), transparent 55%),
-                  radial-gradient(900px 380px at 90% 10%, rgba(34,197,94,0.16), transparent 55%),
-                  #0b1224;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
-    }
-    h1 {
-      margin: 0;
-      font-size: 38px;
-      line-height: 1.1;
-      letter-spacing: -0.4px;
-      color: #fff;
-    }
-    .sub {
-      margin-top: 10px;
-      font-size: 16px;
-      color: #cbd5e1;
-      max-width: 820px;
-      line-height: 1.6;
-    }
-    .heroActions {
-      margin-top: 16px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    .tiny {
-      margin-top: 10px;
-      font-size: 12px;
-      color: #94a3b8;
-    }
-    /* --- Pricing layout helpers --- */
-    .rightCol {
-      display: grid;
-      gap: 16px;
-      align-content: start;
-    }
-  
-    .pricingStack {
-      display: grid;
-      gap: 12px;
-      margin-top: 12px;
-    }
-  
-    .planCard {
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.04);
-      padding: 14px;
-    }
-  
-    .planTop {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-  
-    .planName {
-      font-weight: 900;
-      font-size: 16px;
-      color: #fff;
-    }
-  
-    .planPrice {
-      font-weight: 900;
-      color: #e2e8f0;
-    }
-  
-    .badge {
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      font-size: 11px;
-      font-weight: 900;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(56,189,248,0.35);
-      background: rgba(56,189,248,0.12);
-      color: #c7f9ff;
-      margin-left: 8px;
-      white-space: nowrap;
-    }
-  
-    .planCard ul {
-      margin: 10px 0 0 18px;
-      color: #cbd5e1;
-    }
-  
-    .planCard li { margin: 6px 0; }
-  
-    .chooseBtnRow {
-      margin-top: 12px;
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items:center;
-      justify-content: space-between;
-    }
-  
-    .planSmall {
-      font-size: 12px;
-      color: #94a3b8;
-    }
-  
-    /* Selected state */
-    .planCard.selected {
-      border-color: rgba(56,189,248,0.55);
-      box-shadow: 0 0 0 1px rgba(56,189,248,0.25), 0 12px 26px rgba(0,0,0,0.35);
-      background: radial-gradient(700px 220px at 20% 0%, rgba(56,189,248,0.12), transparent 50%),
-                  rgba(255,255,255,0.05);
-    }
-    /* Main grid */
-    .grid {
-      margin-top: 16px;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 16px;
-    }
-    @media (max-width: 900px){
-      .grid { grid-template-columns: 1fr; }
-    }
-
+    /* Card */
     .card {
       padding: 18px;
       border-radius: 16px;
@@ -218,9 +108,80 @@
     }
     .card p { margin: 8px 0; color: #cbd5e1; line-height: 1.6; }
 
-    .steps { margin: 10px 0 0 0; padding-left: 18px; color: #cbd5e1; }
-    .steps li { margin: 8px 0; }
+    /* Hero */
+    .hero {
+      padding: 22px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: radial-gradient(1200px 420px at 10% 0%, rgba(56,189,248,0.18), transparent 55%),
+                  radial-gradient(900px 380px at 90% 10%, rgba(34,197,94,0.16), transparent 55%),
+                  #0b1224;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+    }
+    .badge {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(34,197,94,0.35);
+      background: rgba(34,197,94,0.12);
+      color: #bbf7d0;
+      font-weight: 800;
+      font-size: 12px;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+    .badge .tick {
+      width: 10px; height: 10px;
+      border-radius: 2px;
+      background: #22c55e;
+      box-shadow: 0 0 16px rgba(34,197,94,0.35);
+      display:inline-block;
+    }
+    h1 {
+      margin: 0;
+      font-size: 42px;
+      line-height: 1.1;
+      letter-spacing: -0.6px;
+      color: #fff;
+    }
+    .sub {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #cbd5e1;
+      max-width: 900px;
+      line-height: 1.6;
+    }
+    .heroActions {
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .tiny {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #94a3b8;
+    }
 
+    /* Lists + example */
+    ul.clean { margin: 10px 0 0 18px; color: #cbd5e1; }
+    ul.clean li { margin: 8px 0; }
+    .example {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #070b16;
+      color: #cbd5e1;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    code { background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 6px; }
+
+    /* Form */
     label { display:block; font-size: 13px; color:#94a3b8; margin: 10px 0 6px; }
     input {
       width: 100%;
@@ -238,59 +199,77 @@
     .err { color: #fca5a5; }
     .ok  { color: #86efac; }
 
-    .example {
-      margin-top: 14px;
-      padding: 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: #070b16;
-      color: #cbd5e1;
-      font-size: 14px;
-      line-height: 1.6;
+    /* Pricing */
+    .pricingHead {
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
     }
+    .pricingHead h2 { margin:0; }
+    .pricingHead .hint { color:#94a3b8; font-size: 13px; margin-top: 4px; }
+
+    .planStack { display: grid; gap: 14px; margin-top: 12px; }
+    .plan {
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+    }
+    .plan.featured{
+      border-color: rgba(56,189,248,0.40);
+      box-shadow: 0 0 0 1px rgba(56,189,248,0.25);
+      background:
+        radial-gradient(700px 260px at 15% 0%, rgba(56,189,248,0.10), transparent 55%),
+        rgba(255,255,255,0.04);
+    }
+    .planTop {
+      display:flex;
+      justify-content:space-between;
+      align-items:baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .planName { font-size: 18px; font-weight: 900; color:#fff; }
+    .price { font-weight: 900; color:#e2e8f0; }
+    .price small { font-weight: 800; color:#94a3b8; }
 
     .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
+      display:inline-flex;
+      align-items:center;
+      padding: 6px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.06);
-      color: #cbd5e1;
-      font-weight: 800;
+      font-weight: 900;
       font-size: 12px;
-    }
-    .pill.ok{
-      border-color: rgba(34,197,94,0.45);
-      background: rgba(34,197,94,0.12);
-      color: #bbf7d0;
+      border: 1px solid rgba(56,189,248,0.35);
+      background: rgba(56,189,248,0.12);
+      color: #c7f9ff;
+      margin-left: 8px;
     }
 
-    .section {
-      margin-top: 16px;
-      padding: 18px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: #0b1224;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
-    }
-    .section h2{
-      margin: 0 0 10px 0;
-      font-size: 20px;
-      color: #e2e8f0;
-    }
-    .section p, .section li { color: #cbd5e1; line-height: 1.7; }
-    .section ul { margin: 8px 0 0 18px; }
+    .plan ul { margin: 10px 0 0 18px; color:#cbd5e1; }
+    .plan ul li { margin: 7px 0; }
 
+    .planActions {
+      margin-top: 12px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .planNote { color:#94a3b8; font-size: 12px; }
+
+    /* Footer */
     .footer {
-      margin: 18px 0 8px;
+      margin: 8px 0 8px;
       text-align: center;
       color: #94a3b8;
       font-size: 12px;
     }
-    code { background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 6px; }
-    a { color: #7dd3fc; }
+    a { color:#7dd3fc; }
   </style>
 </head>
 
@@ -308,346 +287,182 @@
       </div>
     </div>
 
-    <!-- HERO -->
-    <div class="hero">
-      <div class="pill ok">✅ Google Autopilot available (connect once)</div>
+    <div class="stack">
 
-      <h1 style="margin-top:10px;">Never think about review replies again.</h1>
+      <!-- HERO -->
+      <div class="hero">
+        <div class="badge"><span class="tick"></span> Google Autopilot available (connect once)</div>
 
-      <div class="sub">
-        RestaurantAssist writes professional, on-brand responses to customer reviews — and tells you
-        <strong>which ones actually need attention</strong>. Built for restaurant owners:
-        <strong>no prompts</strong>, no guessing, no busywork.
-      </div>
-
-      <div class="heroActions">
-        <a class="btn primary" href="#start">Start free trial</a>
-        <a class="btn" href="#why">Why not just ChatGPT?</a>
-      </div>
-
-      <div class="tiny">
-        30-second setup • Cancel anytime • Works best when you respond consistently
-      </div>
-    </div>
-
-    <!-- MAIN: VALUE + TRIAL FORM -->
-    <div class="grid">
-      <!-- LEFT: Quick explanation + example -->
-      <div class="card">
-        <h2>What you get</h2>
-        <ul class="steps">
-          <li><strong>No prompting required:</strong> paste the review and click Generate.</li>
-          <li><strong>Platform-aware tone:</strong> Google ≠ Yelp ≠ Facebook (we adjust automatically).</li>
-          <li><strong>Urgent review flags:</strong> missing items, rude service, long wait time, wrong order.</li>
-          <li><strong>Consistency:</strong> your replies sound like one brand voice, every time.</li>
-          <li><strong>Patterns & summaries:</strong> see what customers keep mentioning.</li>
-        </ul>
-
-        <div class="example">
-          <div><strong>Customer:</strong> “Food was great but the wait time was really long.”</div>
-          <div style="margin-top:8px;"><strong>RestaurantAssist reply:</strong> “Thanks for your feedback! We’re glad you enjoyed the food and apologize for the wait. We’re working to improve service speed and appreciate your patience.”</div>
+        <h1>Never think about review replies again.</h1>
+        <div class="sub">
+          RestaurantAssist writes professional, on-brand responses to customer reviews — and tells you
+          <strong>which ones actually need attention</strong>. Built for restaurant owners: <strong>no prompts</strong>,
+          no guessing, no busywork.
         </div>
 
-        <p style="margin-top:12px; color:#94a3b8; font-size:13px;">
-          Tip: If a review mentions <em>missing items</em> or <em>wrong order</em>, RestaurantAssist automatically raises urgency.
-        </p>
+        <div class="heroActions">
+          <a class="btn primary" href="#start">Start free trial</a>
+          <a class="btn" href="#chatgpt">Why not just ChatGPT?</a>
+        </div>
+
+        <div class="tiny">
+          30-second setup • Cancel anytime • Works best when you respond consistently
+        </div>
       </div>
-      <!-- PRICING -->
-      <div class="card" style="margin-top:16px;">
-        <h2 style="margin:0 0 6px 0;">Pricing</h2>
-        <p style="margin:0 0 14px 0; color:#cbd5e1;">
-          Simple plans. Start with Starter. Upgrade when you’re busier.
-        </p>
-      
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:14px;">
-          <!-- STARTER -->
-          <div style="
-            padding:16px;
-            border-radius:16px;
-            border:1px solid rgba(255,255,255,0.10);
-            background:#0b1224;
-            box-shadow:0 10px 24px rgba(0,0,0,0.25);
-          ">
-            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
-              <div style="font-weight:900; color:#fff; font-size:16px;">Starter</div>
-              <div style="font-weight:900; color:#fff; font-size:18px;">
-                $29<span style="font-weight:700; color:#94a3b8; font-size:12px;">/mo</span>
-              </div>
-            </div>
-      
-            <div style="margin-top:10px; color:#cbd5e1; line-height:1.6;">
-              Great for 1 location getting started.
-            </div>
-      
-            <ul style="margin:12px 0 0 18px; color:#cbd5e1; line-height:1.7;">
-              <li>Paste review → Generate reply</li>
-              <li>Platform-aware tone (Google/Yelp/Facebook)</li>
-              <li>Urgency flags for bad reviews</li>
-              <li>Basic summaries (top issues)</li>
-            </ul>
-      
-            <button
-              class="btn primary"
-              style="width:100%; margin-top:14px;"
-              onclick="selectPlan('starter')"
-            >
-              Choose Starter
-            </button>
-      
-            <div style="margin-top:8px; font-size:12px; color:#94a3b8;">
-              Card required to prevent trial abuse.
+
+      <!-- ROW: What you get + Start trial -->
+      <div class="row2">
+
+        <div class="card">
+          <h2>What you get</h2>
+          <ul class="clean">
+            <li><strong>No prompting required:</strong> paste the review and click Generate.</li>
+            <li><strong>Platform-aware tone:</strong> Google ≠ Yelp ≠ Facebook (we adjust automatically).</li>
+            <li><strong>Urgent review flags:</strong> missing items, rude service, long wait time, wrong order.</li>
+            <li><strong>Consistency:</strong> your replies sound like one brand voice, every time.</li>
+            <li><strong>Patterns & summaries:</strong> see what customers keep mentioning.</li>
+          </ul>
+
+          <div class="example">
+            <div><strong>Customer:</strong> “Food was great but the wait time was really long.”</div>
+            <div style="margin-top:8px;">
+              <strong>RestaurantAssist reply:</strong> “Thanks for your feedback! We’re glad you enjoyed the food and apologize for the wait. We’re working to improve service speed and appreciate your patience.”
             </div>
           </div>
-      
-          <!-- PRO -->
-          <div style="
-            padding:16px;
-            border-radius:16px;
-            border:1px solid rgba(56,189,248,0.35);
-            background: radial-gradient(900px 280px at 20% 0%, rgba(56,189,248,0.10), transparent 60%), #0b1224;
-            box-shadow:0 10px 24px rgba(0,0,0,0.25);
-            position:relative;
-          ">
-            <div style="
-              position:absolute; top:14px; right:14px;
-              padding:6px 10px;
-              border-radius:999px;
-              font-size:11px;
-              font-weight:900;
-              border:1px solid rgba(56,189,248,0.35);
-              background: rgba(56,189,248,0.08);
-              color:#c7f9ff;
-            ">
-              Most popular
-            </div>
-      
-            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
-              <div style="font-weight:900; color:#fff; font-size:16px;">Pro</div>
-              <div style="font-weight:900; color:#fff; font-size:18px;">
-                $59<span style="font-weight:700; color:#94a3b8; font-size:12px;">/mo</span>
-              </div>
-            </div>
-      
-            <div style="margin-top:10px; color:#cbd5e1; line-height:1.6;">
-              For busy restaurants that want consistency and speed.
-            </div>
-      
-            <ul style="margin:12px 0 0 18px; color:#cbd5e1; line-height:1.7;">
-              <li>Everything in Starter</li>
-              <li>Brand voice presets (friendly / professional)</li>
-              <li>Better summaries & patterns</li>
-              <li>Higher monthly usage limits</li>
-            </ul>
-      
-            <button
-              class="btn primary"
-              style="width:100%; margin-top:14px;"
-              onclick="selectPlan('pro')"
-            >
-              Choose Pro
-            </button>
-      
-            <div style="margin-top:8px; font-size:12px; color:#94a3b8;">
-              Upgrade anytime. Downgrade anytime.
-            </div>
-          </div>
-        </div>
-      
-        <div style="margin-top:12px; font-size:12px; color:#94a3b8;">
-          Multi-location plan coming soon. Need it now? <a href="/support.html">Contact support</a>.
-        </div>
-      </div>
-      
-      <script>
-        // Default plan
-        window.RA_SELECTED_PLAN = "starter";
-      
-        function selectPlan(plan){
-          window.RA_SELECTED_PLAN = plan;
-      
-          // Scroll to your existing trial form and focus business ID
-          const start = document.getElementById("start");
-          if (start) start.scrollIntoView({ behavior: "smooth", block: "start" });
-      
-          setTimeout(() => {
-            const biz = document.getElementById("businessId");
-            if (biz) biz.focus();
-          }, 250);
-        }
-      </script>
 
-      <!-- RIGHT COLUMN: Pricing + Trial -->
-      <div class="rightCol">
-      
-        <!-- Pricing -->
-        <div class="card" id="pricing">
-          <h2>Pricing</h2>
-          <p style="margin-top:-4px;">
-            Simple plans. Start with Starter. Upgrade when you’re busier.
-          </p>
-      
-          <div class="pricingStack">
-      
-            <!-- Starter -->
-            <div class="planCard selected" id="planStarter" data-plan="starter">
-              <div class="planTop">
-                <div class="planName">Starter</div>
-                <div class="planPrice">$29<span style="font-size:12px;opacity:.8">/mo</span></div>
-              </div>
-              <div style="color:#cbd5e1; line-height:1.5;">
-                Great for 1 location getting started.
-              </div>
-              <ul>
-                <li>Paste review → Generate reply</li>
-                <li>Platform-aware tone (Google/Yelp/Facebook)</li>
-                <li>Urgency flags for bad reviews</li>
-                <li>Basic summaries (top issues)</li>
-              </ul>
-              <div class="chooseBtnRow">
-                <button class="btn primary" type="button" id="chooseStarterBtn">Choose Starter</button>
-                <div class="planSmall">Good for most restaurants.</div>
-              </div>
-            </div>
-      
-            <!-- Pro -->
-            <div class="planCard" id="planPro" data-plan="pro">
-              <div class="planTop">
-                <div class="planName">
-                  Pro <span class="badge">Most popular</span>
-                </div>
-                <div class="planPrice">$59<span style="font-size:12px;opacity:.8">/mo</span></div>
-              </div>
-              <div style="color:#cbd5e1; line-height:1.5;">
-                For busy restaurants that want consistency and speed.
-              </div>
-              <ul>
-                <li>Everything in Starter</li>
-                <li>Brand voice presets (friendly / professional)</li>
-                <li>Better summaries & patterns</li>
-                <li>Higher usage limits</li>
-              </ul>
-              <div class="chooseBtnRow">
-                <button class="btn" type="button" id="chooseProBtn">Choose Pro</button>
-                <div class="planSmall">Upgrade anytime.</div>
-              </div>
-            </div>
-      
+          <div class="tiny" style="margin-top:10px;">
+            Tip: If a review mentions <em>missing items</em> or <em>wrong order</em>, RestaurantAssist automatically raises urgency.
           </div>
-      
-          <p class="tiny" style="margin-top:12px;">
-            Multi-location plan coming soon. Need it now? <a href="/support.html">Contact support</a>
-          </p>
         </div>
-      
-        <!-- Trial form -->
+
         <div class="card" id="start">
           <h2>Start free trial</h2>
           <p style="margin-top:-4px;">
             Choose a short business ID (letters/numbers/dashes) — you’ll use it for your account.
           </p>
-      
+
           <label for="businessId">Business ID (no spaces)</label>
           <input id="businessId" placeholder="e.g. kjs-local-grindz" />
-      
+
           <label for="email">Email</label>
           <input id="email" type="email" placeholder="you@yourrestaurant.com" />
-      
+
           <button class="btn primary" id="startTrialBtn" style="width:100%; margin-top:12px;">
             Start Free Trial
           </button>
-      
+
           <div id="msg" class="msg"></div>
-      
+
           <p class="tiny">
             After checkout, your API key is emailed. If it lands in Spam, click <strong>“Not spam”</strong>.
           </p>
         </div>
+
       </div>
-    </div>
 
-    <!-- WHY NOT CHATGPT -->
-    <div class="section" id="why">
-      <h2>Why not just ChatGPT?</h2>
-      <p style="margin-top:-4px;">
-        <strong>ChatGPT gives answers. RestaurantAssist runs the process.</strong>
-      </p>
-
-      <p>
-        Most restaurant owners don’t want to open an AI tool, think about prompts, change the tone for each platform,
-        and remember what they replied last time. They just want reviews handled fast and consistently.
-      </p>
-
-      <ul>
-        <li><strong>No prompting:</strong> paste the review. That’s it.</li>
-        <li><strong>Restaurant tone baked in:</strong> professional on Google, empathetic on Yelp, friendly on Facebook.</li>
-        <li><strong>Urgency flags:</strong> the “uh oh” reviews get highlighted.</li>
-        <li><strong>Consistent voice:</strong> no robotic replies, no mood swings.</li>
-        <li><strong>Patterns:</strong> see what customers keep mentioning across time.</li>
-      </ul>
-
-      <p style="margin-top:12px;">
-        <strong>If you’re replying to reviews manually, you’re wasting time every single day.</strong>
-      </p>
-    </div>
-
-    <!-- HOW IT WORKS -->
-    <div class="section" id="how">
-      <h2>How it works (fits into your day)</h2>
-      <ol class="steps">
-        <li><strong>Paste a customer review</strong> (or let Google Autopilot handle it automatically).</li>
-        <li><strong>We generate a ready-to-post reply</strong> — professional, empathetic, and on-brand.</li>
-        <li><strong>You copy, approve, or auto-post</strong> depending on the platform.</li>
-      </ol>
-
-      <p style="color:#94a3b8; font-size:13px;">
-        Honest note: full automation depends on platform rules. Google can be fully automated; other platforms may require approval steps.
-      </p>
-    </div>
-
-    <!-- WHO THIS IS FOR -->
-    <div class="section" id="for">
-      <h2>Who this is for</h2>
-      <p style="margin-top:-4px;">
-        RestaurantAssist is for you if you want reviews handled <strong>consistently</strong> without thinking about wording every time.
-      </p>
-
-      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px;">
-        <div style="padding:14px; border-radius:14px; border:1px solid rgba(255,255,255,0.08); background:#070b16;">
-          <div style="font-weight:900; color:#e2e8f0;">✅ Great fit if you…</div>
-          <ul style="margin-top:8px;">
-            <li>Care about your online reputation</li>
-            <li>Don’t want to sound generic or careless</li>
-            <li>Want replies done fast, with a consistent voice</li>
-            <li>Want urgent issues surfaced immediately</li>
-          </ul>
+      <!-- PRICING (full width, stacked plans) -->
+      <div class="card" id="pricing">
+        <div class="pricingHead">
+          <div>
+            <h2>Pricing</h2>
+            <div class="hint">Simple plans. Start with Starter. Upgrade when you’re busier.</div>
+          </div>
         </div>
 
-        <div style="padding:14px; border-radius:14px; border:1px solid rgba(255,255,255,0.08); background:#070b16;">
-          <div style="font-weight:900; color:#e2e8f0;">❌ Not a fit if you…</div>
-          <ul style="margin-top:8px;">
-            <li>Enjoy writing every reply manually</li>
-            <li>Want to experiment with prompts</li>
-            <li>Only respond once a month</li>
-            <li>Don’t care about review consistency</li>
-          </ul>
+        <div class="planStack">
+
+          <div class="plan featured">
+            <div class="planTop">
+              <div>
+                <div class="planName">Starter</div>
+                <div class="tiny" style="margin-top:4px;">Great for 1 location getting started.</div>
+              </div>
+              <div class="price">$29<small>/mo</small></div>
+            </div>
+
+            <ul>
+              <li>Paste review → Generate reply</li>
+              <li>Platform-aware tone (Google/Yelp/Facebook)</li>
+              <li>Urgency flags for bad reviews</li>
+              <li>Basic summaries (top issues)</li>
+            </ul>
+
+            <div class="planActions">
+              <a class="btn primary" href="#start">Choose Starter</a>
+              <div class="planNote">Good for most restaurants.</div>
+            </div>
+          </div>
+
+          <div class="plan">
+            <div class="planTop">
+              <div>
+                <div class="planName">Pro <span class="pill">Most popular</span></div>
+                <div class="tiny" style="margin-top:4px;">For busy restaurants that want consistency and speed.</div>
+              </div>
+              <div class="price">$59<small>/mo</small></div>
+            </div>
+
+            <ul>
+              <li>Everything in Starter</li>
+              <li>Brand voice presets (friendly / professional)</li>
+              <li>Better summaries & patterns</li>
+              <li>Higher usage limits</li>
+            </ul>
+
+            <div class="planActions">
+              <a class="btn" href="#start">Choose Pro</a>
+              <div class="planNote">Upgrade anytime.</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="tiny" style="margin-top:10px;">
+          Multi-location plan coming soon. Need it now? <a href="/support.html">Contact support</a>
         </div>
       </div>
-    </div>
 
-    <!-- FINAL CTA -->
-    <div class="section" id="cta">
-      <h2>Start your free trial</h2>
-      <p style="margin-top:-4px;">
-        Respond better. Faster. Without thinking.
-      </p>
-      <div class="heroActions" style="margin-top:12px;">
-        <a class="btn primary" href="#start">Start free trial</a>
-        <a class="btn" href="/support.html">Questions? Contact support</a>
+      <!-- WHY NOT CHATGPT -->
+      <div class="card" id="chatgpt">
+        <h2>Why not just ChatGPT?</h2>
+        <p><strong>ChatGPT gives answers. RestaurantAssist runs the process.</strong></p>
+
+        <p>
+          Most restaurant owners don’t want to open an AI tool, think about prompts, change the tone for each platform,
+          and remember what they replied last time. They just want reviews handled fast and consistently.
+        </p>
+
+        <ul class="clean">
+          <li><strong>No prompting:</strong> paste the review. That’s it.</li>
+          <li><strong>Restaurant tone baked in:</strong> professional on Google, empathetic on Yelp, friendly on Facebook.</li>
+          <li><strong>Urgency flags:</strong> the “uh oh” reviews get highlighted.</li>
+          <li><strong>Consistent voice:</strong> no robotic replies, no mood swings.</li>
+          <li><strong>Patterns:</strong> see what customers keep mentioning across time.</li>
+        </ul>
+
+        <p class="tiny" style="margin-top:10px;">
+          If you’re replying manually, you’re wasting time every single day.
+        </p>
       </div>
-    </div>
 
-    <div class="footer">
-      © <span id="yr"></span> RestaurantAssist • Questions? <a href="/support.html">Support</a>
+      <!-- HOW IT WORKS -->
+      <div class="card">
+        <h2>How it works (fits into your day)</h2>
+        <ol class="clean">
+          <li>Paste a customer review (or let Google Autopilot handle it automatically).</li>
+          <li>We generate a ready-to-post reply — professional, empathetic, and on-brand.</li>
+          <li>You copy, approve, or auto-post depending on the platform.</li>
+        </ol>
+
+        <p class="tiny">
+          Honest note: full automation depends on platform rules. Google can be fully automated; other platforms may require manual copy/paste.
+        </p>
+      </div>
+
+      <div class="footer">
+        © <span id="yr"></span> RestaurantAssist • Questions? <a href="mailto:support@restaurantassist.app">support@restaurantassist.app</a>
+      </div>
+
     </div>
   </div>
 
@@ -655,33 +470,6 @@
     document.getElementById("yr").textContent = new Date().getFullYear();
 
     const API_BASE = "https://review-assistant-api.onrender.com";
-    let selectedPlan = "starter";
-    const planStarterEl = document.getElementById("planStarter");
-    const planProEl = document.getElementById("planPro");
-    const chooseStarterBtn = document.getElementById("chooseStarterBtn");
-    const chooseProBtn = document.getElementById("chooseProBtn");
-    
-    function setPlan(plan){
-      selectedPlan = plan;
-    
-      // visual highlight
-      planStarterEl.classList.toggle("selected", plan === "starter");
-      planProEl.classList.toggle("selected", plan === "pro");
-    
-      // button styling
-      if (plan === "starter"){
-        chooseStarterBtn.classList.add("primary");
-        chooseProBtn.classList.remove("primary");
-        chooseProBtn.classList.add("btn");
-      } else {
-        chooseProBtn.classList.add("primary");
-        chooseStarterBtn.classList.remove("primary");
-        chooseStarterBtn.classList.add("btn");
-      }
-    }
-    
-    chooseStarterBtn.addEventListener("click", () => setPlan("starter"));
-    chooseProBtn.addEventListener("click", () => setPlan("pro"));
 
     const msgEl = document.getElementById("msg");
     function setMsg(text, cls){
@@ -704,7 +492,7 @@
         const res = await fetch(`${API_BASE}/billing/create-checkout`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ business_id, email, plan: selectedPlan })
+          body: JSON.stringify({ business_id, email })
         });
 
         const data = await res.json();
@@ -719,5 +507,3 @@
   </script>
 </body>
 </html>
-
-
