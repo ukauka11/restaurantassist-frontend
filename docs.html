@@ -29,12 +29,15 @@
     .docsWrap{
       margin-top: 12px;
       display: grid;
-      grid-template-columns: 280px 1fr;
+      grid-template-columns: 280px minmax(0, 1fr);
       gap: 16px;
       align-items: start;
       width: 100%;          /* use container width */
       max-width: 100%;      /* prevent any accidental overflow */
     }
+    
+    .docsWrap > div { min-width: 0; }
+    .card { min-width: 0; }
 
     @media (max-width: 1200px){
       .docsWrap{ grid-template-columns: 1fr; }
