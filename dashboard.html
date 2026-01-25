@@ -122,41 +122,45 @@
 
       <!-- LEFT: Generate -->
       <div class="card">
-        <div class="sectionTitle">
-          <h2>1) Paste a review</h2>
-          <div id="genPill" class="pill">Not ready</div>
+        <div class="leftMain">
+          <div class="sectionTitle">
+            <h2>1) Paste a review</h2>
+            <div id="genPill" class="pill">Not ready</div>
+          </div>
+  
+          <label>Customer review</label>
+          <textarea id="reviewText" placeholder="Paste the customer’s review here..."></textarea>
+  
+          <div class="hint" style="margin-top:6px;">
+            <button class="btn" id="clearReviewBtn" style="padding:6px 10px; font-size:12px;">Clear review</button>
+          </div>
+  
+          <div class="btnRow">
+            <button class="btn primary" id="generateBtn">Generate reply</button>
+            <button class="btn" id="copyReplyBtn" disabled>Copy reply</button>
+          </div>
+  
+          <div id="genMsg" class="muted" style="margin-top:10px; min-height:18px;"></div>
+  
+          <div id="resultBox" class="boxOut" style="display:none;">
+            <h3>2) Your ready-to-post reply</h3>
+            <div id="replyOut" style="white-space: pre-wrap;"></div>
+            <div id="attentionLine" class="muted" style="margin-top:10px;"></div>
+  
+            <div style="height:10px;"></div>
+          </div>
         </div>
-
-        <label>Customer review</label>
-        <textarea id="reviewText" placeholder="Paste the customer’s review here..."></textarea>
-
-        <div class="hint" style="margin-top:6px;">
-          <button class="btn" id="clearReviewBtn" style="padding:6px 10px; font-size:12px;">Clear review</button>
-        </div>
-
-        <div class="btnRow">
-          <button class="btn primary" id="generateBtn">Generate reply</button>
-          <button class="btn" id="copyReplyBtn" disabled>Copy reply</button>
-        </div>
-
-        <div id="genMsg" class="muted" style="margin-top:10px; min-height:18px;"></div>
-
-        <div id="resultBox" class="boxOut" style="display:none;">
-          <h3>2) Your ready-to-post reply</h3>
-          <div id="replyOut" style="white-space: pre-wrap;"></div>
-          <div id="attentionLine" class="muted" style="margin-top:10px;"></div>
-
-          <div style="height:10px;"></div>
-        </div>
-        <div class="boxOut" style="margin-top:16px;">
-          <h3>What happens next</h3>
-          <ul style="margin:8px 0 0 18px; padding:0;">
-            <li>Copy the reply</li>
-            <li>Paste it into Google, Yelp, or Facebook</li>
-            <li>You're done</li>
-          </ul>
-          <div class="muted" style="margin-top:8px;">
-            RestaurantAssist keeps replies professional and consistent every time.
+        <div class="leftFooter">
+          <div class="boxOut">
+            <h3>What happens next</h3>
+            <ul style="margin:8px 0 0 18px; padding:0;">
+              <li>Copy the reply</li>
+              <li>Paste it into Google, Yelp, or Facebook</li>
+              <li>You're done</li>
+            </ul>
+            <div class="muted" style="margin-top:8px;">
+              RestaurantAssist keeps replies professional and consistent every time.
+            </div>
           </div>
         </div>
       </div>
