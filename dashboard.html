@@ -130,10 +130,13 @@
         <label>Customer review</label>
         <textarea id="reviewText" placeholder="Paste the customer’s review here..."></textarea>
 
+        <div class="hint" style="margin-top:6px;">
+          <button class="btn" id="clearReviewBtn" style="padding:6px 10px; font-size:12px;">Clear review</button>
+        </div>
+
         <div class="btnRow">
           <button class="btn primary" id="generateBtn">Generate reply</button>
           <button class="btn" id="copyReplyBtn" disabled>Copy reply</button>
-          <button class="btn" id="clearReviewBtn">Clear</button>
         </div>
 
         <div id="genMsg" class="muted" style="margin-top:10px; min-height:18px;"></div>
@@ -141,39 +144,9 @@
         <div id="resultBox" class="boxOut" style="display:none;">
           <h3>2) Your ready-to-post reply</h3>
           <div id="replyOut" style="white-space: pre-wrap;"></div>
+          <div id="attentionLine" class="muted" style="margin-top:10px;"></div>
 
           <div style="height:10px;"></div>
-
-          <div class="row2">
-            <div>
-              <div class="muted">Sentiment</div>
-              <div id="sentimentOut" class="mono"></div>
-            </div>
-            <div>
-              <div class="muted">Urgency</div>
-              <div id="urgencyOut" class="mono"></div>
-            </div>
-          </div>
-
-          <div style="height:10px;"></div>
-
-          <div class="row2">
-            <div>
-              <div class="muted">Category</div>
-              <div id="categoryOut" class="mono"></div>
-            </div>
-            <div>
-              <div class="muted">Tags</div>
-              <div id="tagsOut" class="mono"></div>
-            </div>
-          </div>
-
-          <div style="height:10px;"></div>
-
-          <div>
-            <div class="muted">Next steps (optional)</div>
-            <div id="stepsOut" style="margin-top:6px;"></div>
-          </div>
         </div>
       </div>
 
@@ -182,12 +155,6 @@
         <div class="sectionTitle">
           <h2>Connect</h2>
           <div id="connPill" class="pill">Not connected</div>
-        </div>
-
-        <label>API Base URL</label>
-        <input id="apiBase" value="https://review-assistant-api.onrender.com" />
-        <div class="hint" style="margin-top:8px;">
-          If you later upgrade and set <code>api.restaurantassist.app</code>, update this.
         </div>
 
         <label>Your API Key (<code>x-api-key</code>)</label>
@@ -244,14 +211,11 @@
     document.getElementById("yr").textContent = new Date().getFullYear();
 
     const API_BASE_DEFAULT = "https://review-assistant-api.onrender.com";
-
-    const apiBaseEl = document.getElementById("apiBase");
     const apiKeyEl  = document.getElementById("apiKey");
-
     const connPill = document.getElementById("connPill");
     const genPill  = document.getElementById("genPill");
-
     const toastEl = document.getElementById("toast");
+    
     function toast(text="Done"){
       toastEl.textContent = text;
       toastEl.classList.add("show");
@@ -259,7 +223,7 @@
     }
 
     function baseUrl(){
-      return (apiBaseEl.value || API_BASE_DEFAULT).trim().replace(/\/+$/, "");
+      return API_BASE_DEFAULT;
     }
 
     function setConnPill(state, text){
@@ -389,6 +353,13 @@
         document.getElementById("categoryOut").textContent = category;
         document.getElementById("tagsOut").textContent = tags;
 
+        const attentionLine = document.getElementById("attentionLine");
+        if (String(urgency).toLowerCase().includes("high")) {
+          attentionLine.innerHTML = "⚠️ <strong>Needs attention:</strong> consider following up personally.";
+        } else {
+          attentionLine.textContent = "Looks good. Copy and post.";
+        }
+
         const stepsOut = document.getElementById("stepsOut");
         if (steps.length){
           stepsOut.innerHTML = "<ul style='margin:0 0 0 18px; padding:0;'>" +
@@ -458,6 +429,21 @@
     if (getKey()) loadAccount();
     setGenPill("", "Not ready");
     setConnPill("", getKey() ? "Connected?" : "Not connected");
+
+    function refreshUI(){
+      const hasKey = !!getKey();
+      const hasReview = !!document.getElementById("reviewText").value.trim();
+    
+      generateBtn.disabled = !(hasKey && hasReview);
+    
+      if (!hasKey) setGenPill("bad", "Paste API key");
+      else if (!hasReview) setGenPill("", "Paste review");
+      else setGenPill("ok", "Ready");
+    }
+    
+    apiKeyEl.addEventListener("input", refreshUI);
+    document.getElementById("reviewText").addEventListener("input", refreshUI);
+    refreshUI();
   </script>
 </body>
 </html>
