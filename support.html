@@ -231,99 +231,96 @@
           </div>
         </div>
       </div>
-
-      <div class="supportWrap">
         
-        <!-- RIGHT: Contact -->
-        <div>
-          
-          <div class="card">
+      <!-- RIGHT: Contact -->
+      <div>
+        
+        <div class="card">
+          <div class="sectionHead">
+            <h2>Contact Support</h2>
+            <span class="pill ok">Usually same day</span>
+          </div>
+  
+          <div class="boxOut">
+            <h3>Email</h3>
+            <div style="font-weight:900; color:#e2e8f0;">
+              <a href="mailto:support@restaurantassist.app">support@restaurantassist.app</a>
+            </div>
+            <div class="tiny">
+              Include your checkout email + what you’re seeing. Screenshots help a lot.
+            </div>
+  
+            <div class="btnRow">
+              <a class="btn primary" href="mailto:support@restaurantassist.app?subject=RestaurantAssist%20Help&body=Hi%20RestaurantAssist%20Support,%0A%0ACheckout%20email:%20%0ABusiness%20ID%20(if%20known):%20%0AProblem:%20%0AWhat%20I%20expected:%20%0AScreenshot%20(if%20possible):%20%0A%0AThanks!">
+                Email support
+              </a>
+  
+              <a class="btn" href="mailto:support@restaurantassist.app?subject=RestaurantAssist%20Billing%20Help&body=Hi%20Support,%0A%0ACheckout%20email:%20%0ABusiness%20ID%20(if%20known):%20%0ARequest:%20Upgrade%20/%20Cancel%20/%20Payment%20issue%0AWhat%20happened:%20%0A%0AThanks!">
+                Billing help
+              </a>
+  
+              <a class="btn" href="mailto:support@restaurantassist.app?subject=RestaurantAssist%20Bug%20Report&body=Hi%20Support,%0A%0APage:%20Dashboard%20/%20Docs%20/%20Support%0AWhat%20I%20clicked:%20%0AWhat%20happened:%20%0AExpected:%20%0ABrowser%20(Chrome/Safari/etc):%20%0AScreenshot:%20%0A%0AThanks!">
+                Report a bug
+              </a>
+  
+              <a class="btn" href="mailto:support@restaurantassist.app?subject=RestaurantAssist%20Feature%20Request&body=Hi%20Support,%0A%0AFeature%20idea:%20%0AWhy%20it%20helps:%20%0AExample%20use%20case:%20%0A%0AThanks!">
+                Feature request
+              </a>
+            </div>
+          </div>
+  
+          <div class="card" style="margin-top:16px;">
             <div class="sectionHead">
-              <h2>Contact Support</h2>
-              <span class="pill ok">Usually same day</span>
+              <h2>System status</h2>
+              <span class="pill ok">All systems operational</span>
             </div>
-    
+          
             <div class="boxOut">
-              <h3>Email</h3>
-              <div style="font-weight:900; color:#e2e8f0;">
-                <a href="mailto:support@restaurantassist.app">support@restaurantassist.app</a>
-              </div>
+              <ul style="margin:0; padding-left:18px; line-height:1.8;">
+                <li><strong>API:</strong> Operational</li>
+                <li><strong>Dashboard:</strong> Operational</li>
+                <li><strong>Billing (Stripe):</strong> Operational</li>
+                <li><strong>Email delivery:</strong> Operational</li>
+              </ul>
+          
               <div class="tiny">
-                Include your checkout email + what you’re seeing. Screenshots help a lot.
-              </div>
-    
-              <div class="btnRow">
-                <a class="btn primary" href="mailto:support@restaurantassist.app?subject=RestaurantAssist%20Help&body=Hi%20RestaurantAssist%20Support,%0A%0ACheckout%20email:%20%0ABusiness%20ID%20(if%20known):%20%0AProblem:%20%0AWhat%20I%20expected:%20%0AScreenshot%20(if%20possible):%20%0A%0AThanks!">
-                  Email support
-                </a>
-    
-                <a class="btn" href="mailto:support@restaurantassist.app?subject=RestaurantAssist%20Billing%20Help&body=Hi%20Support,%0A%0ACheckout%20email:%20%0ABusiness%20ID%20(if%20known):%20%0ARequest:%20Upgrade%20/%20Cancel%20/%20Payment%20issue%0AWhat%20happened:%20%0A%0AThanks!">
-                  Billing help
-                </a>
-    
-                <a class="btn" href="mailto:support@restaurantassist.app?subject=RestaurantAssist%20Bug%20Report&body=Hi%20Support,%0A%0APage:%20Dashboard%20/%20Docs%20/%20Support%0AWhat%20I%20clicked:%20%0AWhat%20happened:%20%0AExpected:%20%0ABrowser%20(Chrome/Safari/etc):%20%0AScreenshot:%20%0A%0AThanks!">
-                  Report a bug
-                </a>
-    
-                <a class="btn" href="mailto:support@restaurantassist.app?subject=RestaurantAssist%20Feature%20Request&body=Hi%20Support,%0A%0AFeature%20idea:%20%0AWhy%20it%20helps:%20%0AExample%20use%20case:%20%0A%0AThanks!">
-                  Feature request
-                </a>
+                Last checked: today
               </div>
             </div>
-    
-            <div class="card" style="margin-top:16px;">
-              <div class="sectionHead">
-                <h2>System status</h2>
-                <span class="pill ok">All systems operational</span>
-              </div>
-            
-              <div class="boxOut">
-                <ul style="margin:0; padding-left:18px; line-height:1.8;">
-                  <li><strong>API:</strong> Operational</li>
-                  <li><strong>Dashboard:</strong> Operational</li>
-                  <li><strong>Billing (Stripe):</strong> Operational</li>
-                  <li><strong>Email delivery:</strong> Operational</li>
-                </ul>
-            
-                <div class="tiny">
-                  Last checked: today
-                </div>
+          </div>
+  
+          <div class="card" style="margin-top:16px;">
+            <div class="sectionHead">
+              <h2>Common issues we see</h2>
+              <span class="pill">Quick checks</span>
+            </div>
+          
+            <div class="boxOut">
+              <ul style="margin:0; padding-left:18px; line-height:1.8;">
+                <li>API key pasted with extra spaces at the start or end</li>
+                <li>Clicked <strong>Generate</strong> before clicking <strong>Load my account</strong></li>
+                <li>Tried immediately after checkout (Stripe needs ~30–90 seconds)</li>
+                <li>Subscription is <code>past_due</code> or <code>canceled</code></li>
+                <li>Browser cached an old version of the page</li>
+              </ul>
+              <div class="tiny">
+                Tip: Try a hard refresh (<strong>Ctrl + Shift + R</strong>) before emailing support.
               </div>
             </div>
-    
-            <div class="card" style="margin-top:16px;">
-              <div class="sectionHead">
-                <h2>Common issues we see</h2>
-                <span class="pill">Quick checks</span>
-              </div>
-            
-              <div class="boxOut">
-                <ul style="margin:0; padding-left:18px; line-height:1.8;">
-                  <li>API key pasted with extra spaces at the start or end</li>
-                  <li>Clicked <strong>Generate</strong> before clicking <strong>Load my account</strong></li>
-                  <li>Tried immediately after checkout (Stripe needs ~30–90 seconds)</li>
-                  <li>Subscription is <code>past_due</code> or <code>canceled</code></li>
-                  <li>Browser cached an old version of the page</li>
-                </ul>
-                <div class="tiny">
-                  Tip: Try a hard refresh (<strong>Ctrl + Shift + R</strong>) before emailing support.
-                </div>
-              </div>
+          </div>
+  
+          <div class="card" style="margin-top:16px;">
+            <div class="sectionHead">
+              <h2>What RestaurantAssist is (and isn’t)</h2>
             </div>
-    
-            <div class="card" style="margin-top:16px;">
-              <div class="sectionHead">
-                <h2>What RestaurantAssist is (and isn’t)</h2>
-              </div>
-              <div class="boxOut">
-                <ul style="margin:8px 0 0 18px; padding:0;">
-                  <li><strong>Is:</strong> paste review → generate reply → copy & post</li>
-                  <li><strong>Is:</strong> consistent brand voice + urgency flags</li>
-                  <li><strong>Isn’t:</strong> a chat tool with prompts and “guess the tone”</li>
-                </ul>
-                <div class="tiny">
-                  ChatGPT gives answers. RestaurantAssist runs the process.
-                </div>
+            <div class="boxOut">
+              <ul style="margin:8px 0 0 18px; padding:0;">
+                <li><strong>Is:</strong> paste review → generate reply → copy & post</li>
+                <li><strong>Is:</strong> consistent brand voice + urgency flags</li>
+                <li><strong>Isn’t:</strong> a chat tool with prompts and “guess the tone”</li>
+              </ul>
+              <div class="tiny">
+                ChatGPT gives answers. RestaurantAssist runs the process.
               </div>
             </div>
           </div>
