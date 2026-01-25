@@ -127,14 +127,6 @@
           <div id="genPill" class="pill">Not ready</div>
         </div>
 
-        <label>Platform</label>
-        <select id="platform">
-          <option value="google">Google</option>
-          <option value="yelp">Yelp</option>
-          <option value="facebook">Facebook</option>
-          <option value="other">Other</option>
-        </select>
-
         <label>Customer review</label>
         <textarea id="reviewText" placeholder="Paste the customer’s review here..."></textarea>
 
@@ -283,6 +275,16 @@
       return apiKeyEl.value.trim();
     }
 
+    function detectPlatformFromText(text){
+      const t = (text || "").toLowerCase();
+    
+      if (t.includes("yelp")) return "yelp";
+      if (t.includes("facebook") || t.includes("fb")) return "facebook";
+      if (t.includes("google") || t.includes("maps")) return "google";
+    
+      return "google"; // default
+    }
+    
     // Load saved key if exists
     const saved = localStorage.getItem("ra_api_key");
     if (saved) apiKeyEl.value = saved;
@@ -335,7 +337,7 @@
     async function generateReply(){
       const key = getKey();
       const review_text = document.getElementById("reviewText").value.trim();
-      const platform = document.getElementById("platform").value;
+      const platform = detectPlatformFromText(review_text);
 
       resultBox.style.display = "none";
       copyReplyBtn.disabled = true;
