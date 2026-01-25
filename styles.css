@@ -87,12 +87,20 @@ p{ color:#cbd5e1; line-height:1.6; }
   align-items: stretch; /* THIS is the important line */
 }
 
+.leftMain {
+  flex: 1;
+}
+
 /* Footer */
 .footer{
   margin:18px 0 8px;
   text-align:center;
   color:#94a3b8;
   font-size:12px;
+}
+
+.leftFooter {
+  margin-top: 16px;
 }
 
 .stack {
