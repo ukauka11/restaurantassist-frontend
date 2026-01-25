@@ -43,6 +43,8 @@
       .sideNav{
         position: static !important;
         top:auto !important;
+        overflow-x: auto;
+        padding-bottom: 6px;
       }
     
       .sideNav .navTitle{
@@ -50,16 +52,12 @@
       }
     
       .sideNav a{
-        display: inline-flex;
-        margin: 6px 6px 0 0;
-        width: auto;
+        display: inline-flex !important;   /* IMPORTANT: overrides later display:block */
+        margin: 6px 6px 0 0 !important;
+        width: auto !important;
         white-space: nowrap;
-      }
-    
-      /* let links wrap nicely */
-      .sideNav{
-        overflow-x: auto;
-        padding-bottom: 6px;
+        padding: 8px 10px;                 /* slightly tighter on small screens */
+        margin-bottom: 0 !important;
       }
     }
 
