@@ -4,69 +4,103 @@
   <meta charset="UTF-8" />
   <title>RestaurantAssist • Support</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/styles.css">
+
   <style>
-    :root { color-scheme: dark; }
-    body { font-family: Arial, sans-serif; background:#0f172a; color:#e5e7eb; margin:0; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 22px; }
+    .hero {
+      margin-top: 18px;
+      padding: 22px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        radial-gradient(1200px 420px at 10% 0%, rgba(56,189,248,0.18), transparent 55%),
+        radial-gradient(900px 380px at 90% 10%, rgba(34,197,94,0.16), transparent 55%),
+        #0b1224;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+    }
+    .hero h1{ margin:0; font-size: 34px; letter-spacing: -0.3px; color:#fff; }
+    .hero .sub{ margin-top:10px; font-size:14px; color:#cbd5e1; line-height:1.6; max-width: 980px; }
+    .muted{ color:#94a3b8; font-size: 12px; line-height: 1.5; }
+    code{ background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 6px; }
 
-    .nav {
-      display:flex; justify-content:space-between; align-items:center; gap:12px;
-      padding:14px 18px; border:1px solid rgba(255,255,255,0.08); border-radius:14px;
-      background:#0b1224; box-shadow:0 10px 24px rgba(0,0,0,0.25);
+    .supportWrap{
+      margin-top: 16px;
+      display:grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+      align-items: start;
     }
-    .brand{ font-weight:1000; font-size:22px; display:flex; align-items:center; gap:10px; }
-    .dot{ width:10px; height:10px; border-radius:50%; background:#38bdf8; box-shadow:0 0 22px rgba(56,189,248,0.75); }
-    .brand span{
-      background: linear-gradient(90deg, #ffffff, #d9fbff, #9ae6ff);
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-      text-shadow:0 0 22px rgba(56,189,248,0.22);
+    @media (max-width: 980px){
+      .supportWrap{ grid-template-columns: 1fr; }
     }
-    .navlinks{ display:flex; gap:10px; flex-wrap:wrap; }
-    .btn{
-      display:inline-block; padding:10px 14px; border-radius:10px;
-      border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.06);
-      color:#e5e7eb; text-decoration:none; font-weight:800; cursor:pointer;
-    }
-    .btn.primary{ background:#38bdf8; border-color:#38bdf8; color:#031018; }
 
-    .hero{
-      margin-top:18px; padding:22px; border-radius:16px;
-      border:1px solid rgba(255,255,255,0.08);
-      background: radial-gradient(1200px 400px at 10% 0%, rgba(56,189,248,0.18), transparent 55%),
-                  radial-gradient(900px 380px at 90% 10%, rgba(34,197,94,0.16), transparent 55%),
-                  #0b1224;
-      box-shadow:0 10px 24px rgba(0,0,0,0.25);
+    .sectionHead{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      margin-bottom: 10px;
     }
-    h1{ margin:0; font-size:34px; color:#fff; }
-    .sub{ margin-top:10px; font-size:15px; color:#cbd5e1; line-height:1.6; max-width:800px; }
-
-    .grid{ margin-top:16px; display:grid; grid-template-columns: 1fr 1fr; gap:16px; }
-    @media (max-width: 900px){ .grid{ grid-template-columns:1fr; } }
-    .card{
-      padding:18px; border-radius:16px; border:1px solid rgba(255,255,255,0.08);
-      background:#0b1224; box-shadow:0 10px 24px rgba(0,0,0,0.25);
+    .sectionHead h2{
+      margin:0;
+      color:#e2e8f0;
+      font-size: 18px;
+      letter-spacing: -0.2px;
     }
-    .card h2{ margin:0 0 10px 0; font-size:18px; color:#e2e8f0; }
-    .hint{ font-size:13px; color:#cbd5e1; line-height:1.6; }
-    .tiny{ margin-top:10px; font-size:12px; color:#94a3b8; line-height:1.6; }
-    code{ background:rgba(255,255,255,0.06); padding:2px 6px; border-radius:6px; }
 
-    .toast{
-      position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
-      padding: 10px 14px; border-radius: 999px;
-      border:1px solid rgba(255,255,255,0.14); background: rgba(2,6,23,0.85);
-      color:#e5e7eb; font-weight:900; font-size:13px;
-      box-shadow:0 10px 24px rgba(0,0,0,0.35);
-      opacity:0; pointer-events:none; transition: opacity 160ms ease;
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color:#cbd5e1;
+      font-weight: 900;
+      font-size: 12px;
+      white-space: nowrap;
     }
-    .toast.show{ opacity:1; }
+    .pill.ok{ border-color: rgba(34,197,94,0.35); background: rgba(34,197,94,0.10); color:#bbf7d0; }
+    .pill.info{ border-color: rgba(56,189,248,0.35); background: rgba(56,189,248,0.10); color:#bae6fd; }
 
-    .footer{ margin:18px 0 8px; text-align:center; color:#94a3b8; font-size:12px; }
+    .boxOut{
+      margin-top: 10px;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #070b16;
+      color:#cbd5e1;
+      line-height: 1.65;
+    }
+    .boxOut h3{ margin: 0 0 8px 0; color:#e2e8f0; font-size: 16px; }
+
+    .btnRow{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:12px; }
+
+    details{
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.03);
+      margin-top: 10px;
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      font-weight: 900;
+      color:#e2e8f0;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    details p{ margin: 10px 0 0; color:#cbd5e1; line-height: 1.7; }
+    details ul{ margin: 10px 0 0 18px; color:#cbd5e1; line-height: 1.7; }
+    .tiny{ font-size: 12px; color:#94a3b8; margin-top: 8px; }
   </style>
 </head>
+
 <body>
   <div class="container">
 
+    <!-- NAV -->
     <div class="nav">
       <div class="brand"><div class="dot"></div><span>RestaurantAssist</span></div>
       <div class="navlinks">
@@ -77,72 +111,186 @@
       </div>
     </div>
 
+    <!-- HERO -->
     <div class="hero">
       <h1>Support</h1>
       <div class="sub">
-        If you’re stuck, don’t worry — just email us and we’ll help.  
-        <strong>Most common fix:</strong> copy your API key from the email (check Spam) and paste it into the Dashboard.
+        Fast help for RestaurantAssist. Most issues are solved in under a minute.
+        <div class="muted" style="margin-top:8px;">
+          Email: <a href="mailto:support@restaurantassist.app"><strong>support@restaurantassist.app</strong></a>
+        </div>
       </div>
     </div>
 
-    <div class="grid">
+    <div class="supportWrap">
 
-      <div class="card">
-        <h2>Contact Support</h2>
-        <div class="hint">
-          Support email: <strong>support@restaurantassist.app</strong>
+      <!-- LEFT: FAQs + Troubleshooting -->
+      <div>
+
+        <div class="card">
+          <div class="sectionHead">
+            <h2>Start here</h2>
+            <span class="pill info">2-minute checklist</span>
+          </div>
+
+          <div class="boxOut">
+            <h3>If something isn’t working</h3>
+            <ol style="margin:8px 0 0 18px; padding:0; color:#cbd5e1; line-height:1.7;">
+              <li>Go to <a href="/dashboard.html"><strong>Dashboard</strong></a></li>
+              <li>Paste your API key (from the email)</li>
+              <li>Click <strong>Load my account</strong></li>
+            </ol>
+            <div class="tiny">
+              If you just checked out, wait 30–90 seconds while Stripe finishes provisioning.
+            </div>
+          </div>
+
+          <div class="boxOut">
+            <h3>Didn’t get your API key?</h3>
+            <ul style="margin:8px 0 0 18px; padding:0;">
+              <li>Check Spam / Promotions</li>
+              <li>Click <strong>“Not spam”</strong> so future emails land in Inbox</li>
+              <li>Still missing? Email support with the checkout email you used</li>
+            </ul>
+          </div>
         </div>
 
-        <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
-          <button class="btn primary" id="copyEmail">Copy support email</button>
-          <a class="btn" href="mailto:support@restaurantassist.app?subject=RestaurantAssist%20Support">Open email app (optional)</a>
+        <div class="card" style="margin-top:16px;">
+          <div class="sectionHead">
+            <h2>FAQ</h2>
+            <span class="pill">Common questions</span>
+          </div>
+
+          <details open>
+            <summary>Where do I find my API key?</summary>
+            <p>
+              After checkout, we email your API key to the email you used. Copy it, then paste it into the Dashboard.
+              You can click <strong>Save key locally</strong> to remember it on that device.
+            </p>
+          </details>
+
+          <details>
+            <summary>The Dashboard says “Not connected”. What do I do?</summary>
+            <ul>
+              <li>Make sure the API key is fully pasted (no extra spaces)</li>
+              <li>Click <strong>Load my account</strong></li>
+              <li>Hard refresh the page (Ctrl + Shift + R)</li>
+              <li>If you just paid, wait 30–90 seconds and try again</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Why is Generate disabled / not working?</summary>
+            <ul>
+              <li>You must have a valid API key pasted</li>
+              <li>You must paste a customer review</li>
+              <li>If billing is inactive, requests can return <code>402</code></li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Do you post automatically to Google/Yelp/Facebook?</summary>
+            <p>
+              Right now, the MVP is “copy/paste”: we generate your reply, you post it.
+              Google Autopilot is planned as an optional add-on (connect once).
+            </p>
+          </details>
+
+          <details>
+            <summary>Do you store my reviews?</summary>
+            <p>
+              RestaurantAssist uses the review text to generate a reply. If we store anything for product improvement,
+              it will be limited and used responsibly. If you want deletion help, email support.
+            </p>
+          </details>
         </div>
 
-        <div class="tiny">
-          If “Open email app” asks what program to use, that’s normal on some computers.
-          <strong>Copy support email</strong> always works.
+        <div class="card" style="margin-top:16px;">
+          <div class="sectionHead">
+            <h2>Billing help</h2>
+            <span class="pill">Plans & status</span>
+          </div>
+
+          <div class="boxOut">
+            <h3>If you see a 402 error</h3>
+            <p class="muted" style="margin:0;">
+              402 usually means the subscription is inactive (past_due/canceled). Email support and include:
+            </p>
+            <ul style="margin:8px 0 0 18px; padding:0;">
+              <li>Your checkout email</li>
+              <li>Your business ID (if you know it)</li>
+              <li>What you’re trying to do (ex: Generate reply)</li>
+            </ul>
+          </div>
+
+          <div class="boxOut">
+            <h3>Want to upgrade / cancel?</h3>
+            <p style="margin:0;">
+              Email support and we’ll help immediately. Billing portal access will be added to the Dashboard soon.
+            </p>
+          </div>
         </div>
+
       </div>
 
+      <!-- RIGHT: Contact -->
       <div class="card">
-        <h2>What to include</h2>
-        <div class="hint">
-          Paste these so we can help fast:
-          <ul>
-            <li>Your <code>business_id</code></li>
-            <li>The email you used at checkout</li>
-            <li>What happened (and any error message)</li>
-          </ul>
+        <div class="sectionHead">
+          <h2>Contact Support</h2>
+          <span class="pill ok">Usually same day</span>
         </div>
 
-        <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
-          <a class="btn primary" href="/dashboard.html">Go to Dashboard</a>
-          <a class="btn" href="/docs.html">Open Docs</a>
+        <div class="boxOut">
+          <h3>Email</h3>
+          <div style="font-weight:900; color:#e2e8f0;">
+            <a href="mailto:support@restaurantassist.app">support@restaurantassist.app</a>
+          </div>
+          <div class="tiny">
+            Include your checkout email + what you’re seeing. Screenshots help a lot.
+          </div>
+
+          <div class="btnRow">
+            <a class="btn primary" href="mailto:support@restaurantassist.app?subject=RestaurantAssist%20Help&body=Hi%20RestaurantAssist%20Support,%0A%0ACheckout%20email:%20%0ABusiness%20ID%20(if%20known):%20%0AProblem:%20%0AWhat%20I%20expected:%20%0AScreenshot%20(if%20possible):%20%0A%0AThanks!">
+              Email support
+            </a>
+
+            <a class="btn" href="mailto:support@restaurantassist.app?subject=RestaurantAssist%20Billing%20Help&body=Hi%20Support,%0A%0ACheckout%20email:%20%0ABusiness%20ID%20(if%20known):%20%0ARequest:%20Upgrade%20/%20Cancel%20/%20Payment%20issue%0AWhat%20happened:%20%0A%0AThanks!">
+              Billing help
+            </a>
+
+            <a class="btn" href="mailto:support@restaurantassist.app?subject=RestaurantAssist%20Bug%20Report&body=Hi%20Support,%0A%0APage:%20Dashboard%20/%20Docs%20/%20Support%0AWhat%20I%20clicked:%20%0AWhat%20happened:%20%0AExpected:%20%0ABrowser%20(Chrome/Safari/etc):%20%0AScreenshot:%20%0A%0AThanks!">
+              Report a bug
+            </a>
+
+            <a class="btn" href="mailto:support@restaurantassist.app?subject=RestaurantAssist%20Feature%20Request&body=Hi%20Support,%0A%0AFeature%20idea:%20%0AWhy%20it%20helps:%20%0AExample%20use%20case:%20%0A%0AThanks!">
+              Feature request
+            </a>
+          </div>
         </div>
+
+        <div class="boxOut">
+          <h3>What RestaurantAssist is (and isn’t)</h3>
+          <ul style="margin:8px 0 0 18px; padding:0;">
+            <li><strong>Is:</strong> paste review → generate reply → copy & post</li>
+            <li><strong>Is:</strong> consistent brand voice + urgency flags</li>
+            <li><strong>Isn’t:</strong> a chat tool with prompts and “guess the tone”</li>
+          </ul>
+          <div class="tiny">
+            ChatGPT gives answers. RestaurantAssist runs the process.
+          </div>
+        </div>
+
       </div>
 
     </div>
 
     <div class="footer">
-      © <span id="yr"></span> RestaurantAssist • <a class="btn primary" href="mailto:support@restaurantassist.app">Email support</a>
+      © <span id="yr"></span> RestaurantAssist • Email <a href="mailto:support@restaurantassist.app">support@restaurantassist.app</a>
     </div>
   </div>
 
-  <div id="toast" class="toast">Copied!</div>
-
   <script>
     document.getElementById("yr").textContent = new Date().getFullYear();
-    const toastEl = document.getElementById("toast");
-    function toast(text){
-      toastEl.textContent = text;
-      toastEl.classList.add("show");
-      setTimeout(()=>toastEl.classList.remove("show"), 900);
-    }
-
-    document.getElementById("copyEmail").addEventListener("click", async () => {
-      await navigator.clipboard.writeText("support@restaurantassist.app");
-      toast("Support email copied");
-    });
   </script>
 </body>
 </html>
