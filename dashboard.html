@@ -389,6 +389,7 @@
         }
 
         resultBox.style.display = "block";
+        document.getElementById("emptyHint").style.display = "none";
         copyReplyBtn.disabled = !reply;
 
         setGenPill("ok", "Ready");
@@ -438,6 +439,7 @@
 
     clearReviewBtn.addEventListener("click", () => {
       document.getElementById("reviewText").value = "";
+      document.getElementById("emptyHint").style.display = "block";
       resultBox.style.display = "none";
       copyReplyBtn.disabled = true;
       setGenPill("", "Not ready");
