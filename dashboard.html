@@ -416,7 +416,12 @@
         console.log("ANALYZE RAW DATA:", data);
         console.log("ANALYZE RECORD:", record);
 
-        const reply = record.reply || record.response || "";
+        const reply =
+          record.reply ||
+          record.response ||
+          record.message ||
+          record.text ||
+          "";
         const sentiment = record.sentiment || "—";
         const urgency = record.urgency || "—";
         const category = record.category || "—";
