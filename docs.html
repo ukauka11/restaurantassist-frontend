@@ -704,5 +704,26 @@ const data = await res.json();</pre>
       });
     });
   </script>
+  <script>
+    (function(){
+      const nav = document.getElementById("siteNav");
+      const toggle = document.getElementById("navToggle");
+      const links = document.getElementById("navLinks");
+      if (!nav || !toggle || !links) return;
+  
+      toggle.addEventListener("click", () => {
+        const isOpen = nav.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+  
+      // Close menu after tapping a link (mobile)
+      links.querySelectorAll("a").forEach(a => {
+        a.addEventListener("click", () => {
+          nav.classList.remove("open");
+          toggle.setAttribute("aria-expanded", "false");
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
