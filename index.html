@@ -448,7 +448,22 @@
     const planEl = document.getElementById("plan");
     const starterCard = document.getElementById("planStarterCard");
     const proCard = document.getElementById("planProCard");
+    // --- Plan selection (Pricing buttons) ---
+    const chooseStarterBtn = document.getElementById("chooseStarter");
+    const chooseProBtn = document.getElementById("choosePro");
     
+    function setPlan(p){
+      if (!planEl) return;
+      planEl.value = p;
+    
+      // optional: visual highlight if you have cards
+      starterCard?.classList.toggle("featured", p === "starter");
+      proCard?.classList.toggle("featured", p === "pro");
+    }
+    
+    chooseStarterBtn?.addEventListener("click", () => setPlan("starter"));
+    chooseProBtn?.addEventListener("click", () => setPlan("pro"));
+
     function setPlan(p){
       planEl.value = p;
     
