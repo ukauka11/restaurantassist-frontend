@@ -116,6 +116,12 @@ body{
   justify-content: flex-end;
 }
 
+/* Force-hide mobile menu on desktop */
+@media (min-width: 721px){
+  .navToggle{ display: none !important; }
+  .navlinks{ display: flex !important; }
+}
+
 /* Buttons */
 .btn{
   display:inline-block;
