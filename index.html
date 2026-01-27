@@ -292,33 +292,37 @@
           <p style="margin-top:-4px;">
             Choose a short business ID (letters/numbers/dashes) — you’ll use it for your account.
           </p>
-
+        
           <label for="businessId">Business ID (no spaces)</label>
           <input id="businessId" placeholder="e.g. california-pizza-kitchen" />
-
+        
           <label for="email">Email</label>
           <input id="email" type="email" placeholder="you@yourrestaurant.com" />
+        
+          <!-- ONE hidden plan input (keep only this one) -->
           <input id="plan" type="hidden" value="starter" />
-          
-          <label>Plan</label>
-
+        
+          <div class="labelRow">
+            <label style="margin:0;">Plan</label>
+            <span class="muted" id="planHint">Selected: Starter</span>
+          </div>
+        
           <div class="planPick" role="radiogroup" aria-label="Choose a plan">
-            <button type="button" class="planBtn selected" data-plan="starter" id="chooseStarter">
+            <button type="button" class="planBtn selected" data-plan="starter" id="chooseStarter" aria-checked="true">
               <div class="planName">Starter</div>
-              <div class="planMeta">$29.99/mo • core replies</div>
+              <div class="planMeta">$29/mo • core replies</div>
             </button>
-          
-            <button type="button" class="planBtn" data-plan="pro" id="choosePro">
+        
+            <button type="button" class="planBtn" data-plan="pro" id="choosePro" aria-checked="false">
               <div class="planName">Pro</div>
-              <div class="planMeta">$59.99/mo • priority + extras</div>
+              <div class="planMeta">$59/mo • priority + extras</div>
             </button>
           </div>
-          
-          <input id="plan" type="hidden" value="starter" />
-
+        
           <button class="btn primary" id="startTrialBtn" style="width:100%; margin-top:12px;">
             Start Free Trial
           </button>
+        </div>
 
           <div id="msg" class="msg"></div>
 
