@@ -102,6 +102,20 @@ body{
   }
 }
 
+/* Desktop layout for new nav structure */
+.nav{
+  flex-wrap: nowrap;          /* prevent weird wrapping */
+}
+
+.navTop{
+  flex: 1;                    /* brand + menu button stay on left */
+}
+
+.navlinks{
+  margin-left: auto;          /* push links to the right */
+  justify-content: flex-end;
+}
+
 /* Buttons */
 .btn{
   display:inline-block;
