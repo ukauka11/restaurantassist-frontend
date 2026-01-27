@@ -440,123 +440,90 @@
 
   <script>
     document.getElementById("yr").textContent = new Date().getFullYear();
-
+  
     const API_BASE = "https://review-assistant-api.onrender.com";
-
+  
+    // ----- message helper -----
     const msgEl = document.getElementById("msg");
     function setMsg(text, cls){
+      if (!msgEl) return;
       msgEl.className = "msg " + (cls || "");
       msgEl.textContent = text || "";
     }
-
+  
+    // ----- Plan selection (Start free trial card) -----
     const planEl = document.getElementById("plan");
-    const starterCard = document.getElementById("planStarterCard");
-    const proCard = document.getElementById("planProCard");
-    // --- Plan selection (Pricing buttons) ---
-    const chooseStarterBtn = document.getElementById("chooseStarter");
-    const chooseProBtn = document.getElementById("choosePro");
-    
-    function setPlan(p){
+    const planHint = document.getElementById("planHint"); // optional
+    const starterBtn = document.getElementById("chooseStarter");
+    const proBtn = document.getElementById("choosePro");
+  
+    function selectPlan(plan){
       if (!planEl) return;
-      planEl.value = p;
-    
-      // optional: visual highlight if you have cards
-      starterCard?.classList.toggle("featured", p === "starter");
-      proCard?.classList.toggle("featured", p === "pro");
+  
+      planEl.value = plan;
+  
+      // button UI
+      starterBtn?.classList.toggle("selected", plan === "starter");
+      proBtn?.classList.toggle("selected", plan === "pro");
+  
+      starterBtn?.setAttribute("aria-checked", plan === "starter" ? "true" : "false");
+      proBtn?.setAttribute("aria-checked", plan === "pro" ? "true" : "false");
+  
+      if (planHint) planHint.textContent = "Selected: " + (plan === "pro" ? "Pro" : "Starter");
+  
+      console.log("[plan] selected =", planEl.value);
     }
-    
-    chooseStarterBtn?.addEventListener("click", () => setPlan("starter"));
-    chooseProBtn?.addEventListener("click", () => setPlan("pro"));
-
-    function setPlan(p){
-      planEl.value = p;
-    
-      // visual highlight
-      if (p === "starter") {
-        starterCard.classList.add("featured");
-        proCard.classList.remove("featured");
-      } else {
-        proCard.classList.add("featured");
-        starterCard.classList.remove("featured");
-      }
-    }
-    
-    document.getElementById("chooseStarter")?.addEventListener("click", () => setPlan("starter"));
-    document.getElementById("choosePro")?.addEventListener("click", () => setPlan("pro"));
-
-    document.getElementById("startTrialBtn").addEventListener("click", async () => {
+  
+    starterBtn?.addEventListener("click", () => selectPlan("starter"));
+    proBtn?.addEventListener("click", () => selectPlan("pro"));
+  
+    // set default UI on load
+    selectPlan(planEl?.value || "starter");
+  
+  
+    // ----- Start Trial button -----
+    const startTrialBtn = document.getElementById("startTrialBtn");
+  
+    startTrialBtn?.addEventListener("click", async () => {
       const business_id = document.getElementById("businessId").value.trim().toLowerCase();
       const email = document.getElementById("email").value.trim().toLowerCase();
-
+      const plan = (document.getElementById("plan")?.value || "starter").trim().toLowerCase();
+  
       setMsg("");
-
+  
       if (!business_id) return setMsg("Please enter a business id.", "err");
       if (!email.includes("@")) return setMsg("Please enter a valid email.", "err");
-
-      const btn = document.getElementById("startTrialBtn");
-      btn.disabled = true;
-      btn.textContent = "Creating checkout…";
-
+  
+      startTrialBtn.disabled = true;
+      startTrialBtn.textContent = "Creating checkout…";
+  
       try {
-        const plan = document.getElementById("plan").value || "starter";
-
         const res = await fetch(`${API_BASE}/billing/create-checkout`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ business_id, email, plan })
         });
-
+  
         const text = await res.text();
         let data;
         try { data = JSON.parse(text); } catch { data = { raw: text }; }
-        
+  
         if (!res.ok) {
           console.error("Checkout failed:", res.status, data);
           return setMsg(data?.detail || data?.raw || "Failed to create checkout.", "err");
         }
-
-        if (!res.ok) return setMsg(data?.detail || "Failed to create checkout.", "err");
+  
         if (!data.checkout_url) return setMsg("No checkout URL returned.", "err");
-
+  
         window.location.href = data.checkout_url;
       } catch (e) {
         console.error("Checkout error:", e);
         setMsg("Checkout failed. Open DevTools → Console for details.", "err");
       } finally {
-        btn.disabled = false;
-        btn.textContent = "Start Free Trial";
+        startTrialBtn.disabled = false;
+        startTrialBtn.textContent = "Start Free Trial";
       }
-      (function(){
-      const planEl = document.getElementById("plan");
-      const planHint = document.getElementById("planHint");
-      const starterBtn = document.getElementById("chooseStarter");
-      const proBtn = document.getElementById("choosePro");
-  
-      if (!planEl || !starterBtn || !proBtn) {
-        console.warn("[plan] Missing elements:", { planEl, starterBtn, proBtn });
-        return;
-      }
-  
-      function selectPlan(plan){
-        planEl.value = plan;
-  
-        starterBtn.classList.toggle("selected", plan === "starter");
-        proBtn.classList.toggle("selected", plan === "pro");
-  
-        starterBtn.setAttribute("aria-checked", plan === "starter" ? "true" : "false");
-        proBtn.setAttribute("aria-checked", plan === "pro" ? "true" : "false");
-  
-        if (planHint) planHint.textContent = "Selected: " + (plan === "pro" ? "Pro" : "Starter");
-  
-        console.log("[plan] selected =", planEl.value);
-      }
-  
-      starterBtn.addEventListener("click", () => selectPlan("starter"));
-      proBtn.addEventListener("click", () => selectPlan("pro"));
-  
-      // Ensure UI matches the hidden value on load
-      selectPlan(planEl.value || "starter");
-    })();
+    });
   </script>
   <script>
     (function(){
