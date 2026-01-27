@@ -463,9 +463,11 @@
 
         generateBtn.disabled = false;
       }catch(e){
-        setGenPill("bad", "Network error");
-        setGenMsg("Network error. Please try again.");
-      } finally {
+        console.error("generateReply crashed:", e);
+      
+        setGenPill("bad", "Error");
+        setGenMsg(String(e));
+      
         if (loadingState) loadingState.style.display = "none";
         generateBtn.disabled = false;
       }
