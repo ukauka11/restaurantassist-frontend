@@ -255,6 +255,11 @@
 
   <script>
     document.getElementById("yr").textContent = new Date().getFullYear();
+    async function readJsonOrText(res){
+      const text = await res.text();
+      try { return JSON.parse(text); }
+      catch { return { detail: text }; }
+    }
 
     const API_BASE = "https://review-assistant-api.onrender.com";
     function baseUrl() {
@@ -318,7 +323,7 @@
         const res = await fetch(`${baseUrl()}/me`, {
           headers: { "x-api-key": key }
         });
-        const data = await res.json();
+        const data = await readJsonOrText(res);
 
         if (!res.ok){
           setConnPill("bad", "Not connected");
@@ -395,11 +400,11 @@
           body: JSON.stringify({ review_text, platform })
         });
 
-        const data = await res.json();
+        const data = await readJsonOrText(res);
 
         if (!res.ok){
           setGenPill("bad", "Could not generate");
-          setGenMsg(detail);
+          setGenMsg(data?.detail || "Could not generate.");
         
           if (loadingState) loadingState.style.display = "none";
           generateBtn.disabled = false;
