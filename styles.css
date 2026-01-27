@@ -95,6 +95,10 @@ body{
     gap:10px;
   }
 
+  .nav.open .navlinks .btn:last-child{
+    grid-column: 1 / -1;
+  }
+
   /* Make buttons easy to tap */
   .navlinks .btn{
     width:100%;
