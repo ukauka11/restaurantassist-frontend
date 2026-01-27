@@ -101,9 +101,18 @@
   <div class="container">
 
     <!-- NAV -->
-    <div class="nav">
-      <div class="brand"><div class="dot"></div><span>RestaurantAssist</span></div>
-      <div class="navlinks">
+    <div class="nav" id="siteNav">
+      <div class="navTop">
+        <div class="brand">
+          <div class="dot"></div><span>RestaurantAssist</span>
+        </div>
+    
+        <button class="navToggle btn" id="navToggle" aria-expanded="false" aria-controls="navLinks">
+          ☰ Menu
+        </button>
+      </div>
+    
+      <div class="navlinks" id="navLinks">
         <a class="btn" href="/">Home</a>
         <a class="btn" href="/dashboard.html">Dashboard</a>
         <a class="btn" href="/docs.html">Docs</a>
