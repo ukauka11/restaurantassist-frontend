@@ -413,6 +413,8 @@
 
         // The backend returns something like: { business_id, record: {...} }
         const record = data.record || data;
+        console.log("ANALYZE RAW DATA:", data);
+        console.log("ANALYZE RECORD:", record);
 
         const reply = record.reply || record.response || "";
         const sentiment = record.sentiment || "—";
