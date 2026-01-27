@@ -257,6 +257,11 @@
     document.getElementById("yr").textContent = new Date().getFullYear();
 
     const API_BASE = "https://review-assistant-api.onrender.com";
+    function baseUrl() {
+      return API_BASE.replace(/\/+$/, ""); // removes trailing /
+    }
+    console.log("baseUrl() =", baseUrl());
+    
     const apiKeyEl  = document.getElementById("apiKey");
     const connPill = document.getElementById("connPill");
     const genPill  = document.getElementById("genPill");
