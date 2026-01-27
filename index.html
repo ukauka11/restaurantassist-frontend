@@ -461,10 +461,11 @@
       setMsg("Creating checkout…");
 
       try {
+        const plan = document.getElementById("plan").value || "starter";
+
         const res = await fetch(`${API_BASE}/billing/create-checkout`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          const plan = document.getElementById("plan").value || "starter";
           body: JSON.stringify({ business_id, email, plan })
         });
 
