@@ -421,26 +421,38 @@
         const tags = Array.isArray(record.tags) ? record.tags.join(", ") : (record.tags || "—");
         const steps = Array.isArray(record.next_steps) ? record.next_steps : [];
 
-        document.getElementById("replyOut").textContent = reply || "(No reply returned)";
-        document.getElementById("sentimentOut").textContent = sentiment;
-        document.getElementById("urgencyOut").textContent = urgency;
-        document.getElementById("categoryOut").textContent = category;
-        document.getElementById("tagsOut").textContent = tags;
+        const replyEl = document.getElementById("replyOut");
+        if (replyEl) replyEl.textContent = reply || "(No reply returned)";
+        
+        const sentimentEl = document.getElementById("sentimentOut");
+        if (sentimentEl) sentimentEl.textContent = sentiment;
+        
+        const urgencyEl = document.getElementById("urgencyOut");
+        if (urgencyEl) urgencyEl.textContent = urgency;
+        
+        const categoryEl = document.getElementById("categoryOut");
+        if (categoryEl) categoryEl.textContent = category;
+        
+        const tagsEl = document.getElementById("tagsOut");
+        if (tagsEl) tagsEl.textContent = tags;
+
+        const stepsOut = document.getElementById("stepsOut");
+        if (stepsOut) {
+          if (steps.length){
+            stepsOut.innerHTML =
+              "<ul style='margin:0 0 0 18px; padding:0;'>" +
+              steps.map(s => `<li style="margin:6px 0;">${escapeHtml(String(s))}</li>`).join("") +
+              "</ul>";
+          } else {
+            stepsOut.innerHTML = "<span class='muted'>None</span>";
+          }
+        }
 
         const attentionLine = document.getElementById("attentionLine");
         if (String(urgency).toLowerCase().includes("high")) {
           attentionLine.innerHTML = "⚠️ <strong>Needs attention:</strong> consider following up personally.";
         } else {
           attentionLine.textContent = "Looks good. Copy and post.";
-        }
-
-        const stepsOut = document.getElementById("stepsOut");
-        if (steps.length){
-          stepsOut.innerHTML = "<ul style='margin:0 0 0 18px; padding:0;'>" +
-            steps.map(s => `<li style="margin:6px 0;">${escapeHtml(String(s))}</li>`).join("") +
-            "</ul>";
-        }else{
-          stepsOut.innerHTML = "<span class='muted'>None</span>";
         }
 
         if (loadingState) loadingState.style.display = "none";
