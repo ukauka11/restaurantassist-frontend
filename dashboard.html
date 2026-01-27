@@ -373,7 +373,6 @@
       const review_text = document.getElementById("reviewText").value.trim();
       const platform = detectPlatformFromText(review_text);
 
-      showEmpty();
       copyReplyBtn.disabled = true;
 
       if (!review_text){
@@ -405,10 +404,7 @@
         if (!res.ok){
           setGenPill("bad", "Could not generate");
           setGenMsg(data?.detail || "Could not generate.");
-        
-          if (loadingState) loadingState.style.display = "none";
-          generateBtn.disabled = false;
-        
+          showEmpty();
           return;
         }
 
@@ -454,7 +450,7 @@
       }catch(e){
         setGenPill("bad", "Network error");
         setGenMsg("Network error. Please try again.");
-      
+      } finally {
         if (loadingState) loadingState.style.display = "none";
         generateBtn.disabled = false;
       }
