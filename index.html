@@ -458,7 +458,9 @@
       if (!business_id) return setMsg("Please enter a business id.", "err");
       if (!email.includes("@")) return setMsg("Please enter a valid email.", "err");
 
-      setMsg("Creating checkout…");
+      const btn = document.getElementById("startTrialBtn");
+      btn.disabled = true;
+      btn.textContent = "Creating checkout…";
 
       try {
         const plan = document.getElementById("plan").value || "starter";
@@ -476,6 +478,9 @@
         window.location.href = data.checkout_url;
       } catch (e) {
         setMsg("Network error. Please try again.", "err");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Start Free Trial";
       }
     });
   </script>
