@@ -281,6 +281,7 @@
     function baseUrl(){
       return API_BASE;
     }
+    console.log("baseUrl() =", baseUrl());
 
     function setConnPill(state, text){
       connPill.className = "pill " + (state || "");
@@ -324,6 +325,7 @@
           headers: { "x-api-key": key }
         });
         const data = await readJsonOrText(res);
+        console.log("baseUrl() =", baseUrl());
 
         if (!res.ok){
           setConnPill("bad", "Not connected");
@@ -400,6 +402,7 @@
         });
 
         const data = await readJsonOrText(res);
+        console.log("baseUrl() =", baseUrl());
 
         if (!res.ok){
           setGenPill("bad", "Could not generate");
