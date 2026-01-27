@@ -295,6 +295,21 @@
 
           <label for="businessId">Business ID (no spaces)</label>
           <input id="businessId" placeholder="e.g. california-pizza-kitchen" />
+          <label>Plan</label>
+
+          <div class="planPick" role="radiogroup" aria-label="Choose a plan">
+            <button type="button" class="planBtn selected" data-plan="starter" id="chooseStarter">
+              <div class="planName">Starter</div>
+              <div class="planMeta">$29/mo • core replies</div>
+            </button>
+          
+            <button type="button" class="planBtn" data-plan="pro" id="choosePro">
+              <div class="planName">Pro</div>
+              <div class="planMeta">$59/mo • priority + extras</div>
+            </button>
+          </div>
+          
+          <input id="plan" type="hidden" value="starter" />
 
           <label for="email">Email</label>
           <input id="email" type="email" placeholder="you@yourrestaurant.com" />
