@@ -299,6 +299,36 @@
           <label for="email">Email</label>
           <input id="email" type="email" placeholder="you@yourrestaurant.com" />
           <input id="plan" type="hidden" value="starter" />
+          <div class="row2" style="margin-top:12px;">
+            <div id="planStarterCard" class="plan featured">
+              <div class="planTop">
+                <div class="planName">Starter</div>
+                <div class="price">$29 <small>/mo</small></div>
+              </div>
+              <ul>
+                <li>Core reply generation</li>
+                <li>Sentiment + urgency</li>
+              </ul>
+              <div class="planActions">
+                <button class="btn primary" id="chooseStarter" type="button">Choose Starter</button>
+              </div>
+            </div>
+          
+            <div id="planProCard" class="plan">
+              <div class="planTop">
+                <div class="planName">Pro</div>
+                <div class="price">$59 <small>/mo</small></div>
+              </div>
+              <ul>
+                <li>Everything in Starter</li>
+                <li>More advanced features</li>
+              </ul>
+              <div class="planActions">
+                <button class="btn" id="choosePro" type="button">Choose Pro</button>
+              </div>
+            </div>
+          </div>
+
           <button class="btn primary" id="startTrialBtn" style="width:100%; margin-top:12px;">
             Start Free Trial
           </button>
