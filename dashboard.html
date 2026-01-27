@@ -394,8 +394,11 @@
 
         if (!res.ok){
           setGenPill("bad", "Could not generate");
-          const detail = data?.detail || "Error generating reply.";
           setGenMsg(detail);
+        
+          if (loadingState) loadingState.style.display = "none";
+          generateBtn.disabled = false;
+        
           return;
         }
 
@@ -433,15 +436,17 @@
 
         if (loadingState) loadingState.style.display = "none";
         resultBox.style.display = "block";
-
-        document.getElementById("emptyHint").style.display = "none";
-        copyReplyBtn.disabled = !reply;
-
+        copyReplyBtn.disabled = false;
         setGenPill("ok", "Ready");
         setGenMsg("Reply ready. Copy & post — you’re done.");
+
+        generateBtn.disabled = false;
       }catch(e){
         setGenPill("bad", "Network error");
         setGenMsg("Network error. Please try again.");
+      
+        if (loadingState) loadingState.style.display = "none";
+        generateBtn.disabled = false;
       }
     }
 
