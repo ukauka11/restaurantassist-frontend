@@ -488,6 +488,14 @@
     starterBtn?.addEventListener("click", () => selectPlan("starter"));
     proBtn?.addEventListener("click", () => selectPlan("pro"));
 
+    const planCompareBtn = document.getElementById("planCompareBtn");
+    const planTooltip = document.getElementById("planTooltip");
+    
+    planCompareBtn?.addEventListener("click", () => {
+      const isOpen = planTooltip.style.display !== "none";
+      planTooltip.style.display = isOpen ? "none" : "block";
+    });
+
     // ----- Pricing section buttons (scroll to start + select plan) -----
     const pricingStarter = document.getElementById("pricingChooseStarter");
     const pricingPro = document.getElementById("pricingChoosePro");
