@@ -114,16 +114,6 @@ body{
   .nav.open .navlinks .btn:last-child:nth-child(odd){
     grid-column: 1 / -1;
   }
-
-  /* Make buttons easy to tap */
-  .navlinks .btn{
-    width:100%;
-    box-sizing: border-box;
-    text-align:center;
-    padding: 10px 10px;
-    border-radius: 12px;
-    font-size: 15px;
-  }
 }
 
 /* Desktop layout for new nav structure */
