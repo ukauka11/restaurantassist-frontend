@@ -259,19 +259,34 @@ body{
 }
 
 .planHelp{
-  margin-top: 6px;
-  font-size: 12px;
-  color:#94a3b8;
+  margin-top: 8px;
+  display:flex;
+  align-items:center;
+  gap: 6px;
 }
 
 .planTooltip{
   margin-top: 10px;
-  padding: 10px 12px;
-  border-radius: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
   border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(7,11,22,0.85);
+  background: rgba(0,0,0,0.25);
   color:#cbd5e1;
-  line-height: 1.6;
+  line-height: 1.5;
+  
+  /* animation */
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: max-height .25s ease, opacity .2s ease, transform .2s ease;
+}
+
+/* when opened */
+.planTooltip.open{
+  max-height: 140px;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Cards + sections */
