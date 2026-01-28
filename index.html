@@ -357,12 +357,12 @@
             </ul>
 
             <div class="planActions">
-              <a class="btn primary" id="chooseStarter" href="#start">Choose Starter</a>
+              <a class="btn primary" id="pricingChooseStarter" href="#start">Choose Starter</a>
               <div class="planNote">Good for most restaurants.</div>
             </div>
           </div>
 
-          <div class="plan featured" id="planProCard">
+          <div class="plan" id="planProCard">
             <div class="planTop">
               <div>
                 <div class="planName">Pro <span class="pill">Most popular</span></div>
@@ -379,7 +379,7 @@
             </ul>
 
             <div class="planActions">
-              <a class="btn primary" href="#start">Choose Pro</a>
+              <a class="btn primary" id="pricingChoosePro" href="#start">Choose Pro</a>
               <div class="planNote">Upgrade anytime.</div>
             </div>
           </div>
@@ -458,6 +458,9 @@
       if (!planEl) return;
   
       planEl.value = plan;
+
+      document.getElementById("planStarterCard")?.classList.toggle("featured", plan === "starter");
+      document.getElementById("planProCard")?.classList.toggle("featured", plan === "pro");
   
       // button UI
       starterBtn?.classList.toggle("selected", plan === "starter");
@@ -473,6 +476,13 @@
   
     starterBtn?.addEventListener("click", () => selectPlan("starter"));
     proBtn?.addEventListener("click", () => selectPlan("pro"));
+
+    // ----- Pricing section buttons (scroll to start + select plan) -----
+    const pricingStarter = document.getElementById("pricingChooseStarter");
+    const pricingPro = document.getElementById("pricingChoosePro");
+  
+    pricingStarter?.addEventListener("click", () => selectPlan("starter"));
+    pricingPro?.addEventListener("click", () => selectPlan("pro"));
   
     // set default UI on load
     selectPlan(planEl?.value || "starter");
