@@ -304,7 +304,7 @@
         
           <div class="planLabel">
             <label>Plan</label>
-            <div class="hint">Selected: Pro</div>
+            <div class="hint">Selected: <span id="planSelectedText">Starter</span></div>
           </div>
         
           <div class="planPick" role="radiogroup" aria-label="Choose a plan">
@@ -469,7 +469,7 @@
       starterBtn?.setAttribute("aria-checked", plan === "starter" ? "true" : "false");
       proBtn?.setAttribute("aria-checked", plan === "pro" ? "true" : "false");
   
-      if (planHint) planHint.textContent = "Selected: " + (plan === "pro" ? "Pro" : "Starter");
+      document.getElementById("planSelectedText").textContent = (plan === "pro" ? "Pro" : "Starter");
   
       console.log("[plan] selected =", planEl.value);
     }
