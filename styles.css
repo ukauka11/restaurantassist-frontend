@@ -360,9 +360,9 @@ p{ color:#cbd5e1; line-height:1.6; }
   padding: 4px 8px;
   border-radius: 999px;
   font-weight: 900;
-  font-size: 11px;
-  margin-left: 8px;
-  border: 1px solid rgba(56,189,248,0.30);
+  font-size: 12px;
+  margin-left: 10px;
+  border: 1px solid rgba(56,189,248,0.35);
   background: rgba(56,189,248,0.12);
   color: #c7f9ff;
 }
