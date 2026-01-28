@@ -155,16 +155,18 @@ body{
   box-shadow: 0 0 0 1px rgba(56,189,248,0.25);
 }
 
-.planPick{
-  display:grid;
+/* --- Start Free Trial: Plan spacing polish --- */
+.planPick {
+  margin-top: 14px;   /* space from "Plan / Selected" */
+  margin-bottom: 18px; /* space before Start Free Trial button */
+  display: grid;
   grid-template-columns: 1fr 1fr;
-  gap:10px;
-  margin-top: 6px;
+  gap: 12px; /* space BETWEEN Starter / Pro buttons */
 }
 
 .planBtn{
   text-align:left;
-  padding: 12px;
+  padding: 14px 14px;
   border-radius: 14px;
   border: 1px solid rgba(255,255,255,0.12);
   background: rgba(255,255,255,0.04);
@@ -185,8 +187,27 @@ body{
     rgba(255,255,255,0.04);
 }
 
-.planName{ font-weight: 900; font-size: 15px; color:#fff; }
-.planMeta{ margin-top:4px; font-size: 12px; color:#94a3b8; }
+.planName{
+  font-weight: 900;
+  font-size: 15px;
+  color:#fff;
+}
+
+.planMeta{
+  margin-top:4px;
+  font-size: 12px;
+  color:#94a3b8;
+}
+
+.planBtn .planName {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.planBtn .planMeta {
+  font-size: 13px;
+  opacity: 0.85;
+}
 
 @media (max-width: 720px){
   .planPick{ grid-template-columns: 1fr; }
