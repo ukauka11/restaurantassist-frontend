@@ -201,6 +201,15 @@ body{
     rgba(255,255,255,0.04);
 }
 
+/* Pro-only premium feel (only when selected) */
+.planBtn.selected[data-plan="pro"]{
+  border-color: rgba(34,197,94,0.45);
+  box-shadow: 0 0 0 1px rgba(34,197,94,0.22), 0 12px 26px rgba(0,0,0,0.22);
+  background:
+    radial-gradient(700px 260px at 15% 0%, rgba(34,197,94,0.10), transparent 55%),
+    rgba(255,255,255,0.04);
+}
+
 .planBtn[data-plan="pro"].selected{
   border-color: rgba(34,197,94,0.40);
   box-shadow: 0 0 0 1px rgba(34,197,94,0.18), 0 12px 26px rgba(0,0,0,0.28);
