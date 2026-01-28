@@ -156,6 +156,10 @@ body{
 }
 
 /* --- Start Free Trial: Plan spacing polish --- */
+#startTrialBtn {
+  margin-top: 20px;
+}
+
 .planPick {
   margin-top: 14px;   /* space from "Plan / Selected" */
   margin-bottom: 18px; /* space before Start Free Trial button */
@@ -185,6 +189,11 @@ body{
   background:
     radial-gradient(700px 260px at 15% 0%, rgba(56,189,248,0.10), transparent 55%),
     rgba(255,255,255,0.04);
+}
+
+.planLabel {
+  margin-top: 16px;
+  margin-bottom: 6px;
 }
 
 .planName{
