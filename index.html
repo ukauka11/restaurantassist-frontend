@@ -488,13 +488,23 @@
     starterBtn?.addEventListener("click", () => selectPlan("starter"));
     proBtn?.addEventListener("click", () => selectPlan("pro"));
 
+    // ----- Compare plans toggle (animated + clean) -----
     const planCompareBtn = document.getElementById("planCompareBtn");
     const planTooltip = document.getElementById("planTooltip");
     
-    planCompareBtn?.addEventListener("click", () => {
-      const isOpen = planTooltip.style.display !== "none";
-      planTooltip.style.display = isOpen ? "none" : "block";
-    });
+    if (planCompareBtn && planTooltip) {
+      planCompareBtn.addEventListener("click", () => {
+        const isHidden = planTooltip.hidden;
+    
+        if (isHidden) {
+          planTooltip.hidden = false;
+          requestAnimationFrame(() => planTooltip.classList.add("open"));
+        } else {
+          planTooltip.classList.remove("open");
+          setTimeout(() => planTooltip.hidden = true, 220);
+        }
+      });
+    }
 
     // ----- Pricing section buttons (scroll to start + select plan) -----
     const pricingStarter = document.getElementById("pricingChooseStarter");
