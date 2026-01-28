@@ -234,7 +234,9 @@ body{
 }
 
 @media (max-width: 720px){
-  .planPick{ grid-template-columns: 1fr; }
+  .planPick{ grid-template-columns: 1fr 1fr; } /* keep it 2-up */
+  .planBtn{ padding: 12px; }                   /* slightly shorter */
+  .planBtn .planMeta{ font-size: 12px; }       /* tighter text */
 }
 
 .planHelp{
