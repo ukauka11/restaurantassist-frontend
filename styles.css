@@ -176,16 +176,26 @@ body{
   background: rgba(255,255,255,0.04);
   color:#e5e7eb;
   cursor:pointer;
+  width:100%;
+  box-sizing:border-box;
+
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
 }
 
 .planBtn:hover{
+  transform: translateY(-1px);
   border-color: rgba(56,189,248,0.35);
   background: rgba(56,189,248,0.08);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+}
+
+.planBtn:active{
+  transform: translateY(0px);
 }
 
 .planBtn.selected{
   border-color: rgba(56,189,248,0.60);
-  box-shadow: 0 0 0 1px rgba(56,189,248,0.25);
+  box-shadow: 0 0 0 1px rgba(56,189,248,0.25), 0 12px 26px rgba(0,0,0,0.22);
   background:
     radial-gradient(700px 260px at 15% 0%, rgba(56,189,248,0.10), transparent 55%),
     rgba(255,255,255,0.04);
