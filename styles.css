@@ -85,17 +85,28 @@ body{
     display:none;
     width:100%;
     margin-top: 10px;
-    gap:8px;
+    gap:10px;
+
+    display: none: /* keep this for "closed" stat*/
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   /* When opened */
   .nav.open .navlinks{
     display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap:10px;
   }
 
-  .nav.open .navlinks .btn:last-child{
+  /* Buttons fill their grid cell (NOT the whole row) */
+  .navlinks .btn{
+    width:100%;
+    box-sizing:border-box;
+    text-align:center;
+    padding:10px 12px;
+    border-radius:12px;
+    font-size:15px;
+  }
+
+  .nav.open .navlinks .btn:last-child:nth-child(odd){
     grid-column: 1 / -1;
   }
 
