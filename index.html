@@ -492,19 +492,12 @@
     const planCompareBtn = document.getElementById("planCompareBtn");
     const planTooltip = document.getElementById("planTooltip");
     
-    if (planCompareBtn && planTooltip) {
-      planCompareBtn.addEventListener("click", () => {
-        const isHidden = planTooltip.hidden;
+    planCompareBtn?.addEventListener("click", () => {
+      if (!planTooltip) return;
     
-        if (isHidden) {
-          planTooltip.hidden = false;
-          requestAnimationFrame(() => planTooltip.classList.add("open"));
-        } else {
-          planTooltip.classList.remove("open");
-          setTimeout(() => planTooltip.hidden = true, 220);
-        }
-      });
-    }
+      const isOpen = planTooltip.classList.toggle("open");
+      planCompareBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
 
     // ----- Pricing section buttons (scroll to start + select plan) -----
     const pricingStarter = document.getElementById("pricingChooseStarter");
