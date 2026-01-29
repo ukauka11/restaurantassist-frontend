@@ -499,7 +499,7 @@
       planCompareBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
     });
 
-    // ----- Close Compare plans -----
+    // ----- Close Compare plans (closes when clicking outside) -----
     document.addEventListener("click", (e) => {
       if (!planTooltip || !planCompareBtn) return;
     
