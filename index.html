@@ -373,7 +373,7 @@
             </div>
           </div>
 
-          <div class="plan" id="planProCard">
+          <div class="plan featured" id="planProCard">
             <div class="planTop">
               <div>
                 <div class="planName">Pro <span class="pill">Most popular</span></div>
@@ -469,9 +469,6 @@
       if (!planEl) return;
   
       planEl.value = plan;
-
-      document.getElementById("planStarterCard")?.classList.toggle("featured", plan === "starter");
-      document.getElementById("planProCard")?.classList.toggle("featured", plan === "pro");
   
       // button UI
       starterBtn?.classList.toggle("selected", plan === "starter");
