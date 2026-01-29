@@ -499,6 +499,19 @@
       planCompareBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
     });
 
+    // ----- Close Compare plans -----
+    document.addEventListener("click", (e) => {
+      if (!planTooltip || !planCompareBtn) return;
+    
+      const clickedInside =
+        planTooltip.contains(e.target) || planCompareBtn.contains(e.target);
+    
+      if (!clickedInside){
+        planTooltip.classList.remove("open");
+        planCompareBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+
     // ----- Pricing section buttons (scroll to start + select plan) -----
     const pricingStarter = document.getElementById("pricingChooseStarter");
     const pricingPro = document.getElementById("pricingChoosePro");
